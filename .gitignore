@@ -31,3 +31,10 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# private config
+app/*/configs
+
+# generated files
+bin/
+*.log

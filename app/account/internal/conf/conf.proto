@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package account.internal.conf;
+
+option go_package = "app/account/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Label label = 1;
+  Trace trace = 2;
+  Server server = 3;
+  Data data = 4;
+  Log log = 5;
+  Platform platform = 6;
+}
+
+message Label {
+	string service = 1;
+	string profile = 2;
+	string color = 3;
+	string version = 4;
+	uint32 zone = 5;
+	string node = 6;
+	string language = 7;
+}
+
+message Trace {
+  string endpoint = 1;
+}
+
+message Log {
+	string type = 1;
+	string level = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  string health = 2;
+}
+
+message Data {
+  message Postgres {
+    string driver = 1;
+    string source = 2;
+    int32 max_idle_conns = 3;
+    int32 max_open_conns = 4;
+  }
+  message Redis {
+    string addr = 1;
+    string password = 2;
+    bool cluster = 3;
+    google.protobuf.Duration dial_timeout = 4;
+    google.protobuf.Duration read_timeout = 5;
+    google.protobuf.Duration write_timeout = 6;
+  }
+  Redis redis = 1;
+  Postgres postgres = 2;
+}
+
+message Registry {
+  Etcd etcd = 1;
+}
+
+message Etcd {
+  repeated string endpoints = 1;
+  string username = 2;
+  string password = 3;
+}
+
+message Secret {
+  string token_key = 1;
+  string session_key = 2;
+  string platform_key = 3;
+}
+
+message Platform {
+  Apple apple = 1;
+  Google google = 2;
+  Facebook facebook = 3;
+}
+
+message Apple {
+  string aud_app = 1;
+  string aud_web = 2;
+  string iss = 3;
+  string key_id = 4;
+  string team_id = 5;
+  string client_id = 6;
+  string validator = 7;
+  string secret = 8;
+  string redirect_uri = 9;
+}
+
+message Google {
+  string aud = 1;
+  string iss1 = 2;
+  string iss2 = 3;
+  string json = 4;
+}
+
+message Facebook {
+  string app_id = 1;
+  string app_secret = 2;
+}
