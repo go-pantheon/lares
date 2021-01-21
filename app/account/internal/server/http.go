@@ -6,6 +6,7 @@ import (
 	adv1 "github.com/luffy050596/rec-account/app/account/internal/admin/service/v1"
 	"github.com/luffy050596/rec-account/app/account/internal/conf"
 	ifacev1 "github.com/luffy050596/rec-account/app/account/internal/http/service/v1"
+	adminv1 "github.com/luffy050596/rec-account/gen/api/server/account/admin/account/v1"
 	interfacev1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
 	"github.com/luffy050596/rec-kit/metrics"
 )
@@ -36,5 +37,8 @@ func NewHTTPServer(label *conf.Label, c *conf.Server, logger log.Logger,
 	s := http.NewServer(opts...)
 
 	interfacev1.RegisterAccountInterfaceHTTPServer(s, v1Iface)
+	if strings.ToLower(label.Profile) == "dev" {
+		adminv1.RegisterAccountAdminHTTPServer(s, v1Admin)
+	}
 	return s
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-var ProviderSet = wire.NewSet(NewHTTPServer, NewRegistrar)
+var ProviderSet = wire.NewSet(NewHTTPServer, NewGRPCServer, NewRegistrar)
 
 func NewRegistrar(conf *conf.Registry) (registry.Registrar, error) {
 	client, err := etcdclient.New(etcdclient.Config{
@@ -15,7 +15,7 @@ func NewRegistrar(conf *conf.Registry) (registry.Registrar, error) {
 		Password:  conf.Etcd.Password,
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "etcd client create failed")
+		return nil, errors.Wrapf(err, "[etcdclient.New] etcd 客户端创建失败。")
 	}
 
 	return etcd.New(client), nil
