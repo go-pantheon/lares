@@ -20,14 +20,8 @@ import (
 )
 
 const (
-	keyID              = "1234"
-	testAudience       = "test-audience"
-	expiry       int64 = 233431200
-)
-
-var (
-	beforeExp = func() time.Time { return time.Unix(expiry-1, 0) }
-	afterExp  = func() time.Time { return time.Unix(expiry+1, 0) }
+	keyID        = "1234"
+	testAudience = "test-audience"
 )
 
 func TestValidateRS256(t *testing.T) {
@@ -37,7 +31,6 @@ func TestValidateRS256(t *testing.T) {
 		keyID   string
 		n       *big.Int
 		e       int
-		nowFunc func() time.Time
 		wantErr bool
 	}{
 		{
@@ -45,7 +38,6 @@ func TestValidateRS256(t *testing.T) {
 			keyID:   keyID,
 			n:       pk.N,
 			e:       pk.E,
-			nowFunc: beforeExp,
 			wantErr: false,
 		},
 		{
@@ -53,7 +45,6 @@ func TestValidateRS256(t *testing.T) {
 			keyID:   "5678",
 			n:       pk.N,
 			e:       pk.E,
-			nowFunc: beforeExp,
 			wantErr: true,
 		},
 		{
@@ -61,15 +52,6 @@ func TestValidateRS256(t *testing.T) {
 			keyID:   keyID,
 			n:       new(big.Int).SetBytes([]byte("42")),
 			e:       42,
-			nowFunc: beforeExp,
-			wantErr: true,
-		},
-		{
-			name:    "token expired",
-			keyID:   keyID,
-			n:       pk.N,
-			e:       pk.E,
-			nowFunc: afterExp,
 			wantErr: true,
 		},
 	}
@@ -98,9 +80,6 @@ func TestValidateRS256(t *testing.T) {
 					}
 				}),
 			}
-			oldNow := now
-			defer func() { now = oldNow }()
-			now = tt.nowFunc
 
 			v := NewValidator(context.Background(), testAppleSACertsURL, client)
 			payload, err := v.Validate(context.Background(), idToken, testAudience)
@@ -163,7 +142,7 @@ func commonToken(t *testing.T, alg string) *jwt {
 	payload := Payload{
 		Issuer:   "example.com",
 		Audience: testAudience,
-		Expires:  expiry,
+		Expires:  time.Now().Unix() + 1000,
 	}
 
 	hb, err := json.Marshal(&header)

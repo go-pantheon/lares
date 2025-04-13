@@ -47,7 +47,7 @@ func (s *AccountInterface) Refresh(ctx context.Context, req *v1.RefreshRequest) 
 		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
 	}
 
-	if len(req.Session) <= 0 {
+	if len(req.Session) == 0 {
 		return nil, xerrors.APIParamInvalid("session is empty")
 	}
 	ss, err := unmarshalSession(req.Session)
@@ -84,7 +84,7 @@ func (s *AccountInterface) Token(ctx context.Context, req *v1.TokenRequest) (*v1
 		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
 	}
 
-	if len(req.Session) <= 0 {
+	if len(req.Session) == 0 {
 		return nil, xerrors.APIParamInvalid("session is empty")
 	}
 	ss, err := unmarshalSession(req.Session)

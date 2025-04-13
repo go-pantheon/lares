@@ -26,10 +26,8 @@ import (
 )
 
 const (
-	appleSACertsURL   string        = "https://appleid.apple.com/auth/keys"
-	appleAuthTokenURL string        = "https://appleid.apple.com/auth/token"
-	maxResponseSize   int64         = 1024 * 1024 // 1MB
-	appleTokenExpire  time.Duration = 5 * time.Minute
+	maxResponseSize  int64         = 1024 * 1024 // 1MB
+	appleTokenExpire time.Duration = 5 * time.Minute
 )
 
 type AppleDomain struct {
@@ -60,7 +58,7 @@ func NewAppleDomain(logger log.Logger, label *conf.Label, c *conf.Platform, repo
 			DisableKeepAlives:   false,
 		},
 	}
-	do.validator = xjwt.NewValidator(context.Background(), appleSACertsURL, do.cli)
+	do.validator = xjwt.NewValidator(context.Background(), c.Apple.AppleSaCertsUrl, do.cli)
 
 	if profile.IsDevStr(label.Profile) {
 		do.priKey, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
@@ -151,7 +149,7 @@ func (do *AppleDomain) RequestToken(ctx context.Context, code string) (string, e
 
 	body := bytes.NewBufferString(form.Encode())
 
-	req, err := http.NewRequestWithContext(ctx, "POST", appleAuthTokenURL, body)
+	req, err := http.NewRequestWithContext(ctx, "POST", do.conf.AppleAuthTokenUrl, body)
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("create apple auth token request failed")
 	}
@@ -161,7 +159,11 @@ func (do *AppleDomain) RequestToken(ctx context.Context, code string) (string, e
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("do apple auth token request failed")
 	}
-	defer resp.Body.Close()
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			do.log.Errorf("close apple auth token response body failed: %v", err)
+		}
+	}()
 
 	data, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseSize))
 	if err != nil {

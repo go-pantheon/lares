@@ -5,6 +5,7 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"fmt"
+	"math"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -17,7 +18,7 @@ type Argon2Params struct {
 	Time       uint32 // iteration count
 	Threads    uint8  // parallelism
 	KeyLength  uint32 // output key length
-	SaltLength uint32 // salt length
+	SaltLength int    // salt length
 }
 
 // DefaultArgon2Params returns the recommended Argon2id parameter settings
@@ -127,14 +128,18 @@ func decodeArgon2idHash(encodedHash string) (params *Argon2Params, salt, hash []
 	if err != nil {
 		return nil, nil, nil, fmt.Errorf("failed to decode salt: %w", err)
 	}
-	params.SaltLength = uint32(len(salt))
+	params.SaltLength = len(salt)
 
 	// Decode hash
 	hash, err = base64.RawStdEncoding.DecodeString(parts[5])
 	if err != nil {
 		return nil, nil, nil, fmt.Errorf("failed to decode hash: %w", err)
 	}
-	params.KeyLength = uint32(len(hash))
+	lenHash := len(hash)
+	if lenHash > math.MaxUint32 {
+		return nil, nil, nil, fmt.Errorf("hash length is too long: %d", lenHash)
+	}
+	params.KeyLength = uint32(lenHash)
 
 	return params, salt, hash, nil
 }

@@ -56,6 +56,7 @@ func (d *noticeData) NoticeList(ctx context.Context, now time.Time) ([]*biz.Noti
 
 	bos := make([]*biz.Notice, 0, len(pos))
 	for _, po := range pos {
+		po := po
 		bos = append(bos, noticePo2bo(&po))
 	}
 	return bos, nil

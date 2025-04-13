@@ -32,6 +32,14 @@ platform:
   apple:
     aud: {{APPLE_AUD}}
     iss: {{APPLE_ISS}}
+    key_id: {{APPLE_KEY_ID}}
+    team_id: {{APPLE_TEAM_ID}}
+    client_id: {{APPLE_CLIENT_ID}}
+    validator: {{APPLE_VALIDATOR}}
+    secret: {{APPLE_SECRET}}
+    redirect_uri: {{APPLE_REDIRECT_URI}}
+    apple_sa_certs_url: {{APPLE_SACERTS_URL}}
+    apple_auth_token_url: {{APPLE_AUTH_TOKEN_URL}}
   google:
     aud: {{GOOGLE_AUD}}
     iss1: {{GOOGLE_ISS1}}

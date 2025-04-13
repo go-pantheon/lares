@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"math"
 	"path/filepath"
 
 	"github.com/go-kratos/kratos/v2"
@@ -43,7 +45,11 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, health *health.
 		panic(err)
 	}
 
-	profile.Init(label.Profile, label.Color, label.Zone, label.Version, label.Node, url)
+	if label.Zone > math.MaxUint8 {
+		panic(fmt.Errorf("zone must be less than %d", math.MaxUint8))
+	}
+
+	profile.Init(label.Profile, label.Color, uint8(label.Zone), label.Version, label.Node, url)
 
 	return kratos.New(
 		kratos.Name(label.Service),

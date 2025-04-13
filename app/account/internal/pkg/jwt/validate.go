@@ -16,11 +16,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-var (
-	defaultValidator = &Validator{certGetter: newCacheCertGetter(http.DefaultClient)}
-	now              = time.Now
-)
-
 type Payload struct {
 	Issuer   string                 `json:"iss"`
 	Audience string                 `json:"aud"`
@@ -89,7 +84,7 @@ func (v *Validator) Validate(ctx context.Context, idToken string, audience strin
 		return nil, errors.Errorf("idtoken: audience provided does not match aud claim in the JWT")
 	}
 
-	if now().Unix() > payload.Expires {
+	if time.Now().Unix() > payload.Expires {
 		return nil, errors.Errorf("idtoken: token expired")
 	}
 

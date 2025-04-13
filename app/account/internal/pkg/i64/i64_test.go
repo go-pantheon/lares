@@ -88,29 +88,6 @@ func TestAdd(t *testing.T) {
 	}
 }
 
-func TestRandom(t *testing.T) {
-	tests := []struct {
-		name string
-		v    int64
-	}{
-		{"zero value", 0},
-		{"small value", 10},
-		{"large value", math.MaxInt64},
-		{"overflow value", math.MaxInt64},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := Random(tt.v)
-			if tt.v == 0 {
-				assert.Equal(t, int64(0), got)
-			} else {
-				assert.True(t, got < tt.v)
-			}
-		})
-	}
-}
-
 func TestDivide2f64(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -283,12 +260,6 @@ func BenchmarkAdd(b *testing.B) {
 	}
 }
 
-func BenchmarkRandom(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Random(1000)
-	}
-}
-
 func BenchmarkDivide2f64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Divide2f64(1000, 10)
@@ -327,6 +298,6 @@ func BenchmarkToI32(b *testing.B) {
 
 func BenchmarkToI64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ToI64("12345")
+		_, _ = ToI64("12345")
 	}
 }

@@ -41,6 +41,10 @@ func (s *NoticeAdmin) GetById(ctx context.Context, req *adminv1.GetByIdRequest) 
 
 func (s *NoticeAdmin) GetList(ctx context.Context, req *adminv1.GetListRequest) (*adminv1.GetListResponse, error) {
 	start, limit, err := buildGetListCond(req)
+	if err != nil {
+		return nil, err
+	}
+
 	bos, count, err := s.uc.GetList(ctx, start, limit)
 	if err != nil {
 		return nil, err

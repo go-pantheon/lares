@@ -13,7 +13,7 @@ import (
 	"github.com/go-pantheon/fabrica-kit/metrics"
 	v1 "github.com/go-pantheon/lares/app/account/internal/admin/service/v1"
 	"github.com/go-pantheon/lares/app/account/internal/conf"
-	"github.com/go-pantheon/lares/gen/api/server/account/admin/account/v1"
+	adminv1 "github.com/go-pantheon/lares/gen/api/server/account/admin/account/v1"
 	"google.golang.org/grpc"
 )
 

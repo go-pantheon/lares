@@ -89,6 +89,7 @@ func (d *accountData) GetList(ctx context.Context, index, size int64, cond *biz.
 
 	bos := make([]*biz.Account, 0, len(pos))
 	for _, po := range pos {
+		po := po
 		bo, err := accountPo2bo(&po)
 		if err != nil {
 			return nil, err

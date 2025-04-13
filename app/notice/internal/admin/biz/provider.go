@@ -4,4 +4,4 @@ import (
 	"github.com/google/wire"
 )
 
-var ProviderSet = wire.NewSet( NewNoticeUseCase)
+var ProviderSet = wire.NewSet(NewNoticeUseCase)

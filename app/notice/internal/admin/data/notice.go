@@ -54,6 +54,7 @@ func (d *noticeData) GetList(ctx context.Context, index, size int64) ([]*biz.Not
 
 	bos := make([]*biz.Notice, 0, len(pos))
 	for _, po := range pos {
+		po := po
 		bos = append(bos, noticePo2bo(&po))
 	}
 	return bos, nil

@@ -1,0 +1,1659 @@
+[1mapp/account/internal/pkg/jwt/cache.go:106[22m:34: [31mnon-canonical header "cache-control", instead use: "Cache-Control"[0m (canonicalheader)
+	cc := strings.Split(headers.Get("cache-control"), ",")
+	                                [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:120[22m:19: [31mnon-canonical header "age", instead use: "Age"[0m (canonicalheader)
+	a := headers.Get("age")
+	                 [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:63[22m:8: [31mnon-canonical header "age", instead use: "Age"[0m (canonicalheader)
+	h.Set("age", "0")
+	      [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:64[22m:8: [31mnon-canonical header "cache-control", instead use: "Cache-Control"[0m (canonicalheader)
+	h.Set("cache-control", "public, max-age=1, must-revalidate, no-transform")
+	      [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:106[22m:34: [31mnon-canonical header "cache-control", instead use: "Cache-Control"[0m (canonicalheader)
+	cc := strings.Split(headers.Get("cache-control"), ",")
+	                                [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:120[22m:19: [31mnon-canonical header "age", instead use: "Age"[0m (canonicalheader)
+	a := headers.Get("age")
+	                 [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:77[22m:22: [31mFunction `appleCallbackFail` should pass the context parameter[0m (contextcheck)
+		s.appleCallbackFail(kctx, v1.AppleLoginCallbackResponse_CODE_ERR_UNSPECIFIED, errors.New("ctx is not kratos.Context"))
+		                   [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:82[22m:22: [31mFunction `appleCallbackFail` should pass the context parameter[0m (contextcheck)
+		s.appleCallbackFail(kctx, v1.AppleLoginCallbackResponse_CODE_ERR_APPLE, errors.New(req.Error))
+		                   [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:99[22m:22: [31mFunction `appleCallbackFail` should pass the context parameter[0m (contextcheck)
+		s.appleCallbackFail(kctx, v1.AppleLoginCallbackResponse_CODE_ERR_PARAM, errors.New("code is empty"))
+		                   [33m^[0m
+[1mapp/account/cmd/server/main.go:7[22m:2: [31mimport 'github.com/go-kratos/kratos/v2' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:8[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/config' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/config"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:9[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/config/env' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/config/env"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:10[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/config/file' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/config/file"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:11[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/log' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/log"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:12[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/registry' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/registry"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:13[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/transport/grpc' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/transport/grpc"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:14[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/transport/http' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/transport/http"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:15[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/metrics' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/metrics"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:16[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/profile' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/profile"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:17[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/trace' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/trace"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:18[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/xlog' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/xlog"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:19[22m:2: [31mimport 'github.com/go-pantheon/fabrica-net/health' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-net/health"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:20[22m:2: [31mimport 'github.com/go-pantheon/fabrica-util/xtime' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-util/xtime"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:21[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/conf' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/conf"
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:22[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/pkg/security' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:7[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/errors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/errors"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:9[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/profile' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/profile"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:10[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/xerrors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:11[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/admin/biz' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/admin/biz"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:12[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/pkg/i64' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/pkg/i64"
+	[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:13[22m:2: [31mimport 'github.com/go-pantheon/lares/gen/api/server/account/admin/account/v1' is not allowed from list 'Main'[0m (depguard)
+	adminv1 "github.com/go-pantheon/lares/gen/api/server/account/admin/account/v1"
+	[33m^[0m
+[1mapp/account/internal/http/biz/account.go:7[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/http/domain' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:6[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/xerrors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:7[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/http/domain' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:8[22m:2: [31mimport 'github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1' is not allowed from list 'Main'[0m (depguard)
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
+	[33m^[0m
+[1mapp/account/internal/http/biz/facebook.go:6[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/profile' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/profile"
+	[33m^[0m
+[1mapp/account/internal/http/biz/facebook.go:7[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/xerrors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	[33m^[0m
+[1mapp/account/internal/http/biz/facebook.go:8[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/http/domain' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	[33m^[0m
+[1mapp/account/internal/http/biz/username.go:8[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/pkg/security' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
+	[33m^[0m
+[1mapp/account/internal/http/biz/username.go:9[22m:2: [31mimport 'github.com/pkg/errors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/pkg/errors"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:10[22m:2: [31mimport 'github.com/go-pantheon/fabrica-util/id' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-util/id"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:11[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/http/biz' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/http/biz"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:12[22m:2: [31mimport 'github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1' is not allowed from list 'Main'[0m (depguard)
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:9[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/transport/http' is not allowed from list 'Main'[0m (depguard)
+	khttp "github.com/go-kratos/kratos/v2/transport/http"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:10[22m:2: [31mimport 'github.com/go-pantheon/fabrica-kit/ip' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/fabrica-kit/ip"
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:13[22m:2: [31mimport 'github.com/go-pantheon/lares/app/account/internal/pkg/security' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:16[22m:2: [31mimport 'github.com/pkg/errors' is not allowed from list 'Main'[0m (depguard)
+	"github.com/pkg/errors"
+	[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:7[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/log' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/log"
+	[33m^[0m
+[1mapp/notice/internal/admin/biz/provider.go:4[22m:2: [31mimport 'github.com/google/wire' is not allowed from list 'Main'[0m (depguard)
+	"github.com/google/wire"
+	[33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:5[22m:2: [31mimport 'github.com/go-kratos/kratos/v2/log' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-kratos/kratos/v2/log"
+	[33m^[0m
+[1mapp/notice/internal/http/provider.go:4[22m:2: [31mimport 'github.com/go-pantheon/lares/app/notice/internal/http/biz' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/notice/internal/http/biz"
+	[33m^[0m
+[1mapp/notice/internal/http/provider.go:5[22m:2: [31mimport 'github.com/go-pantheon/lares/app/notice/internal/http/data' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/notice/internal/http/data"
+	[33m^[0m
+[1mapp/notice/internal/http/provider.go:6[22m:2: [31mimport 'github.com/go-pantheon/lares/app/notice/internal/http/service' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/notice/internal/http/service"
+	[33m^[0m
+[1mapp/notice/internal/http/provider.go:7[22m:2: [31mimport 'github.com/google/wire' is not allowed from list 'Main'[0m (depguard)
+	"github.com/google/wire"
+	[33m^[0m
+[1mapp/notice/internal/http/service/provider.go:4[22m:2: [31mimport 'github.com/go-pantheon/lares/app/notice/internal/http/service/v1' is not allowed from list 'Main'[0m (depguard)
+	v1 "github.com/go-pantheon/lares/app/notice/internal/http/service/v1"
+	[33m^[0m
+[1mapp/notice/internal/http/service/provider.go:5[22m:2: [31mimport 'github.com/google/wire' is not allowed from list 'Main'[0m (depguard)
+	"github.com/google/wire"
+	[33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:7[22m:2: [31mimport 'github.com/go-pantheon/lares/app/notice/internal/http/biz' is not allowed from list 'Main'[0m (depguard)
+	"github.com/go-pantheon/lares/app/notice/internal/http/biz"
+	[33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:8[22m:2: [31mimport 'github.com/go-pantheon/lares/gen/api/server/notice/interface/notice/v1' is not allowed from list 'Main'[0m (depguard)
+	v1 "github.com/go-pantheon/lares/gen/api/server/notice/interface/notice/v1"
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:7[22m:2: [31mimport 'github.com/stretchr/testify/assert' is not allowed from list 'Main'[0m (depguard)
+	"github.com/stretchr/testify/assert"
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:58[22m:15: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"idtoken: unable to retrieve cert, got status code %d\", resp.StatusCode)"[0m (err113)
+		return nil, fmt.Errorf("idtoken: unable to retrieve cert, got status code %d", resp.StatusCode)
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:104[22m:25: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"invalid hash format, expected format: $argon2id$v=[version]$m=[memory],t=[time],p=[threads]$[salt]$[hash]\")"[0m (err113)
+		return nil, nil, nil, fmt.Errorf("invalid hash format, expected format: $argon2id$v=[version]$m=[memory],t=[time],p=[threads]$[salt]$[hash]")
+		                      [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:109[22m:25: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"unsupported algorithm: %s, only supports argon2id\", parts[1])"[0m (err113)
+		return nil, nil, nil, fmt.Errorf("unsupported algorithm: %s, only supports argon2id", parts[1])
+		                      [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:58[22m:15: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"idtoken: unable to retrieve cert, got status code %d\", resp.StatusCode)"[0m (err113)
+		return nil, fmt.Errorf("idtoken: unable to retrieve cert, got status code %d", resp.StatusCode)
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:104[22m:25: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"格式无效的散列，预期格式: $argon2id$v=[version]$m=[memory],t=[time],p=[threads]$[salt]$[hash]\")"[0m (err113)
+		return nil, nil, nil, fmt.Errorf("格式无效的散列，预期格式: $argon2id$v=[version]$m=[memory],t=[time],p=[threads]$[salt]$[hash]")
+		                      [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:109[22m:25: [31mdo not define dynamic errors, use wrapped static errors instead: "fmt.Errorf(\"不支持的算法: %s, 只支持argon2id\", parts[1])"[0m (err113)
+		return nil, nil, nil, fmt.Errorf("不支持的算法: %s, 只支持argon2id", parts[1])
+		                      [33m^[0m
+[1mapp/account/internal/http/domain/apple.go:164[22m:23: [31mError return value of `resp.Body.Close` is not checked[0m (errcheck)
+	defer resp.Body.Close()
+	                     [33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:330[22m:8: [31mError return value is not checked[0m (errcheck)
+		ToI64("12345")
+		     [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:55[22m:23: [31mError return value of `resp.Body.Close` is not checked[0m (errcheck)
+	defer resp.Body.Close()
+	                     [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:330[22m:8: [31mError return value is not checked[0m (errcheck)
+		ToI64("12345")
+		     [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:55[22m:23: [31mError return value of `resp.Body.Close` is not checked[0m (errcheck)
+	defer resp.Body.Close()
+	                     [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:24[22m:10: [31mv1.AccountAdmin is missing field UnimplementedAccountAdminServer[0m (exhaustruct)
+	return &AccountAdmin{
+	        [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:41[22m:11: [31madminv1.ListResponse is missing field Message[0m (exhaustruct)
+	reply = &adminv1.ListResponse{
+	         [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:61[22m:10: [31mbiz.Account is missing fields Id, IdStr, AppleId, GoogleId, Name, RegisterIp, LastLoginIp, Channel, CreatedAt, UpdatedAt[0m (exhaustruct)
+	cond = &biz.Account{}
+	        [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:84[22m:10: [31madminv1.GetByIdResponse is missing fields Code, Message[0m (exhaustruct)
+	return &adminv1.GetByIdResponse{
+	        [33m^[0m
+[1mapp/account/internal/data/data.go:25[22m:46: [31mredis.ClusterOptions is missing fields ClientName, NewClient, MaxRedirects, ReadOnly, RouteByLatency, RouteRandomly, ClusterSlots, Dialer, OnConnect, Protocol, Username, CredentialsProvider, CredentialsProviderContext, MaxRetries, MinRetryBackoff, MaxRetryBackoff, ContextTimeoutEnabled, PoolFIFO, PoolSize, PoolTimeout, MinIdleConns, MaxIdleConns, MaxActiveConns, ConnMaxIdleTime, ConnMaxLifetime, TLSConfig, DisableIndentity, DisableIdentity, IdentitySuffix, UnstableResp3[0m (exhaustruct)
+		rdb, cleanup, err = cache.NewRedisCluster(&redis.ClusterOptions{
+		                                           [33m^[0m
+[1mapp/account/internal/data/data.go:36[22m:39: [31mredis.Options is missing fields Network, ClientName, Dialer, OnConnect, Protocol, Username, CredentialsProvider, CredentialsProviderContext, DB, MaxRetries, MinRetryBackoff, MaxRetryBackoff, ContextTimeoutEnabled, PoolFIFO, PoolSize, PoolTimeout, MinIdleConns, MaxIdleConns, MaxActiveConns, ConnMaxIdleTime, ConnMaxLifetime, TLSConfig, Limiter, DisableIndentity, DisableIdentity, IdentitySuffix, UnstableResp3[0m (exhaustruct)
+		rdb, cleanup, err = cache.NewRedis(&redis.Options{
+		                                    [33m^[0m
+[1mapp/account/internal/data/data.go:48[22m:36: [31mpostgres.Config is missing fields DriverName, WithoutQuotingCheck, PreferSimpleProtocol, WithoutReturning, Conn[0m (exhaustruct)
+	pdb, err = gorm.Open(postgres.New(postgres.Config{
+	                                  [33m^[0m
+[1mapp/account/internal/data/data.go:50[22m:7: [31mgorm.Config is missing fields SkipDefaultTransaction, NamingStrategy, FullSaveAssociations, Logger, NowFunc, DryRun, PrepareStmt, DisableAutomaticPing, DisableForeignKeyConstraintWhenMigrating, IgnoreRelationshipsWhenMigrating, DisableNestedTransaction, AllowGlobalUpdate, QueryFields, CreateBatchSize, TranslateError, PropagateUnscoped, ClauseBuilders, ConnPool, Dialector, Plugins[0m (exhaustruct)
+	}), &gorm.Config{})
+	     [33m^[0m
+[1mapp/account/internal/http/biz/username.go:27[22m:35: [31mdomain.Account is missing fields Id, Zone, IdStr, Apple, Google, Facebook, Salt, DefaultColor, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+	return uc.accountdo.Create(ctx, &domain.Account{
+	                                 [33m^[0m
+[1mapp/account/internal/http/data/account.go:47[22m:9: [31mdomain.Account is missing fields IdStr, Salt[0m (exhaustruct)
+	out = &domain.Account{
+	       [33m^[0m
+[1mapp/account/internal/http/data/account.go:82[22m:34: [31mdata.Account is missing fields AccountId, Zone, Apple, Google, Facebook, Username, PasswordHash, RegisterIp, LastLoginIp, DefaultColor, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+	if err := data.Mdb.AutoMigrate(&Account{}); err != nil {
+	                                [33m^[0m
+[1mapp/account/internal/http/data/account.go:93[22m:36: [31mdata.Account is missing fields AccountId, Zone, Apple, Google, Facebook, Username, PasswordHash, RegisterIp, LastLoginIp, DefaultColor, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+	if !data.Mdb.Migrator().HasTable(&Account{}) {
+	                                  [33m^[0m
+[1mapp/account/internal/http/data/account.go:99[22m:47: [31mdata.Account is missing fields AccountId, Zone, Apple, Google, Facebook, Username, PasswordHash, RegisterIp, LastLoginIp, DefaultColor, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+	if err := d.data.Mdb.WithContext(ctx).Model(&Account{}).Count(&count).Error; err != nil {
+	                                             [33m^[0m
+[1mapp/account/internal/http/data/account.go:110[22m:32: [31mdomain.Account is missing fields Zone, IdStr, Apple, Google, Facebook, Salt, RegisterIp, LastLoginIp, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+			if _, err := d.Create(ctx, &domain.Account{
+			                            [33m^[0m
+[1mapp/account/internal/http/data/account.go:139[22m:7: [31mdata.Account is missing fields AccountId, State, CreatedAt, UpdatedAt[0m (exhaustruct)
+	po = Account{
+	     [33m^[0m
+[1mapp/account/internal/http/data/account.go:182[22m:8: [31mdata.Account is missing fields Apple, Google, Facebook, Username, PasswordHash, RegisterIp, LastLoginIp, DefaultColor, Channel, State, Device, CreatedAt, UpdatedAt[0m (exhaustruct)
+	po := Account{AccountId: zoneId, Zone: zone}
+	      [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:29[22m:10: [31mv1.AccountInterface is missing field UnimplementedAccountInterfaceServer[0m (exhaustruct)
+	return &AccountInterface{
+	        [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:71[22m:12: [31minterfacev1.AppleLoginCallbackResponse is missing field Code[0m (exhaustruct)
+		reply = &v1.AppleLoginCallbackResponse{}
+		         [33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:19[22m:10: [31minterfacev1.LoginInfo is missing fields AccountId, Token, TokenTimeout, Session, SessionTimeout[0m (exhaustruct)
+	info = &v1.LoginInfo{
+	        [33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:45[22m:11: [31mintrav1.AuthToken is missing fields Location, Unencrypted, Status[0m (exhaustruct)
+	auth := &gatev1.AuthToken{
+	         [33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:101[22m:13: [31minterfacev1.Session is missing fields AccountId, Timeout, Key[0m (exhaustruct)
+	session = &v1.Session{}
+	           [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:31[22m:10: [31mjwt.cacheCertGetter is missing fields clock, mu[0m (exhaustruct)
+	return &cacheCertGetter{
+	        [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:66[22m:15: [31mjwt.certResponse is missing field Keys[0m (exhaustruct)
+	certResp := &certResponse{}
+	             [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:36[22m:12: [31mjwt.fakeClock is missing field mu[0m (exhaustruct)
+	clock := &fakeClock{t: time.Now()}
+	          [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:39[22m:4: [31mjwt.jwk is missing fields Alg, Crv, Kty, Use, E, N, X, Y[0m (exhaustruct)
+			{
+			[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:79[22m:15: [31mhttp.Client is missing fields CheckRedirect, Jar, Timeout[0m (exhaustruct)
+			client := &http.Client{
+			           [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:83[22m:8: [31mjwt.jwk is missing fields Alg, Crv, Kty, Use, X, Y[0m (exhaustruct)
+							{
+							[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:94[22m:14: [31mhttp.Response is missing fields Status, Proto, ProtoMajor, ProtoMinor, ContentLength, TransferEncoding, Close, Uncompressed, Trailer, Request, TLS[0m (exhaustruct)
+					return &http.Response{
+					        [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:163[22m:13: [31mjwt.Payload is missing fields IssuedAt, Subject, Claims[0m (exhaustruct)
+	payload := Payload{
+	           [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:179[22m:10: [31mjwt.jwt is missing field signature[0m (exhaustruct)
+	return &jwt{
+	        [33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:21[22m:32: [31minterfacev1.AppleId is missing field T[0m (exhaustruct)
+	org, err := jsoniter.Marshal(&v1.AppleId{AppleId: appleId, State: state})
+	                              [33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:33[22m:11: [31minterfacev1.AppleId is missing fields AppleId, State, T[0m (exhaustruct)
+	dest := &v1.AppleId{}
+	         [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:119[22m:12: [31msecurity.Argon2Params is missing fields Memory, Time, Threads, KeyLength, SaltLength[0m (exhaustruct)
+	params = &Argon2Params{}
+	          [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:23[22m:10: [31mv1.NoticeAdmin is missing field UnimplementedNoticeAdminServer[0m (exhaustruct)
+	return &NoticeAdmin{
+	        [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:35[22m:12: [31madminv1.GetByIdResponse is missing field Message[0m (exhaustruct)
+	reply := &adminv1.GetByIdResponse{
+	          [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:49[22m:12: [31madminv1.GetListResponse is missing field Message[0m (exhaustruct)
+	reply := &adminv1.GetListResponse{
+	          [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:69[22m:10: [31madminv1.CreateResponse is missing field Message[0m (exhaustruct)
+	return &adminv1.CreateResponse{
+	        [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:82[22m:10: [31madminv1.UpdateResponse is missing field Message[0m (exhaustruct)
+	return &adminv1.UpdateResponse{
+	        [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:91[22m:10: [31madminv1.DeleteResponse is missing field Message[0m (exhaustruct)
+	return &adminv1.DeleteResponse{
+	        [33m^[0m
+[1mapp/notice/internal/data/data.go:24[22m:46: [31mredis.ClusterOptions is missing fields ClientName, NewClient, MaxRedirects, ReadOnly, RouteByLatency, RouteRandomly, ClusterSlots, Dialer, OnConnect, Protocol, Username, CredentialsProvider, CredentialsProviderContext, MaxRetries, MinRetryBackoff, MaxRetryBackoff, ContextTimeoutEnabled, PoolFIFO, PoolSize, PoolTimeout, MinIdleConns, MaxIdleConns, MaxActiveConns, ConnMaxIdleTime, ConnMaxLifetime, TLSConfig, DisableIndentity, DisableIdentity, IdentitySuffix, UnstableResp3[0m (exhaustruct)
+		rdb, cleanup, err = cache.NewRedisCluster(&redis.ClusterOptions{
+		                                           [33m^[0m
+[1mapp/notice/internal/data/data.go:35[22m:39: [31mredis.Options is missing fields Network, ClientName, Dialer, OnConnect, Protocol, Username, CredentialsProvider, CredentialsProviderContext, DB, MaxRetries, MinRetryBackoff, MaxRetryBackoff, ContextTimeoutEnabled, PoolFIFO, PoolSize, PoolTimeout, MinIdleConns, MaxIdleConns, MaxActiveConns, ConnMaxIdleTime, ConnMaxLifetime, TLSConfig, Limiter, DisableIndentity, DisableIdentity, IdentitySuffix, UnstableResp3[0m (exhaustruct)
+		rdb, cleanup, err = cache.NewRedis(&redis.Options{
+		                                    [33m^[0m
+[1mapp/notice/internal/data/data.go:47[22m:36: [31mpostgres.Config is missing fields DriverName, WithoutQuotingCheck, PreferSimpleProtocol, WithoutReturning, Conn[0m (exhaustruct)
+	pdb, err = gorm.Open(postgres.New(postgres.Config{
+	                                  [33m^[0m
+[1mapp/notice/internal/data/data.go:49[22m:7: [31mgorm.Config is missing fields SkipDefaultTransaction, NamingStrategy, FullSaveAssociations, Logger, NowFunc, DryRun, PrepareStmt, DisableAutomaticPing, DisableForeignKeyConstraintWhenMigrating, IgnoreRelationshipsWhenMigrating, DisableNestedTransaction, AllowGlobalUpdate, QueryFields, CreateBatchSize, TranslateError, PropagateUnscoped, ClauseBuilders, ConnPool, Dialector, Plugins[0m (exhaustruct)
+	}), &gorm.Config{})
+	     [33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:19[22m:10: [31mv1.NoticeInterface is missing field UnimplementedNoticeInterfaceServer[0m (exhaustruct)
+	return &NoticeInterface{
+	        [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:31[22m:10: [31mjwt.cacheCertGetter is missing fields clock, mu[0m (exhaustruct)
+	return &cacheCertGetter{
+	        [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:66[22m:15: [31mjwt.certResponse is missing field Keys[0m (exhaustruct)
+	certResp := &certResponse{}
+	             [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache_test.go:36[22m:12: [31mjwt.fakeClock is missing field mu[0m (exhaustruct)
+	clock := &fakeClock{t: time.Now()}
+	          [33m^[0m
+[1mapp/notice/internal/pkg/security/crypto_test.go:21[22m:32: [31minterfacev1.AppleId is missing field T[0m (exhaustruct)
+	org, err := jsoniter.Marshal(&v1.AppleId{AppleId: appleId, State: state})
+	                              [33m^[0m
+[1mapp/notice/internal/pkg/security/crypto_test.go:33[22m:11: [31minterfacev1.AppleId is missing fields AppleId, State, T[0m (exhaustruct)
+	dest := &v1.AppleId{}
+	         [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:119[22m:12: [31msecurity.Argon2Params is missing fields Memory, Time, Threads, KeyLength, SaltLength[0m (exhaustruct)
+	params = &Argon2Params{}
+	          [33m^[0m
+[1mapp/account/internal/http/domain/google.go:56[22m:2: [31mtype assertion must be checked[0m (forcetypeassert)
+	val := jwtConf.Client(ctx).Transport.(*oauth2.Transport)
+	[33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:60[22m:6: [31mFunction 'TestVerifyPassword' is too long (62 > 60)[0m (funlen)
+func TestVerifyPassword(t *testing.T) {
+     [33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:126[22m:6: [31mFunction 'TestDecodeArgon2idHash' is too long (78 > 60)[0m (funlen)
+func TestDecodeArgon2idHash(t *testing.T) {
+     [33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:208[22m:6: [31mFunction 'TestUpdateHashIfNeeded' is too long (68 > 60)[0m (funlen)
+func TestUpdateHashIfNeeded(t *testing.T) {
+     [33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:60[22m:6: [31mFunction 'TestVerifyPassword' is too long (62 > 60)[0m (funlen)
+func TestVerifyPassword(t *testing.T) {
+     [33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:126[22m:6: [31mFunction 'TestDecodeArgon2idHash' is too long (78 > 60)[0m (funlen)
+func TestDecodeArgon2idHash(t *testing.T) {
+     [33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:208[22m:6: [31mFunction 'TestUpdateHashIfNeeded' is too long (68 > 60)[0m (funlen)
+func TestUpdateHashIfNeeded(t *testing.T) {
+     [33m^[0m
+[1mapp/account/cmd/server/main.go:26[22m:2: [31mflagConf is a global variable[0m (gochecknoglobals)
+	flagConf string
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:21[22m:2: [31mnow is a global variable[0m (gochecknoglobals)
+	now              = time.Now
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:29[22m:2: [31mbeforeExp is a global variable[0m (gochecknoglobals)
+	beforeExp = func() time.Time { return time.Unix(expiry-1, 0) }
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:30[22m:2: [31mafterExp is a global variable[0m (gochecknoglobals)
+	afterExp  = func() time.Time { return time.Unix(expiry+1, 0) }
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:12[22m:2: [31mtokenAESKey is a global variable[0m (gochecknoglobals)
+	tokenAESKey   []byte
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:13[22m:2: [31mtokenAESBlock is a global variable[0m (gochecknoglobals)
+	tokenAESBlock cipher.Block
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:15[22m:2: [31msessionAESKey is a global variable[0m (gochecknoglobals)
+	sessionAESKey   []byte
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:16[22m:2: [31msessionAESBlock is a global variable[0m (gochecknoglobals)
+	sessionAESBlock cipher.Block
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:18[22m:2: [31mplatformAESKey is a global variable[0m (gochecknoglobals)
+	platformAESKey   []byte
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:19[22m:2: [31mplatformAESBlock is a global variable[0m (gochecknoglobals)
+	platformAESBlock cipher.Block
+	[33m^[0m
+[1mapp/notice/cmd/server/main.go:25[22m:2: [31mflagConf is a global variable[0m (gochecknoglobals)
+	flagConf string
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:21[22m:2: [31mnow is a global variable[0m (gochecknoglobals)
+	now              = time.Now
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:29[22m:2: [31mbeforeExp is a global variable[0m (gochecknoglobals)
+	beforeExp = func() time.Time { return time.Unix(expiry-1, 0) }
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:30[22m:2: [31mafterExp is a global variable[0m (gochecknoglobals)
+	afterExp  = func() time.Time { return time.Unix(expiry+1, 0) }
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:12[22m:2: [31mtokenAESKey is a global variable[0m (gochecknoglobals)
+	tokenAESKey   []byte
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:13[22m:2: [31mtokenAESBlock is a global variable[0m (gochecknoglobals)
+	tokenAESBlock cipher.Block
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:15[22m:2: [31msessionAESKey is a global variable[0m (gochecknoglobals)
+	sessionAESKey   []byte
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:16[22m:2: [31msessionAESBlock is a global variable[0m (gochecknoglobals)
+	sessionAESBlock cipher.Block
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:18[22m:2: [31mplatformAESKey is a global variable[0m (gochecknoglobals)
+	platformAESKey   []byte
+	[33m^[0m
+[1mapp/notice/internal/pkg/security/crypto.go:19[22m:2: [31mplatformAESBlock is a global variable[0m (gochecknoglobals)
+	platformAESBlock cipher.Block
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:29[22m:1: [31mdon't use `init` function[0m (gochecknoinits)
+func init() {
+[33m^[0m
+[1mapp/notice/cmd/server/main.go:28[22m:1: [31mdon't use `init` function[0m (gochecknoinits)
+func init() {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:33[22m:1: [31mcognitive complexity 36 of func `TestValidateRS256` is high (> 30)[0m (gocognit)
+func TestValidateRS256(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:33[22m:1: [31mcognitive complexity 36 of func `TestValidateRS256` is high (> 30)[0m (gocognit)
+func TestValidateRS256(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:62[22m:14: [31mstring `test_password` has 4 occurrences, make it a constant[0m (goconst)
+	password := "test_password"
+	            [33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:354[22m:14: [31mstring `benchmark_password` has 4 occurrences, make it a constant[0m (goconst)
+	password := "benchmark_password"
+	            [33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:62[22m:14: [31mstring `test_password` has 4 occurrences, make it a constant[0m (goconst)
+	password := "test_password"
+	            [33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:358[22m:14: [31mstring `benchmark_password` has 4 occurrences, make it a constant[0m (goconst)
+	password := "benchmark_password"
+	            [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:50[22m:5: [31msloppyLen: len(req.Session) <= 0 can be len(req.Session) == 0[0m (gocritic)
+	if len(req.Session) <= 0 {
+	   [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:87[22m:5: [31msloppyLen: len(req.Session) <= 0 can be len(req.Session) == 0[0m (gocritic)
+	if len(req.Session) <= 0 {
+	   [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:23[22m:1: [31mComment should end in a period[0m (godot)
+// Reduce returns the difference between x and y when x > y, otherwise returns 0
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:59[22m:1: [31mComment should end in a period[0m (godot)
+// Random generates a random number between 0 and v-1
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:120[22m:1: [31mComment should end in a period[0m (godot)
+// willOverflow checks if multiplying a and b will overflow int64
+[33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:6[22m:1: [31mFile is not properly formatted[0m (goimports)
+	"time"
+[33m^[0m
+[1mapp/account/cmd/server/main.go:33[22m:1: [31mFile is not properly formatted[0m (golines)
+func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, health *health.Server, label *conf.Label, rr registry.Registrar) *kratos.App {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:102[22m:1: [31mFile is not properly formatted[0m (golines)
+		return nil, errors.Errorf("idtoken: expected JWT signed with RS256 but found %q", header.Algorithm)
+[33m^[0m
+[1mgo.mod:101[22m:1: [31mlocal replacement are not allowed: github.com/go-pantheon/fabrica-util[0m (gomoddirectives)
+replace github.com/go-pantheon/fabrica-util => ./deps/fabrica-util
+[33m^[0m
+[1mgo.mod:103[22m:1: [31mlocal replacement are not allowed: github.com/go-pantheon/fabrica-kit[0m (gomoddirectives)
+replace github.com/go-pantheon/fabrica-kit => ./deps/fabrica-kit
+[33m^[0m
+[1mgo.mod:105[22m:1: [31mlocal replacement are not allowed: github.com/go-pantheon/fabrica-net[0m (gomoddirectives)
+replace github.com/go-pantheon/fabrica-net => ./deps/fabrica-net
+[33m^[0m
+[1mapp/account/internal/http/data/account.go:20[22m:2: [31mG101: Potential hardcoded credentials[0m (gosec)
+	defaultQAPasswordHash = "$2a$15$QX1ZA2GhKP0kZJ4FAPKm2Owg8tj6cO5I1PRYO0G9eBaZaODbOdcRq"
+	[33m^[0m
+[1mapp/account/internal/http/data/account.go:48[22m:54: [31mG115: integer overflow conversion uint32 -> uint8[0m (gosec)
+		Id:           xid.CombineZoneId(in.AccountId, uint8(profile.Zone())),
+		                                                   [33m^[0m
+[1mapp/account/internal/http/data/account.go:140[22m:22: [31mG115: integer overflow conversion uint32 -> uint8[0m (gosec)
+		Zone:         uint8(profile.Zone()),
+		                   [33m^[0m
+[1mapp/account/internal/http/domain/apple.go:30[22m:2: [31mG101: Potential hardcoded credentials[0m (gosec)
+	appleAuthTokenURL string        = "https://appleid.apple.com/auth/token"
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:66[22m:9: [31mG404: Use of weak random number generator (math/rand or math/rand/v2 instead of crypto/rand)[0m (gosec)
+	return rand.Int63n(v)
+	       [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:130[22m:28: [31mG115: integer overflow conversion int -> uint32[0m (gosec)
+	params.SaltLength = uint32(len(salt))
+	                          [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:137[22m:27: [31mG115: integer overflow conversion int -> uint32[0m (gosec)
+	params.KeyLength = uint32(len(hash))
+	                         [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:66[22m:9: [31mG404: Use of weak random number generator (math/rand or math/rand/v2 instead of crypto/rand)[0m (gosec)
+	return rand.Int63n(v)
+	       [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:130[22m:28: [31mG115: integer overflow conversion int -> uint32[0m (gosec)
+	params.SaltLength = uint32(len(salt))
+	                          [33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:33[22m:63: [31mstring literal contains rune in Han script[0m (gosmopolitan)
+		s.log.WithContext(ctx).Errorf("[NoticeInterface.NoticeList] 失败: %v", err)
+		                                                            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:43[22m:33: [31mstring literal contains rune in Han script[0m (gosmopolitan)
+		return "", errors.Wrapf(err, "生成盐值失败")
+		                              [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:75[22m:29: [31mstring literal contains rune in Han script[0m (gosmopolitan)
+		return false, errors.New("不支持的哈希格式，系统已统一使用Argon2id算法")
+		                          [33m^[0m
+[1mapp/account/internal/http/data/account.go:116[22m:5: [31mineffectual assignment to err[0m (ineffassign)
+				err = xerrors.APIDBFailed("id=%d", i).WithCause(err)
+				[33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:43[22m:16: [31mineffectual assignment to err[0m (ineffassign)
+	start, limit, err := buildGetListCond(req)
+	              [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:263[22m:2: [31mfor loop can be changed to use an integer range (Go 1.22+)[0m (intrange)
+	for i := 0; i < b.N; i++ {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:269[22m:2: [31mfor loop can be changed to use an integer range (Go 1.22+)[0m (intrange)
+	for i := 0; i < b.N; i++ {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:275[22m:2: [31mfor loop can be changed to use an integer range (Go 1.22+)[0m (intrange)
+	for i := 0; i < b.N; i++ {
+	[33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:34[22m:1: [31mNewNoticeData returns interface (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo)[0m (ireturn)
+func NewNoticeData(data *data.Data, logger log.Logger) (biz.NoticeRepo, error) {
+[33m^[0m
+[1mapp/notice/internal/server/etcd.go:14[22m:1: [31mNewRegistrar returns interface (github.com/go-kratos/kratos/v2/registry.Registrar)[0m (ireturn)
+func NewRegistrar(conf *conf.Registry) (registry.Registrar, error) {
+[33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:132[22m:1: [31mThe line is 132 characters long, which exceeds the maximum of 120 characters.[0m (lll)
+	s.log.WithContext(kctx).Errorf("apple failed callback. code=%s, %+v", v1.AppleLoginCallbackResponse_Code_name[int32(errCode)], err)
+[33m^[0m
+[1mapp/notice/internal/http/data/notice.go:50[22m:1: [31mThe line is 185 characters long, which exceeds the maximum of 120 characters.[0m (lll)
+	if err := d.data.Mdb.WithContext(ctx).Limit(10).Order("sort desc").Order("end_time").Order("start_time").Where("start_time<=? AND end_time>=?", now, now).Find(&pos).Error; err != nil {
+[33m^[0m
+[1mapp/account/internal/http/data/account.go:86[22m:59: [31mMagic number: 100, in <argument> detected[0m (mnd)
+	if err := d.createQaAccounts(context.Background(), data, 100); err != nil {
+	                                                         [33m^[0m
+[1mapp/account/internal/http/data/account.go:153[22m:29: [31mMagic number: 5, in <argument> detected[0m (mnd)
+	fields = make([]string, 0, 5)
+	                           [33m^[0m
+[1mapp/account/internal/http/domain/apple.go:195[22m:31: [31mMagic number: 10, in <assign> detected[0m (mnd)
+			"iat": time.Now().Unix() - 10, // ahead of 10 seconds
+			                           [33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:43[22m:12: [31mMagic number: 10, in <assign> detected[0m (mnd)
+		Timeout: 10 * time.Second,
+		         [33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:45[22m:25: [31mMagic number: 100, in <assign> detected[0m (mnd)
+			MaxIdleConns:        100,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:46[22m:25: [31mMagic number: 100, in <assign> detected[0m (mnd)
+			MaxIdleConnsPerHost: 100,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:47[22m:25: [31mMagic number: 90, in <assign> detected[0m (mnd)
+			IdleConnTimeout:     90 * time.Second,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:48[22m:25: [31mMagic number: 5, in <assign> detected[0m (mnd)
+			TLSHandshakeTimeout: 5 * time.Second,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/google.go:42[22m:12: [31mMagic number: 10, in <assign> detected[0m (mnd)
+		Timeout: 10 * time.Second,
+		         [33m^[0m
+[1mapp/account/internal/http/domain/google.go:44[22m:25: [31mMagic number: 100, in <assign> detected[0m (mnd)
+			MaxIdleConns:        100,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/google.go:46[22m:25: [31mMagic number: 90, in <assign> detected[0m (mnd)
+			IdleConnTimeout:     90 * time.Second,
+			                     [33m^[0m
+[1mapp/account/internal/http/domain/google.go:47[22m:25: [31mMagic number: 5, in <assign> detected[0m (mnd)
+			TLSHandshakeTimeout: 5 * time.Second,
+			                     [33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:77[22m:20: [31mMagic number: 10, in <argument> detected[0m (mnd)
+	shift := math.Pow(10, float64(dig))
+	                  [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:33[22m:44: [31mMagic number: 2, in <argument> detected[0m (mnd)
+		certs:  make(map[string]*cachedResponse, 2),
+		                                         [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:110[22m:17: [31mMagic number: 2, in <condition> detected[0m (mnd)
+			if len(ss) < 2 {
+			             [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:147[22m:22: [31mMagic number: 3, in <condition> detected[0m (mnd)
+	if len(segments) != 3 {
+	                    [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:26[22m:15: [31mMagic number: 64, in <assign> detected[0m (mnd)
+		Memory:     64 * 1024, // 64MB
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:27[22m:15: [31mMagic number: 3, in <assign> detected[0m (mnd)
+		Time:       3,         // 3 iterations
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:28[22m:15: [31mMagic number: 4, in <assign> detected[0m (mnd)
+		Threads:    4,         // 4 threads
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:29[22m:15: [31mMagic number: 32, in <assign> detected[0m (mnd)
+		KeyLength:  32,        // 32 bytes key
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:30[22m:15: [31mMagic number: 16, in <assign> detected[0m (mnd)
+		SaltLength: 16,        // 16 bytes salt
+		            [33m^[0m
+[1mapp/account/internal/pkg/security/password.go:103[22m:19: [31mMagic number: 6, in <condition> detected[0m (mnd)
+	if len(parts) != 6 {
+	                 [33m^[0m
+[1mapp/account/internal/server/grpc.go:44[22m:33: [31mMagic number: 30, in <argument> detected[0m (mnd)
+		grpc.InitialConnWindowSize(1<<30),
+		                              [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:77[22m:20: [31mMagic number: 10, in <argument> detected[0m (mnd)
+	shift := math.Pow(10, float64(dig))
+	                  [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:33[22m:44: [31mMagic number: 2, in <argument> detected[0m (mnd)
+		certs:  make(map[string]*cachedResponse, 2),
+		                                         [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:110[22m:17: [31mMagic number: 2, in <condition> detected[0m (mnd)
+			if len(ss) < 2 {
+			             [33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:147[22m:22: [31mMagic number: 3, in <condition> detected[0m (mnd)
+	if len(segments) != 3 {
+	                    [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:26[22m:15: [31mMagic number: 64, in <assign> detected[0m (mnd)
+		Memory:     64 * 1024, // 64MB
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:27[22m:15: [31mMagic number: 3, in <assign> detected[0m (mnd)
+		Time:       3,         // 3次迭代
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:28[22m:15: [31mMagic number: 4, in <assign> detected[0m (mnd)
+		Threads:    4,         // 4个线程
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:29[22m:15: [31mMagic number: 32, in <assign> detected[0m (mnd)
+		KeyLength:  32,        // 32字节的密钥
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:30[22m:15: [31mMagic number: 16, in <assign> detected[0m (mnd)
+		SaltLength: 16,        // 16字节的盐值
+		            [33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:103[22m:19: [31mMagic number: 6, in <condition> detected[0m (mnd)
+	if len(parts) != 6 {
+	                 [33m^[0m
+[1mapp/notice/internal/server/grpc.go:44[22m:33: [31mMagic number: 30, in <argument> detected[0m (mnd)
+		grpc.InitialConnWindowSize(1<<30),
+		                              [33m^[0m
+[1mapp/notice/internal/server/grpc.go:45[22m:29: [31mMagic number: 30, in <argument> detected[0m (mnd)
+		grpc.InitialWindowSize(1<<30),
+		                          [33m^[0m
+[1mapp/account/internal/data/data.go:33[22m:4: [31mnaked return in func `NewData` with 55 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/account/internal/data/data.go:44[22m:4: [31mnaked return in func `NewData` with 55 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/account/internal/data/data.go:53[22m:3: [31mnaked return in func `NewData` with 55 lines of code[0m (nakedret)
+		return
+		[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:18[22m:3: [31mnaked return in func `LoginByAppleToken` with 35 lines of code[0m (nakedret)
+		return
+		[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:26[22m:4: [31mnaked return in func `LoginByAppleToken` with 35 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:34[22m:4: [31mnaked return in func `LoginByAppleToken` with 35 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/account/internal/http/data/account.go:173[22m:3: [31mnaked return in func `buildCreatePo` with 40 lines of code[0m (nakedret)
+		return
+		[33m^[0m
+[1mapp/account/internal/http/domain/google.go:38[22m:3: [31mnaked return in func `NewGoogleDomain` with 38 lines of code[0m (nakedret)
+		return
+		[33m^[0m
+[1mapp/notice/internal/data/data.go:32[22m:4: [31mnaked return in func `NewData` with 52 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/notice/internal/data/data.go:43[22m:4: [31mnaked return in func `NewData` with 52 lines of code[0m (nakedret)
+			return
+			[33m^[0m
+[1mapp/notice/internal/data/data.go:52[22m:3: [31mnaked return in func `NewData` with 52 lines of code[0m (nakedret)
+		return
+		[33m^[0m
+[1mapp/account/internal/http/domain/facebook.go:74[22m:3: [31merror is nil (line 72) but it returns error[0m (nilerr)
+		return
+		[33m^[0m
+[1mapp/account/internal/http/domain/google.go:99[22m:3: [31merror is nil (line 97) but it returns error[0m (nilerr)
+		return
+		[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:53[22m:2: [31mreturn with no blank line before[0m (nlreturn)
+	return
+	[33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:34[22m:3: [31mreturn with no blank line before[0m (nlreturn)
+		return reply, nil
+		[33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:45[22m:2: [31mreturn with no blank line before[0m (nlreturn)
+	return reply, nil
+	[33m^[0m
+[1mapp/account/internal/admin/data/account.go:34[22m:1: [31mnamed return "out" with type "*biz.Account" found[0m (nonamedreturns)
+func accountPo2bo(in *Account) (out *biz.Account, err error) {
+[33m^[0m
+[1mapp/account/internal/admin/data/account.go:101[22m:1: [31mnamed return "count" with type "int64" found[0m (nonamedreturns)
+func (d *accountData) Count(ctx context.Context, cond *biz.Account) (count int64, err error) {
+[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:53[22m:1: [31mnamed return "cond" with type "*biz.Account" found[0m (nonamedreturns)
+func buildListCond(req *adminv1.ListRequest) (cond *biz.Account, start, limit int64, err error) {
+[33m^[0m
+[1mapp/account/internal/http/data/account.go:46[22m:1: [31mnamed return "out" with type "*domain.Account" found[0m (nonamedreturns)
+func po2bo(in *Account) (out *domain.Account) {
+[33m^[0m
+[1mapp/account/internal/http/data/account.go:138[22m:1: [31mnamed return "po" with type "Account" found[0m (nonamedreturns)
+func (d *accountData) buildCreatePo(acc *domain.Account) (po Account, fields []string, err error) {
+[33m^[0m
+[1mapp/account/internal/http/domain/apple.go:187[22m:1: [31mnamed return "k" with type "string" found[0m (nonamedreturns)
+func (do *AppleDomain) buildSecret() (k string, err error) {
+[33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:37[22m:1: [31mnamed return "token" with type "string" found[0m (nonamedreturns)
+func genToken(account *domain.Account, color string) (token string, expiredTime int64, err error) {
+[33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:66[22m:1: [31mnamed return "session" with type "string" found[0m (nonamedreturns)
+func genSession(account *domain.Account) (session string, expiredTime int64, err error) {
+[33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:94[22m:1: [31mnamed return "session" with type "*v1.Session" found[0m (nonamedreturns)
+func unmarshalSession(secret string) (session *v1.Session, err error) {
+[33m^[0m
+[1mapp/account/internal/pkg/security/password.go:99[22m:1: [31mnamed return "params" with type "*Argon2Params" found[0m (nonamedreturns)
+func decodeArgon2idHash(encodedHash string) (params *Argon2Params, salt, hash []byte, err error) {
+[33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:111[22m:1: [31mnamed return "count" with type "int64" found[0m (nonamedreturns)
+func (d *noticeData) Count(ctx context.Context) (count int64, err error) {
+[33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:119[22m:1: [31mnamed return "out" with type "*biz.Notice" found[0m (nonamedreturns)
+func noticePo2bo(in *Notice) (out *biz.Notice) {
+[33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:135[22m:1: [31mnamed return "out" with type "*Notice" found[0m (nonamedreturns)
+func noticeBo2Po(in *biz.Notice) (out *Notice) {
+[33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:96[22m:1: [31mnamed return "start" with type "int64" found[0m (nonamedreturns)
+func buildGetListCond(req *adminv1.GetListRequest) (start, limit int64, err error) {
+[33m^[0m
+[1mapp/notice/internal/http/data/notice.go:24[22m:1: [31mnamed return "out" with type "*biz.Notice" found[0m (nonamedreturns)
+func noticePo2bo(in *Notice) (out *biz.Notice) {
+[33m^[0m
+[1mapp/notice/internal/pkg/security/password.go:99[22m:1: [31mnamed return "params" with type "*Argon2Params" found[0m (nonamedreturns)
+func decodeArgon2idHash(encodedHash string) (params *Argon2Params, salt, hash []byte, err error) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:10[22m:1: [31mFunction TestMax missing the call to method parallel[0m (paralleltest)
+func TestMax(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:24[22m:2: [31mRange statement for test TestMax missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:31[22m:1: [31mFunction TestMin missing the call to method parallel[0m (paralleltest)
+func TestMin(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:45[22m:2: [31mRange statement for test TestMin missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:52[22m:1: [31mFunction TestReduce missing the call to method parallel[0m (paralleltest)
+func TestReduce(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:65[22m:2: [31mRange statement for test TestReduce missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:72[22m:1: [31mFunction TestAdd missing the call to method parallel[0m (paralleltest)
+func TestAdd(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:84[22m:2: [31mRange statement for test TestAdd missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:91[22m:1: [31mFunction TestRandom missing the call to method parallel[0m (paralleltest)
+func TestRandom(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:102[22m:2: [31mRange statement for test TestRandom missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:114[22m:1: [31mFunction TestDivide2f64 missing the call to method parallel[0m (paralleltest)
+func TestDivide2f64(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:128[22m:2: [31mRange statement for test TestDivide2f64 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:135[22m:1: [31mFunction TestF64WithDigits missing the call to method parallel[0m (paralleltest)
+func TestF64WithDigits(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:149[22m:2: [31mRange statement for test TestF64WithDigits missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:157[22m:1: [31mFunction TestPow missing the call to method parallel[0m (paralleltest)
+func TestPow(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:170[22m:2: [31mRange statement for test TestPow missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:177[22m:1: [31mFunction TestExp missing the call to method parallel[0m (paralleltest)
+func TestExp(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:189[22m:2: [31mRange statement for test TestExp missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:196[22m:1: [31mFunction TestCeilDivide missing the call to method parallel[0m (paralleltest)
+func TestCeilDivide(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:210[22m:2: [31mRange statement for test TestCeilDivide missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:217[22m:1: [31mFunction TestToI32 missing the call to method parallel[0m (paralleltest)
+func TestToI32(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:230[22m:2: [31mRange statement for test TestToI32 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:237[22m:1: [31mFunction TestToI64 missing the call to method parallel[0m (paralleltest)
+func TestToI64(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:252[22m:2: [31mRange statement for test TestToI64 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:35[22m:1: [31mFunction TestCacheHit missing the call to method parallel[0m (paralleltest)
+func TestCacheHit(t *testing.T) {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:77[22m:2: [31mRange statement for test TestValidateRS256 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:10[22m:1: [31mFunction TestMax missing the call to method parallel[0m (paralleltest)
+func TestMax(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:24[22m:2: [31mRange statement for test TestMax missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:31[22m:1: [31mFunction TestMin missing the call to method parallel[0m (paralleltest)
+func TestMin(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:45[22m:2: [31mRange statement for test TestMin missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:52[22m:1: [31mFunction TestReduce missing the call to method parallel[0m (paralleltest)
+func TestReduce(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:65[22m:2: [31mRange statement for test TestReduce missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:72[22m:1: [31mFunction TestAdd missing the call to method parallel[0m (paralleltest)
+func TestAdd(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:84[22m:2: [31mRange statement for test TestAdd missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:91[22m:1: [31mFunction TestRandom missing the call to method parallel[0m (paralleltest)
+func TestRandom(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:102[22m:2: [31mRange statement for test TestRandom missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:114[22m:1: [31mFunction TestDivide2f64 missing the call to method parallel[0m (paralleltest)
+func TestDivide2f64(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:128[22m:2: [31mRange statement for test TestDivide2f64 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:135[22m:1: [31mFunction TestF64WithDigits missing the call to method parallel[0m (paralleltest)
+func TestF64WithDigits(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:149[22m:2: [31mRange statement for test TestF64WithDigits missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:157[22m:1: [31mFunction TestPow missing the call to method parallel[0m (paralleltest)
+func TestPow(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:170[22m:2: [31mRange statement for test TestPow missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:177[22m:1: [31mFunction TestExp missing the call to method parallel[0m (paralleltest)
+func TestExp(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:189[22m:2: [31mRange statement for test TestExp missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:196[22m:1: [31mFunction TestCeilDivide missing the call to method parallel[0m (paralleltest)
+func TestCeilDivide(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:210[22m:2: [31mRange statement for test TestCeilDivide missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:217[22m:1: [31mFunction TestToI32 missing the call to method parallel[0m (paralleltest)
+func TestToI32(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:230[22m:2: [31mRange statement for test TestToI32 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:237[22m:1: [31mFunction TestToI64 missing the call to method parallel[0m (paralleltest)
+func TestToI64(t *testing.T) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:252[22m:2: [31mRange statement for test TestToI64 missing the call to method parallel in test Run[0m (paralleltest)
+	for _, tt := range tests {
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:35[22m:20: [31mavoid direct access to proto field label.Service, use label.GetService() instead[0m (protogetter)
+		profile.SERVICE: label.Service,
+		                 [33m^[0m
+[1mapp/account/cmd/server/main.go:36[22m:20: [31mavoid direct access to proto field label.Profile, use label.GetProfile() instead[0m (protogetter)
+		profile.PROFILE: label.Profile,
+		                 [33m^[0m
+[1mapp/account/cmd/server/main.go:37[22m:20: [31mavoid direct access to proto field label.Version, use label.GetVersion() instead[0m (protogetter)
+		profile.VERSION: label.Version,
+		                 [33m^[0m
+[1mapp/account/cmd/server/main.go:38[22m:20: [31mavoid direct access to proto field label.Color, use label.GetColor() instead[0m (protogetter)
+		profile.COLOR:   label.Color,
+		                 [33m^[0m
+[1mapp/account/cmd/server/main.go:39[22m:20: [31mavoid direct access to proto field label.Node, use label.GetNode() instead[0m (protogetter)
+		profile.NODE:    label.Node,
+		                 [33m^[0m
+[1mapp/account/cmd/server/main.go:47[22m:15: [31mavoid direct access to proto field label.Profile, use label.GetProfile() instead[0m (protogetter)
+	profile.Init(label.Profile, label.Color, label.Zone, label.Version, label.Node, url)
+	             [33m^[0m
+[1mapp/account/cmd/server/main.go:50[22m:15: [31mavoid direct access to proto field label.Service, use label.GetService() instead[0m (protogetter)
+		kratos.Name(label.Service),
+		            [33m^[0m
+[1mapp/account/cmd/server/main.go:51[22m:18: [31mavoid direct access to proto field label.Version, use label.GetVersion() instead[0m (protogetter)
+		kratos.Version(label.Version),
+		               [33m^[0m
+[1mapp/account/cmd/server/main.go:82[22m:13: [31mavoid direct access to proto field bc.Label.Language, use bc.GetLabel().GetLanguage() instead[0m (protogetter)
+	xtime.Init(bc.Label.Language)
+	           [33m^[0m
+[1mapp/account/cmd/server/main.go:94[22m:23: [31mavoid direct access to proto field bc.Trace.Endpoint, use bc.GetTrace().GetEndpoint() instead[0m (protogetter)
+	if err := trace.Init(bc.Trace.Endpoint, bc.Label.Service, bc.Label.Profile, bc.Label.Color); err != nil {
+	                     [33m^[0m
+[1mapp/account/cmd/server/main.go:99[22m:15: [31mavoid direct access to proto field bc.Label.Service, use bc.GetLabel().GetService() instead[0m (protogetter)
+	metrics.Init(bc.Label.Service)
+	             [33m^[0m
+[1mapp/account/cmd/server/main.go:101[22m:26: [31mavoid direct access to proto field sc.TokenKey, use sc.GetTokenKey() instead[0m (protogetter)
+	if err := security.Init(sc.TokenKey, sc.SessionKey, sc.PlatformKey); err != nil {
+	                        [33m^[0m
+[1mapp/account/cmd/server/main.go:111[22m:31: [31mavoid direct access to proto field bc.Label.Service, use bc.GetLabel().GetService() instead[0m (protogetter)
+	log.Infof("[%s] is running", bc.Label.Service)
+	                             [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:54[22m:5: [31mavoid direct access to proto field req.PageSize, use req.GetPageSize() instead[0m (protogetter)
+	if req.PageSize > profile.MaxPageSize {
+	   [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:59[22m:40: [31mavoid direct access to proto field req.Page, use req.GetPage() instead[0m (protogetter)
+	start, limit = profile.PageStartLimit(req.Page, req.PageSize)
+	                                      [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:62[22m:5: [31mavoid direct access to proto field req.Condition, use req.GetCondition() instead[0m (protogetter)
+	if req.Condition == nil {
+	   [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:66[22m:9: [31mavoid direct access to proto field req.Condition.Name, use req.GetCondition().GetName() instead[0m (protogetter)
+	if len(req.Condition.Name) > 0 {
+	       [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:67[22m:15: [31mavoid direct access to proto field req.Condition.Name, use req.GetCondition().GetName() instead[0m (protogetter)
+		cond.Name = req.Condition.Name
+		            [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:69[22m:9: [31mavoid direct access to proto field req.Condition.AppleId, use req.GetCondition().GetAppleId() instead[0m (protogetter)
+	if len(req.Condition.AppleId) > 0 {
+	       [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:70[22m:18: [31mavoid direct access to proto field req.Condition.AppleId, use req.GetCondition().GetAppleId() instead[0m (protogetter)
+		cond.AppleId = req.Condition.AppleId
+		               [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:72[22m:9: [31mavoid direct access to proto field req.Condition.GoogleId, use req.GetCondition().GetGoogleId() instead[0m (protogetter)
+	if len(req.Condition.GoogleId) > 0 {
+	       [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:73[22m:19: [31mavoid direct access to proto field req.Condition.GoogleId, use req.GetCondition().GetGoogleId() instead[0m (protogetter)
+		cond.GoogleId = req.Condition.GoogleId
+		                [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:79[22m:30: [31mavoid direct access to proto field req.Id, use req.GetId() instead[0m (protogetter)
+	o, err := s.ac.GetById(ctx, req.Id)
+	                            [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:29[22m:6: [31mavoid direct access to proto field idInfo.AppleId, use idInfo.GetAppleId() instead[0m (protogetter)
+		if idInfo.AppleId != appleId {
+		   [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:31[22m:22: [31mavoid direct access to proto field idInfo.AppleId, use idInfo.GetAppleId() instead[0m (protogetter)
+				"secretAppleId": idInfo.AppleId,
+				                 [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:37[22m:11: [31mavoid direct access to proto field idInfo.State, use idInfo.GetState() instead[0m (protogetter)
+		state = idInfo.State
+		        [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:68[22m:41: [31mavoid direct access to proto field idInfo.AppleId, use idInfo.GetAppleId() instead[0m (protogetter)
+	acc, err := uc.appledo.GetAccount(ctx, idInfo.AppleId)
+	                                       [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:38[22m:12: [31mavoid direct access to proto field req.Message, use req.GetMessage() instead[0m (protogetter)
+		Message: req.Message,
+		         [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:47[22m:48: [31mavoid direct access to proto field req.AccountId, use req.GetAccountId() instead[0m (protogetter)
+		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
+		                                             [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:53[22m:30: [31mavoid direct access to proto field req.Session, use req.GetSession() instead[0m (protogetter)
+	ss, err := unmarshalSession(req.Session)
+	                            [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:55[22m:53: [31mavoid direct access to proto field req.Session, use req.GetSession() instead[0m (protogetter)
+		return nil, xerrors.APIParamInvalid("session=%s", req.Session).WithCause(err)
+		                                                  [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:57[22m:25: [31mavoid direct access to proto field ss.Timeout, use ss.GetTimeout() instead[0m (protogetter)
+	if time.Now().Unix() > ss.Timeout {
+	                       [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:61[22m:5: [31mavoid direct access to proto field ss.AccountId, use ss.GetAccountId() instead[0m (protogetter)
+	if ss.AccountId != accountId {
+	   [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:62[22m:73: [31mavoid direct access to proto field ss.AccountId, use ss.GetAccountId() instead[0m (protogetter)
+		return nil, xerrors.APISessionIllegal("ssAccountId=%d, accountId=%d", ss.AccountId, accountId)
+		                                                                      [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:84[22m:48: [31mavoid direct access to proto field req.AccountId, use req.GetAccountId() instead[0m (protogetter)
+		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
+		                                             [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:90[22m:30: [31mavoid direct access to proto field req.Session, use req.GetSession() instead[0m (protogetter)
+	ss, err := unmarshalSession(req.Session)
+	                            [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:94[22m:25: [31mavoid direct access to proto field ss.Timeout, use ss.GetTimeout() instead[0m (protogetter)
+	if time.Now().Unix() > ss.Timeout {
+	                       [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:98[22m:5: [31mavoid direct access to proto field ss.AccountId, use ss.GetAccountId() instead[0m (protogetter)
+	if ss.AccountId != accountId {
+	   [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:102[22m:29: [31mavoid direct access to proto field req.Color, use req.GetColor() instead[0m (protogetter)
+	color := strings.TrimSpace(req.Color)
+	                           [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:23[22m:31: [31mavoid direct access to proto field req.Token, use req.GetToken() instead[0m (protogetter)
+		token   = strings.TrimSpace(req.Token)
+		                            [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:25[22m:31: [31mavoid direct access to proto field req.Color, use req.GetColor() instead[0m (protogetter)
+		color   = strings.TrimSpace(req.Color)
+		                            [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:81[22m:9: [31mavoid direct access to proto field req.Error, use req.GetError() instead[0m (protogetter)
+	if len(req.Error) > 0 {
+	       [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:87[22m:29: [31mavoid direct access to proto field req.Code, use req.GetCode() instead[0m (protogetter)
+		code  = strings.TrimSpace(req.Code)
+		                          [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:88[22m:29: [31mavoid direct access to proto field req.State, use req.GetState() instead[0m (protogetter)
+		state = strings.TrimSpace(req.State)
+		                          [33m^[0m
+[1mapp/account/internal/http/service/v1/facebook.go:18[22m:29: [31mavoid direct access to proto field req.Token, use req.GetToken() instead[0m (protogetter)
+	token := strings.TrimSpace(req.Token)
+	                           [33m^[0m
+[1mapp/account/internal/http/service/v1/facebook.go:19[22m:29: [31mavoid direct access to proto field req.Color, use req.GetColor() instead[0m (protogetter)
+	color := strings.TrimSpace(req.Color)
+	                           [33m^[0m
+[1mapp/account/internal/http/service/v1/google.go:18[22m:29: [31mavoid direct access to proto field req.Token, use req.GetToken() instead[0m (protogetter)
+	token := strings.TrimSpace(req.Token)
+	                           [33m^[0m
+[1mapp/account/internal/http/service/v1/username.go:21[22m:28: [31mavoid direct access to proto field req.Username, use req.GetUsername() instead[0m (protogetter)
+	name := strings.TrimSpace(req.Username)
+	                          [33m^[0m
+[1mapp/account/internal/http/service/v1/username.go:22[22m:32: [31mavoid direct access to proto field req.Password, use req.GetPassword() instead[0m (protogetter)
+	password := strings.TrimSpace(req.Password)
+	                              [33m^[0m
+[1mapp/account/internal/http/service/v1/username.go:49[22m:28: [31mavoid direct access to proto field req.Username, use req.GetUsername() instead[0m (protogetter)
+	name := strings.TrimSpace(req.Username)
+	                          [33m^[0m
+[1mapp/account/cmd/server/main.go:1[22m:1: [31mpackage-comments: should have a package comment[0m (revive)
+package main
+[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:16[22m:6: [31mexported: exported type AccountAdmin should have comment or be unexported[0m (revive)
+type AccountAdmin struct {
+     [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:23[22m:1: [31mexported: exported function NewAccountAdmin should have comment or be unexported[0m (revive)
+func NewAccountAdmin(logger log.Logger, ac *biz.AccountUseCase) *AccountAdmin {
+[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:30[22m:1: [31mexported: exported method AccountAdmin.GetList should have comment or be unexported[0m (revive)
+func (s *AccountAdmin) GetList(ctx context.Context, req *adminv1.ListRequest) (reply *adminv1.ListResponse, err error) {
+[33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:78[22m:1: [31mexported: exported method AccountAdmin.GetById should have comment or be unexported[0m (revive)
+func (s *AccountAdmin) GetById(ctx context.Context, req *adminv1.GetByIdRequest) (*adminv1.GetByIdResponse, error) {
+[33m^[0m
+[1mapp/account/internal/http/biz/account.go:10[22m:6: [31mexported: exported type AccountUseCase should have comment or be unexported[0m (revive)
+type AccountUseCase struct {
+     [33m^[0m
+[1mapp/account/internal/http/biz/account.go:20[22m:1: [31mexported: exported function NewAccountUseCase should have comment or be unexported[0m (revive)
+func NewAccountUseCase(logger log.Logger, acc *domain.AccountDomain,
+[33m^[0m
+[1mapp/account/internal/http/biz/account.go:37[22m:1: [31mexported: exported method AccountUseCase.GetById should have comment or be unexported[0m (revive)
+func (uc *AccountUseCase) GetById(ctx context.Context, id int64) (*domain.Account, error) {
+[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:11[22m:1: [31mexported: exported method AccountUseCase.LoginByAppleToken should have comment or be unexported[0m (revive)
+func (uc *AccountUseCase) LoginByAppleToken(ctx context.Context, token, secret string, ip string) (acc *domain.Account, isRegister bool, state string, err error) {
+[33m^[0m
+[1mapp/account/internal/http/biz/apple.go:48[22m:1: [31mexported: exported method AccountUseCase.LoginByAppleCode should have comment or be unexported[0m (revive)
+func (uc *AccountUseCase) LoginByAppleCode(ctx context.Context, code string, ip string) (*domain.Account, bool, error) {
+[33m^[0m
+[1mapp/account/internal/http/biz/username.go:12[22m:1: [31mexported: exported method AccountUseCase.CreateByUsername should have comment or be unexported[0m (revive)
+func (uc *AccountUseCase) CreateByUsername(ctx context.Context, username, pwd, ip string) (*domain.Account, error) {
+[33m^[0m
+[1mapp/account/internal/http/biz/username.go:35[22m:1: [31mexported: exported method AccountUseCase.GetByUsernameAndPassword should have comment or be unexported[0m (revive)
+func (uc *AccountUseCase) GetByUsernameAndPassword(ctx context.Context, name, pwd string) (*domain.Account, error) {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:24[22m:6: [31mexported: exported type Payload should have comment or be unexported[0m (revive)
+type Payload struct {
+     [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:61[22m:6: [31mexported: exported type Validator should have comment or be unexported[0m (revive)
+type Validator struct {
+     [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:66[22m:1: [31mexported: exported function NewValidator should have comment or be unexported[0m (revive)
+func NewValidator(ctx context.Context, saCertURL string, client *http.Client) *Validator {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:70[22m:1: [31mexported: exported method Validator.Validate should have comment or be unexported[0m (revive)
+func (v *Validator) Validate(ctx context.Context, idToken string, audience string) (*Payload, error) {
+[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:80[22m:33: [31munused-parameter: parameter 'req' seems to be unused, consider removing or renaming it as _[0m (revive)
+				Transport: RoundTripFn(func(req *http.Request) *http.Response {
+				                            [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:10[22m:6: [31mexported: exported type Notice should have comment or be unexported[0m (revive)
+type Notice struct {
+     [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:11[22m:2: [31mvar-naming: struct field Id should be ID[0m (revive)
+	Id        int64
+	[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:22[22m:6: [31mexported: exported type NoticeRepo should have comment or be unexported[0m (revive)
+type NoticeRepo interface {
+     [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:31[22m:6: [31mexported: exported type NoticeUseCase should have comment or be unexported[0m (revive)
+type NoticeUseCase struct {
+     [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:37[22m:1: [31mexported: exported function NewNoticeUseCase should have comment or be unexported[0m (revive)
+func NewNoticeUseCase(repo NoticeRepo, logger log.Logger) *NoticeUseCase {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:44[22m:1: [31mexported: exported method NoticeUseCase.GetList should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) GetList(ctx context.Context, index, size int64) (list []*Notice, count int64, err error) {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:56[22m:1: [31mexported: exported method NoticeUseCase.Count should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) Count(ctx context.Context) (int64, error) {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:60[22m:1: [31mexported: exported method NoticeUseCase.GetById should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) GetById(ctx context.Context, id int64) (*Notice, error) {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:64[22m:1: [31mexported: exported method NoticeUseCase.Update should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) Update(ctx context.Context, notice *Notice) error {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:68[22m:1: [31mexported: exported method NoticeUseCase.Create should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) Create(ctx context.Context, notice *Notice) error {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:72[22m:1: [31mexported: exported method NoticeUseCase.Delete should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) Delete(ctx context.Context, id int64) error {
+[33m^[0m
+[1mapp/notice/internal/admin/biz/provider.go:7[22m:5: [31mexported: exported var ProviderSet should have comment or be unexported[0m (revive)
+var ProviderSet = wire.NewSet( NewNoticeUseCase)
+    [33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:9[22m:6: [31mexported: exported type Notice should have comment or be unexported[0m (revive)
+type Notice struct {
+     [33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:16[22m:6: [31mexported: exported type NoticeRepo should have comment or be unexported[0m (revive)
+type NoticeRepo interface {
+     [33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:20[22m:6: [31mexported: exported type NoticeUseCase should have comment or be unexported[0m (revive)
+type NoticeUseCase struct {
+     [33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:26[22m:1: [31mexported: exported function NewNoticeUseCase should have comment or be unexported[0m (revive)
+func NewNoticeUseCase(repo NoticeRepo, logger log.Logger) *NoticeUseCase {
+[33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:33[22m:1: [31mexported: exported method NoticeUseCase.NoticeList should have comment or be unexported[0m (revive)
+func (uc *NoticeUseCase) NoticeList(ctx context.Context) ([]*Notice, error) {
+[33m^[0m
+[1mapp/notice/internal/http/provider.go:1[22m:1: [31mpackage-comments: should have a package comment[0m (revive)
+package http
+[33m^[0m
+[1mapp/notice/internal/http/provider.go:10[22m:5: [31mexported: exported var ProviderSet should have comment or be unexported[0m (revive)
+var ProviderSet = wire.NewSet(service.ProviderSet, biz.ProviderSet, data.ProviderSet)
+    [33m^[0m
+[1mapp/notice/internal/http/service/provider.go:1[22m:1: [31mpackage-comments: should have a package comment[0m (revive)
+package service
+[33m^[0m
+[1mapp/notice/internal/http/service/provider.go:8[22m:5: [31mexported: exported var ProviderSet should have comment or be unexported[0m (revive)
+var ProviderSet = wire.NewSet(v1.NewNoticeInterface)
+    [33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:11[22m:6: [31mexported: exported type NoticeInterface should have comment or be unexported[0m (revive)
+type NoticeInterface struct {
+     [33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:18[22m:1: [31mexported: exported function NewNoticeInterface should have comment or be unexported[0m (revive)
+func NewNoticeInterface(logger log.Logger, uc *biz.NoticeUseCase) *NoticeInterface {
+[33m^[0m
+[1mapp/notice/internal/http/service/v1/notice.go:25[22m:1: [31mexported: exported method NoticeInterface.NoticeList should have comment or be unexported[0m (revive)
+func (s *NoticeInterface) NoticeList(ctx context.Context, req *v1.NoticeListRequest) (*v1.NoticeListResponse, error) {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:9[22m:1: [31mexported: exported function Max should have comment or be unexported[0m (revive)
+func Max(x, y int64) int64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:16[22m:1: [31mexported: exported function Min should have comment or be unexported[0m (revive)
+func Min(x, y int64) int64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:69[22m:1: [31mexported: exported function Divide2f64 should have comment or be unexported[0m (revive)
+func Divide2f64(x, y int64) float64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:76[22m:1: [31mexported: exported function F64WithDigits should have comment or be unexported[0m (revive)
+func F64WithDigits(v float64, dig int) float64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:129[22m:1: [31mexported: exported function Exp should have comment or be unexported[0m (revive)
+func Exp(x int64) int64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:133[22m:1: [31mexported: exported function Abs should have comment or be unexported[0m (revive)
+func Abs(x int64) int64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:140[22m:1: [31mexported: exported function CeilDivide should have comment or be unexported[0m (revive)
+func CeilDivide(x, y int64) int64 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:157[22m:1: [31mexported: exported function ToI32 should have comment or be unexported[0m (revive)
+func ToI32(x int64) int32 {
+[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:167[22m:1: [31mexported: exported function ToI64 should have comment or be unexported[0m (revive)
+func ToI64(s string) (int64, error) {
+[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:108[22m:5: [31mcompares: use assert.Less[0m (testifylint)
+				assert.True(t, got < tt.v)
+				[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:130[22m:4: [31mfloat-compare: use assert.InEpsilon (or InDelta)[0m (testifylint)
+			assert.Equal(t, tt.expected, Divide2f64(tt.x, tt.y))
+			[33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:19[22m:2: [31merror-nil: use assert.NoError[0m (testifylint)
+	assert.Nil(t, err)
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:22[22m:2: [31merror-nil: use assert.NoError[0m (testifylint)
+	assert.Nil(t, err)
+	[33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:25[22m:2: [31merror-nil: use assert.NoError[0m (testifylint)
+	assert.Nil(t, err)
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:108[22m:5: [31mcompares: use assert.Less[0m (testifylint)
+				assert.True(t, got < tt.v)
+				[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:130[22m:4: [31mfloat-compare: use assert.InEpsilon (or InDelta)[0m (testifylint)
+			assert.Equal(t, tt.expected, Divide2f64(tt.x, tt.y))
+			[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:152[22m:4: [31mfloat-compare: use assert.InEpsilon (or InDelta)[0m (testifylint)
+			assert.Equal(t, tt.expected, got)
+			[33m^[0m
+[1mapp/account/internal/pkg/i64/i64_test.go:1[22m:9: [31mpackage should be `i64_test` instead of `i64`[0m (testpackage)
+package i64
+        [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:5[22m:9: [31mpackage should be `jwt_test` instead of `jwt`[0m (testpackage)
+package jwt
+        [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:5[22m:9: [31mpackage should be `jwt_test` instead of `jwt`[0m (testpackage)
+package jwt
+        [33m^[0m
+[1mapp/account/internal/pkg/security/crypto_test.go:1[22m:9: [31mpackage should be `security_test` instead of `security`[0m (testpackage)
+package security
+        [33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:1[22m:9: [31mpackage should be `security_test` instead of `security`[0m (testpackage)
+package security
+        [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64_test.go:1[22m:9: [31mpackage should be `i64_test` instead of `i64`[0m (testpackage)
+package i64
+        [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache_test.go:5[22m:9: [31mpackage should be `jwt_test` instead of `jwt`[0m (testpackage)
+package jwt
+        [33m^[0m
+[1mapp/notice/internal/pkg/security/crypto_test.go:1[22m:9: [31mpackage should be `security_test` instead of `security`[0m (testpackage)
+package security
+        [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:36[22m:57: [31munnecessary conversion[0m (unconvert)
+	accounts, count, err := s.ac.GetList(ctx, i64.Max(int64(page-1), 0)*pageSize, pageSize, cond)
+	                                                       [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:101[22m:45: [31munnecessary conversion[0m (unconvert)
+	start, limit = profile.PageStartLimit(int64(req.Page), int64(req.PageSize))
+	                                           [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:20[22m:2: [31mvar defaultValidator is unused[0m (unused)
+	defaultValidator = &Validator{certGetter: newCacheCertGetter(http.DefaultClient)}
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:20[22m:2: [31mvar defaultValidator is unused[0m (unused)
+	defaultValidator = &Validator{certGetter: newCacheCertGetter(http.DefaultClient)}
+	[33m^[0m
+[1mapp/account/internal/http/domain/apple.go:154[22m:46: [31m"POST" can be replaced by http.MethodPost[0m (usestdlibvars)
+	req, err := http.NewRequestWithContext(ctx, "POST", appleAuthTokenURL, body)
+	                                            [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:95[22m:19: [31m"200" can be replaced by http.StatusOK[0m (usestdlibvars)
+						StatusCode: 200,
+						            [33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:95[22m:19: [31m"200" can be replaced by http.StatusOK[0m (usestdlibvars)
+						StatusCode: 200,
+						            [33m^[0m
+[1mapp/account/cmd/server/main.go:34[22m:2: [31mvariable name 'md' is too short for the scope of its usage[0m (varnamelen)
+	md := map[string]string{
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:67[22m:2: [31mvariable name 'c' is too short for the scope of its usage[0m (varnamelen)
+	c := config.New(
+	[33m^[0m
+[1mapp/account/cmd/server/main.go:77[22m:6: [31mvariable name 'bc' is too short for the scope of its usage[0m (varnamelen)
+	var bc conf.Bootstrap
+	    [33m^[0m
+[1mapp/account/cmd/server/main.go:84[22m:6: [31mvariable name 'rc' is too short for the scope of its usage[0m (varnamelen)
+	var rc conf.Registry
+	    [33m^[0m
+[1mapp/account/cmd/server/main.go:89[22m:6: [31mvariable name 'sc' is too short for the scope of its usage[0m (varnamelen)
+	var sc conf.Secret
+	    [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:89[22m:20: [31mparameter name 'bo' is too short for the scope of its usage[0m (varnamelen)
+func accountBo2dto(bo *biz.Account) *adminv1.AccountProto {
+                   [33m^[0m
+[1mapp/account/internal/http/biz/account.go:22[22m:2: [31mparameter name 'gg' is too short for the scope of its usage[0m (varnamelen)
+	gg *domain.GoogleDomain,
+	[33m^[0m
+[1mapp/account/internal/http/biz/account.go:23[22m:2: [31mparameter name 'ap' is too short for the scope of its usage[0m (varnamelen)
+	ap *domain.AppleDomain,
+	[33m^[0m
+[1mapp/account/internal/http/biz/account.go:24[22m:2: [31mparameter name 'fb' is too short for the scope of its usage[0m (varnamelen)
+	fb *domain.FacebookDomain,
+	[33m^[0m
+[1mapp/account/internal/http/biz/username.go:36[22m:2: [31mvariable name 'po' is too short for the scope of its usage[0m (varnamelen)
+	po, err := uc.usernamedo.GetAccountByUsername(ctx, name)
+	[33m^[0m
+[1mapp/account/internal/http/data/account.go:77[22m:2: [31mvariable name 'd' is too short for the scope of its usage[0m (varnamelen)
+	d := &accountData{
+	[33m^[0m
+[1mapp/account/internal/http/data/account.go:109[22m:7: [31mvariable name 'i' is too short for the scope of its usage[0m (varnamelen)
+		for i := minQaAccountId; i <= maxQaAccountId; i++ {
+		    [33m^[0m
+[1mapp/account/internal/http/data/account.go:126[22m:2: [31mvariable name 'po' is too short for the scope of its usage[0m (varnamelen)
+	po, fields, err := d.buildCreatePo(acc)
+	[33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:95[22m:3: [31mvariable name 'k' is too short for the scope of its usage[0m (varnamelen)
+		k          string
+		[33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:74[22m:2: [31mvariable name 'p' is too short for the scope of its usage[0m (varnamelen)
+	p := &v1.Session{
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:36[22m:10: [31mparameter name 'y' is too short for the scope of its usage[0m (varnamelen)
+func Add(x, y int64) int64 {
+         [33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:44[22m:2: [31mvariable name 'r' is too short for the scope of its usage[0m (varnamelen)
+	r := x + y
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:84[22m:10: [31mparameter name 'a' is too short for the scope of its usage[0m (varnamelen)
+func Pow(a, n int64) int64 {
+         [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache_test.go:48[22m:2: [31mvariable name 'ok' is too short for the scope of its usage[0m (varnamelen)
+	cert, ok := cache.get(testAppleSACertsURL)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:113[22m:2: [31mvariable name 'j' is too short for the scope of its usage[0m (varnamelen)
+	j, err := findMatchingKey(certResp, keyID)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:117[22m:2: [31mvariable name 'dn' is too short for the scope of its usage[0m (varnamelen)
+	dn, err := decode(j.N)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:121[22m:2: [31mvariable name 'de' is too short for the scope of its usage[0m (varnamelen)
+	de, err := decode(j.E)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:186[22m:6: [31mvariable name 'h' is too short for the scope of its usage[0m (varnamelen)
+	var h jwtHeader
+	    [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:200[22m:6: [31mvariable name 'p' is too short for the scope of its usage[0m (varnamelen)
+	var p Payload
+	    [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:201[22m:2: [31mvariable name 'dp' is too short for the scope of its usage[0m (varnamelen)
+	dp, err := j.decodedPayload()
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:34[22m:2: [31mvariable name 'pk' is too short for the scope of its usage[0m (varnamelen)
+	idToken, pk := createRS256JWT(t)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:81[22m:6: [31mvariable name 'cr' is too short for the scope of its usage[0m (varnamelen)
+					cr := certResponse{
+					[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:90[22m:6: [31mvariable name 'b' is too short for the scope of its usage[0m (varnamelen)
+					b, err := json.Marshal(&cr)
+					[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:169[22m:2: [31mvariable name 'hb' is too short for the scope of its usage[0m (varnamelen)
+	hb, err := json.Marshal(&header)
+	[33m^[0m
+[1mapp/notice/cmd/server/main.go:66[22m:2: [31mvariable name 'c' is too short for the scope of its usage[0m (varnamelen)
+	c := config.New(
+	[33m^[0m
+[1mapp/notice/cmd/server/main.go:76[22m:6: [31mvariable name 'bc' is too short for the scope of its usage[0m (varnamelen)
+	var bc conf.Bootstrap
+	    [33m^[0m
+[1mapp/notice/cmd/server/main.go:83[22m:6: [31mvariable name 'rc' is too short for the scope of its usage[0m (varnamelen)
+	var rc conf.Registry
+	    [33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:35[22m:2: [31mvariable name 'r' is too short for the scope of its usage[0m (varnamelen)
+	r := &noticeData{
+	[33m^[0m
+[1mapp/notice/internal/admin/data/notice.go:87[22m:50: [31mparameter name 'bo' is too short for the scope of its usage[0m (varnamelen)
+func (d *noticeData) Insert(ctx context.Context, bo *biz.Notice) error {
+                                                 [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:105[22m:19: [31mparameter name 'bo' is too short for the scope of its usage[0m (varnamelen)
+func noticeBo2dto(bo *biz.Notice) *adminv1.NoticeProto {
+                  [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:120[22m:2: [31mvariable name 'o' is too short for the scope of its usage[0m (varnamelen)
+	o := &biz.Notice{
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:36[22m:10: [31mparameter name 'x' is too short for the scope of its usage[0m (varnamelen)
+func Add(x, y int64) int64 {
+         [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:44[22m:2: [31mvariable name 'r' is too short for the scope of its usage[0m (varnamelen)
+	r := x + y
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:84[22m:10: [31mparameter name 'a' is too short for the scope of its usage[0m (varnamelen)
+func Pow(a, n int64) int64 {
+         [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache_test.go:48[22m:2: [31mvariable name 'ok' is too short for the scope of its usage[0m (varnamelen)
+	cert, ok := cache.get(testAppleSACertsURL)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:113[22m:2: [31mvariable name 'j' is too short for the scope of its usage[0m (varnamelen)
+	j, err := findMatchingKey(certResp, keyID)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:117[22m:2: [31mvariable name 'dn' is too short for the scope of its usage[0m (varnamelen)
+	dn, err := decode(j.N)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:121[22m:2: [31mvariable name 'de' is too short for the scope of its usage[0m (varnamelen)
+	de, err := decode(j.E)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:186[22m:6: [31mvariable name 'h' is too short for the scope of its usage[0m (varnamelen)
+	var h jwtHeader
+	    [33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:200[22m:6: [31mvariable name 'p' is too short for the scope of its usage[0m (varnamelen)
+	var p Payload
+	    [33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:201[22m:2: [31mvariable name 'dp' is too short for the scope of its usage[0m (varnamelen)
+	dp, err := j.decodedPayload()
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:34[22m:2: [31mvariable name 'pk' is too short for the scope of its usage[0m (varnamelen)
+	idToken, pk := createRS256JWT(t)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:81[22m:6: [31mvariable name 'cr' is too short for the scope of its usage[0m (varnamelen)
+					cr := certResponse{
+					[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:90[22m:6: [31mvariable name 'b' is too short for the scope of its usage[0m (varnamelen)
+					b, err := json.Marshal(&cr)
+					[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:169[22m:2: [31mvariable name 'hb' is too short for the scope of its usage[0m (varnamelen)
+	hb, err := json.Marshal(&header)
+	[33m^[0m
+[1mapp/account/internal/admin/biz/account.go:43[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/account/internal/admin/biz.AccountRepo).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/account/internal/admin/biz.Account, error)[0m (wrapcheck)
+	return uc.repo.GetById(ctx, id)
+	       [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:38[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/admin/biz.AccountUseCase).GetList(ctx context.Context, index int64, size int64, cond *github.com/go-pantheon/lares/app/account/internal/admin/biz.Account) (accounts []*github.com/go-pantheon/lares/app/account/internal/admin/biz.Account, count int64, err error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/admin/service/v1/account.go:81[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/admin/biz.AccountUseCase).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/account/internal/admin/biz.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/biz/account.go:38[22m:9: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.AccountDomain).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+	return uc.accountdo.GetById(ctx, id)
+	       [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:51[22m:22: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.AppleDomain).RequestToken(ctx context.Context, code string) (string, error)[0m (wrapcheck)
+		return nil, false, err
+		                   [33m^[0m
+[1mapp/account/internal/http/biz/apple.go:59[22m:9: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.AppleDomain).GetOrCreateAccount(ctx context.Context, appleId string, ip string) (acc *github.com/go-pantheon/lares/app/account/internal/http/domain.Account, isCreated bool, err error)[0m (wrapcheck)
+	return uc.appledo.GetOrCreateAccount(ctx, appleId, ip)
+	       [33m^[0m
+[1mapp/account/internal/http/biz/facebook.go:21[22m:9: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.FacebookDomain).GetOrCreateAccount(ctx context.Context, facebookId string, ip string) (acc *github.com/go-pantheon/lares/app/account/internal/http/domain.Account, isCreated bool, err error)[0m (wrapcheck)
+	return uc.facebookdo.GetOrCreateAccount(ctx, facebookId, ip)
+	       [33m^[0m
+[1mapp/account/internal/http/biz/google.go:18[22m:22: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.GoogleDomain).RequestPlatformId(ctx context.Context, token string) (string, error)[0m (wrapcheck)
+		return nil, false, err
+		                   [33m^[0m
+[1mapp/account/internal/http/biz/google.go:21[22m:9: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.GoogleDomain).GetOrCreateAccount(ctx context.Context, googleId string, ip string) (acc *github.com/go-pantheon/lares/app/account/internal/http/domain.Account, isRegister bool, err error)[0m (wrapcheck)
+	return uc.googledo.GetOrCreateAccount(ctx, googleId, ip)
+	       [33m^[0m
+[1mapp/account/internal/http/biz/username.go:15[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/domain.UsernameDomain).GetAccountByUsername(ctx context.Context, name string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/biz/username.go:24[22m:15: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/lares/app/account/internal/pkg/security.HashPassword(password string) (string, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/data/account.go:83[22m:15: [31merror returned from external package is unwrapped: sig: func (*gorm.io/gorm.DB).AutoMigrate(dst ...interface{}) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:67[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/account.go:106[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:50[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).LoginByAppleToken(ctx context.Context, token string, secret string, ip string) (acc *github.com/go-pantheon/lares/app/account/internal/http/domain.Account, isRegister bool, state string, err error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/apple.go:63[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).LoginByAppleId(ctx context.Context, secret string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, string, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/facebook.go:27[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).LoginByFacebook(ctx context.Context, token string, ip string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, bool, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/google.go:27[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).LoginByGoogle(ctx context.Context, token string, ip string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, bool, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/session.go:25[22m:15: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/id.EncodeId(id int64) (string, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/username.go:35[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).CreateByUsername(ctx context.Context, username string, pwd string, ip string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/http/service/v1/username.go:55[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/account/internal/http/biz.AccountUseCase).GetByUsernameAndPassword(ctx context.Context, name string, pwd string) (*github.com/go-pantheon/lares/app/account/internal/http/domain.Account, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:168[22m:9: [31merror returned from external package is unwrapped: sig: func strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)[0m (wrapcheck)
+	return strconv.ParseInt(s, 10, 64)
+	       [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:48[22m:15: [31merror returned from external package is unwrapped: sig: func net/http.NewRequestWithContext(ctx context.Context, method string, url string, body io.Reader) (*net/http.Request, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:53[22m:15: [31merror returned from external package is unwrapped: sig: func (*net/http.Client).Do(req *net/http.Request) (*net/http.Response, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:63[22m:15: [31merror returned from external package is unwrapped: sig: func io.ReadAll(r io.Reader) ([]byte, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:68[22m:15: [31merror returned from external package is unwrapped: sig: func encoding/json.Unmarshal(data []byte, v any) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:226[22m:9: [31merror returned from external package is unwrapped: sig: func (*encoding/base64.Encoding).DecodeString(s string) ([]byte, error)[0m (wrapcheck)
+	return base64.RawURLEncoding.DecodeString(s)
+	       [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:25[22m:10: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.NewBlock(key []byte) (block crypto/cipher.Block, err error)[0m (wrapcheck)
+		return err
+		       [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:29[22m:10: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.NewBlock(key []byte) (block crypto/cipher.Block, err error)[0m (wrapcheck)
+		return err
+		       [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:33[22m:10: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.NewBlock(key []byte) (block crypto/cipher.Block, err error)[0m (wrapcheck)
+		return err
+		       [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:41[22m:14: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.Encrypt(key []byte, block crypto/cipher.Block, org []byte) (ser []byte, err error)[0m (wrapcheck)
+		return "", err
+		           [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:49[22m:14: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.Encrypt(key []byte, block crypto/cipher.Block, org []byte) (ser []byte, err error)[0m (wrapcheck)
+		return "", err
+		           [33m^[0m
+[1mapp/account/internal/pkg/security/crypto.go:70[22m:14: [31merror returned from external package is unwrapped: sig: func github.com/go-pantheon/fabrica-util/security/aes.Encrypt(key []byte, block crypto/cipher.Block, org []byte) (ser []byte, err error)[0m (wrapcheck)
+		return "", err
+		           [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:57[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo).Count(ctx context.Context) (int64, error)[0m (wrapcheck)
+	return uc.repo.Count(ctx)
+	       [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:61[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice, error)[0m (wrapcheck)
+	return uc.repo.GetById(ctx, id)
+	       [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:65[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo).UpdateById(ctx context.Context, notice *github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice) error[0m (wrapcheck)
+	return uc.repo.UpdateById(ctx, notice)
+	       [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:69[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo).Insert(ctx context.Context, notice *github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice) error[0m (wrapcheck)
+	return uc.repo.Insert(ctx, notice)
+	       [33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:73[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeRepo).DeleteById(ctx context.Context, id int64) error[0m (wrapcheck)
+	return uc.repo.DeleteById(ctx, id)
+	       [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:32[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeUseCase).GetById(ctx context.Context, id int64) (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:46[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeUseCase).GetList(ctx context.Context, index int64, size int64) (list []*github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice, count int64, err error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:67[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeUseCase).Create(ctx context.Context, notice *github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:80[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeUseCase).Update(ctx context.Context, notice *github.com/go-pantheon/lares/app/notice/internal/admin/biz.Notice) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/admin/service/v1/notice.go:89[22m:15: [31merror returned from external package is unwrapped: sig: func (*github.com/go-pantheon/lares/app/notice/internal/admin/biz.NoticeUseCase).Delete(ctx context.Context, id int64) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/http/biz/notice.go:34[22m:9: [31merror returned from interface method should be wrapped: sig: func (github.com/go-pantheon/lares/app/notice/internal/http/biz.NoticeRepo).NoticeList(ctx context.Context, now time.Time) ([]*github.com/go-pantheon/lares/app/notice/internal/http/biz.Notice, error)[0m (wrapcheck)
+	return uc.repo.NoticeList(ctx, time.Now())
+	       [33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:168[22m:9: [31merror returned from external package is unwrapped: sig: func strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)[0m (wrapcheck)
+	return strconv.ParseInt(s, 10, 64)
+	       [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:48[22m:15: [31merror returned from external package is unwrapped: sig: func net/http.NewRequestWithContext(ctx context.Context, method string, url string, body io.Reader) (*net/http.Request, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:53[22m:15: [31merror returned from external package is unwrapped: sig: func (*net/http.Client).Do(req *net/http.Request) (*net/http.Response, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:63[22m:15: [31merror returned from external package is unwrapped: sig: func io.ReadAll(r io.Reader) ([]byte, error)[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:68[22m:15: [31merror returned from external package is unwrapped: sig: func encoding/json.Unmarshal(data []byte, v any) error[0m (wrapcheck)
+		return nil, err
+		            [33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:226[22m:9: [31merror returned from external package is unwrapped: sig: func (*encoding/base64.Encoding).DecodeString(s string) ([]byte, error)[0m (wrapcheck)
+	return base64.RawURLEncoding.DecodeString(s)
+	       [33m^[0m
+[1mapp/account/internal/admin/data/account.go:91[22m:2: [31mranges should only be cuddled with assignments used in the iteration[0m (wsl)
+	for _, po := range pos {
+	[33m^[0m
+[1mapp/account/internal/admin/data/account.go:96[22m:3: [31mappend only allowed to cuddle with appended value[0m (wsl)
+		bos = append(bos, bo)
+		[33m^[0m
+[1mapp/account/internal/http/data/account.go:175[22m:2: [31mappend only allowed to cuddle with appended value[0m (wsl)
+	fields = append(fields, "RegisterIp", "LastLoginIp", "Channel")
+	[33m^[0m
+[1mapp/account/internal/http/domain/apple.go:158[22m:2: [31mexpressions should not be cuddled with blocks[0m (wsl)
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	[33m^[0m
+[1mapp/account/internal/pkg/i64/i64.go:101[22m:2: [31mfor statements should only be cuddled with assignments used in the iteration[0m (wsl)
+	for n > 0 {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:70[22m:2: [31mexpressions should not be cuddled with blocks[0m (wsl)
+	c.set(url, certResp, resp.Header)
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:88[22m:2: [31mif statements should only be cuddled with assignments[0m (wsl)
+	if c.now().After(cachedResp.exp) {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:107[22m:2: [31monly one cuddle assignment allowed before range statement[0m (wsl)
+	for _, v := range cc {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:113[22m:4: [31massignments should only be cuddled with other assignments[0m (wsl)
+			ma, err := strconv.Atoi(ss[1])
+			[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:114[22m:4: [31monly one cuddle assignment allowed before if statement[0m (wsl)
+			if err != nil {
+			[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:117[22m:4: [31massignments should only be cuddled with other assignments[0m (wsl)
+			maxAge = ma
+			[33m^[0m
+[1mapp/account/internal/pkg/jwt/cache.go:121[22m:2: [31monly one cuddle assignment allowed before if statement[0m (wsl)
+	if a == "" {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:137[22m:2: [31mranges should only be cuddled with assignments used in the iteration[0m (wsl)
+	for _, v := range response.Keys {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:205[22m:2: [31mif statements should only be cuddled with assignments[0m (wsl)
+	if err := json.Unmarshal(dp, &p); err != nil {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate.go:208[22m:2: [31mif statements should only be cuddled with assignments[0m (wsl)
+	if err := json.Unmarshal(dp, &p.Claims); err != nil {
+	[33m^[0m
+[1mapp/account/internal/pkg/jwt/validate_test.go:102[22m:4: [31monly one cuddle assignment allowed before defer statement[0m (wsl)
+			defer func() { now = oldNow }()
+			[33m^[0m
+[1mapp/account/internal/pkg/security/password_test.go:355[22m:2: [31monly cuddled expressions if assigning variable or using from line above[0m (wsl)
+	b.ResetTimer()
+	[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:49[22m:2: [31massignments should only be cuddled with other assignments[0m (wsl)
+	count, err = uc.repo.Count(ctx)
+	[33m^[0m
+[1mapp/notice/internal/admin/biz/notice.go:50[22m:2: [31monly one cuddle assignment allowed before if statement[0m (wsl)
+	if err != nil {
+	[33m^[0m
+[1mapp/notice/internal/pkg/i64/i64.go:101[22m:2: [31mfor statements should only be cuddled with assignments used in the iteration[0m (wsl)
+	for n > 0 {
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:70[22m:2: [31mexpressions should not be cuddled with blocks[0m (wsl)
+	c.set(url, certResp, resp.Header)
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/cache.go:107[22m:2: [31monly one cuddle assignment allowed before range statement[0m (wsl)
+	for _, v := range cc {
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate.go:137[22m:2: [31mranges should only be cuddled with assignments used in the iteration[0m (wsl)
+	for _, v := range response.Keys {
+	[33m^[0m
+[1mapp/notice/internal/pkg/jwt/validate_test.go:102[22m:4: [31monly one cuddle assignment allowed before defer statement[0m (wsl)
+			defer func() { now = oldNow }()
+			[33m^[0m
+[1mapp/notice/internal/pkg/security/password_test.go:359[22m:2: [31monly cuddled expressions if assigning variable or using from line above[0m (wsl)
+	b.ResetTimer()
+	[33m^[0m
+[1mapp/notice/internal/server/grpc.go:43[22m:2: [31mappend only allowed to cuddle with appended value[0m (wsl)
+	opts = append(opts, kgrpc.Options(
+	[33m^[0m

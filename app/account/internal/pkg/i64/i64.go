@@ -2,7 +2,6 @@ package i64
 
 import (
 	"math"
-	"math/rand"
 	"strconv"
 )
 
@@ -54,16 +53,6 @@ func Add(x, y int64) int64 {
 	}
 
 	return r
-}
-
-// Random generates a random number between 0 and v-1
-// Note: Call rand.Seed() before using this function
-// to ensure proper randomness
-func Random(v int64) int64 {
-	if v == 0 {
-		return 0
-	}
-	return rand.Int63n(v)
 }
 
 func Divide2f64(x, y int64) float64 {

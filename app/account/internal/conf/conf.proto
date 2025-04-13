@@ -101,6 +101,8 @@ message Apple {
   string validator = 7;
   string secret = 8;
   string redirect_uri = 9;
+  string apple_sa_certs_url = 10;
+  string apple_auth_token_url = 11;
 }
 
 message Google {

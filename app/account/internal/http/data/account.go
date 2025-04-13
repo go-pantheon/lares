@@ -13,16 +13,16 @@ import (
 	xid "github.com/go-pantheon/fabrica-util/id"
 	"github.com/go-pantheon/lares/app/account/internal/data"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
 	"gorm.io/gorm"
 )
 
 const (
-	defaultQAPasswordHash = "$2a$15$QX1ZA2GhKP0kZJ4FAPKm2Owg8tj6cO5I1PRYO0G9eBaZaODbOdcRq"
-	defaultQAColor        = "qa"
-	defaultQAPrefix       = "qa"
-	minQaAccountId        = 1
-	maxQaAccountId        = 1000
-	idZoneBit             = 8
+	defaultQAColor  = "qa"
+	defaultQAPrefix = "qa"
+	minQaAccountId  = 1
+	maxQaAccountId  = 1000
+	idZoneBit       = 8
 )
 
 type Account struct {
@@ -107,13 +107,20 @@ func (d *accountData) createQaAccounts(ctx context.Context, data *data.Data, num
 		d.log.WithContext(ctx).Infof("create qa accounts. id=1~%d", num)
 
 		for i := minQaAccountId; i <= maxQaAccountId; i++ {
+			username := fmt.Sprintf("%s%d", defaultQAPrefix, i)
+			password, err := security.HashPassword(username)
+			if err != nil {
+				d.log.WithContext(ctx).Errorf("hash password failed. err=%v", err)
+				return
+			}
+
 			if _, err := d.Create(ctx, &domain.Account{
 				Id:           int64(i),
-				Username:     fmt.Sprintf("%s%d", defaultQAPrefix, i),
-				PasswordHash: defaultQAPasswordHash,
+				Username:     username,
+				PasswordHash: password,
 				DefaultColor: defaultQAColor,
 			}); err != nil {
-				err = xerrors.APIDBFailed("id=%d", i).WithCause(err)
+				d.log.WithContext(ctx).Errorf("create qa account failed. err=%v", err)
 				return
 			}
 		}
