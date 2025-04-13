@@ -1,5 +1,5 @@
 label:
-  service: "${SERVICE:rec-account.notice.interface}"
+  service: "${SERVICE:lares.notice.interface}"
   profile: "${PROFILE:DEV}"
   version: "${VERSION:v0.0.1}"
   color: "${COLOR:local}"

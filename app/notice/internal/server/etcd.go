@@ -1,9 +1,12 @@
 package server
 
 import (
+	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
+	"github.com/go-kratos/kratos/v2/registry"
+	"github.com/go-pantheon/lares/app/notice/internal/conf"
 	"github.com/google/wire"
-	"github.com/luffy050596/rec-account/app/notice/internal/conf"
 	"github.com/pkg/errors"
+	etcdclient "go.etcd.io/etcd/client/v3"
 )
 
 var ProviderSet = wire.NewSet(NewHTTPServer, NewGRPCServer, NewRegistrar)

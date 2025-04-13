@@ -35,6 +35,10 @@ Thumbs.db
 # private config
 app/*/configs
 
+# submodules
+/api/
+/deps/
+
 # generated files
 bin/
 *.log

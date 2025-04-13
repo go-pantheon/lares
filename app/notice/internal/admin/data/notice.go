@@ -4,9 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/luffy050596/rec-account/app/notice/internal/admin/biz"
-	"github.com/luffy050596/rec-account/app/notice/internal/data"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/notice/internal/admin/biz"
+	"github.com/go-pantheon/lares/app/notice/internal/data"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )

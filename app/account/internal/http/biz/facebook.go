@@ -3,9 +3,9 @@ package biz
 import (
 	"context"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/domain"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
 )
 
 func (uc *AccountUseCase) LoginByFacebook(ctx context.Context, token string, ip string) (*domain.Account, bool, error) {

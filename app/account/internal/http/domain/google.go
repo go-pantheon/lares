@@ -5,9 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/luffy050596/rec-account/app/account/internal/conf"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/conf"
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"

@@ -1,0 +1,24 @@
+# For details on buf.yaml configuration, visit https://buf.build/docs/configuration/v2/buf-yaml
+version: v2
+modules:
+  - path: api/server
+    lint:
+      use:
+        - STANDARD
+      except:
+        - SERVICE_SUFFIX
+  - path: third_party
+  - path: app
+    lint:
+      use:
+        - STANDARD
+      except:
+        - PACKAGE_VERSION_SUFFIX
+lint:
+  use:
+    - STANDARD
+  ignore:
+    - third_party
+breaking:
+  use:
+    - FILE

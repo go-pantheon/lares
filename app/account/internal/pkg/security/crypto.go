@@ -4,7 +4,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 
-	"github.com/luffy050596/rec-util/security/aes"
+	"github.com/go-pantheon/fabrica-util/security/aes"
 	"github.com/pkg/errors"
 )
 

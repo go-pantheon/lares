@@ -4,10 +4,10 @@ import (
 	"context"
 	"strings"
 
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-kit/ip"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-pantheon/fabrica-kit/ip"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 )
 
 func (s *AccountInterface) FacebookLogin(ctx context.Context, req *v1.FacebookLoginRequest) (*v1.FacebookLoginResponse, error) {

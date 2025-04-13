@@ -6,13 +6,15 @@
 package main
 
 import (
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-net/health"
+	"github.com/go-pantheon/lares/app/notice/internal/admin"
+	"github.com/go-pantheon/lares/app/notice/internal/conf"
+	"github.com/go-pantheon/lares/app/notice/internal/data"
+	"github.com/go-pantheon/lares/app/notice/internal/http"
+	"github.com/go-pantheon/lares/app/notice/internal/server"
 	"github.com/google/wire"
-	"github.com/luffy050596/rec-account/app/notice/internal/admin"
-	"github.com/luffy050596/rec-account/app/notice/internal/conf"
-	"github.com/luffy050596/rec-account/app/notice/internal/data"
-	"github.com/luffy050596/rec-account/app/notice/internal/http"
-	"github.com/luffy050596/rec-account/app/notice/internal/server"
-	"github.com/luffy050596/rec-net/health"
 )
 
 func initApp(*conf.Server, *conf.Label, *conf.Registry, *conf.Data, log.Logger, *health.Server) (*kratos.App, func(), error) {

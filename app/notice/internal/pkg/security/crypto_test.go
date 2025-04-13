@@ -4,9 +4,9 @@ import (
 	"encoding/base64"
 	"testing"
 
+	"github.com/go-pantheon/fabrica-util/security/aes"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 	jsoniter "github.com/json-iterator/go"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-util/security/aes"
 	"github.com/stretchr/testify/assert"
 )
 

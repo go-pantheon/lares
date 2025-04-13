@@ -3,9 +3,9 @@ package biz
 import (
 	"context"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/domain"
-	"github.com/luffy050596/rec-account/app/account/internal/pkg/security"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
 	"github.com/pkg/errors"
 )
 

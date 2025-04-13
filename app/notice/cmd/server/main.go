@@ -4,13 +4,21 @@ import (
 	"flag"
 	"path/filepath"
 
-	"github.com/luffy050596/rec-account/app/notice/internal/conf"
-	"github.com/luffy050596/rec-kit/metrics"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/trace"
-	"github.com/luffy050596/rec-kit/xlog"
-	"github.com/luffy050596/rec-net/health"
-	"github.com/luffy050596/rec-util/xtime"
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/config"
+	"github.com/go-kratos/kratos/v2/config/env"
+	"github.com/go-kratos/kratos/v2/config/file"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/registry"
+	"github.com/go-kratos/kratos/v2/transport/grpc"
+	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-pantheon/fabrica-kit/metrics"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/trace"
+	"github.com/go-pantheon/fabrica-kit/xlog"
+	"github.com/go-pantheon/fabrica-net/health"
+	"github.com/go-pantheon/fabrica-util/xtime"
+	"github.com/go-pantheon/lares/app/notice/internal/conf"
 )
 
 var (

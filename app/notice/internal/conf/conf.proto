@@ -59,9 +59,10 @@ message Data {
   message Redis {
     string addr = 1;
     string password = 2;
-    google.protobuf.Duration dial_timeout = 3;
-    google.protobuf.Duration read_timeout = 4;
-    google.protobuf.Duration write_timeout = 5;
+    bool cluster = 3;
+    google.protobuf.Duration dial_timeout = 4;
+    google.protobuf.Duration read_timeout = 5;
+    google.protobuf.Duration write_timeout = 6;
   }
   Redis redis = 1;
   Postgres postgres = 2;

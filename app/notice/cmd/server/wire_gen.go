@@ -7,16 +7,18 @@
 package main
 
 import (
-	"github.com/luffy050596/rec-net/health"
-	biz2 "github.com/luffy050596/rec-account/app/notice/internal/admin/biz"
-	data3 "github.com/luffy050596/rec-account/app/notice/internal/admin/data"
-	v1_2 "github.com/luffy050596/rec-account/app/notice/internal/admin/service/v1"
-	"github.com/luffy050596/rec-account/app/notice/internal/conf"
-	"github.com/luffy050596/rec-account/app/notice/internal/data"
-	"github.com/luffy050596/rec-account/app/notice/internal/http/biz"
-	data2 "github.com/luffy050596/rec-account/app/notice/internal/http/data"
-	"github.com/luffy050596/rec-account/app/notice/internal/http/service/v1"
-	"github.com/luffy050596/rec-account/app/notice/internal/server"
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-net/health"
+	biz2 "github.com/go-pantheon/lares/app/notice/internal/admin/biz"
+	data3 "github.com/go-pantheon/lares/app/notice/internal/admin/data"
+	v1_2 "github.com/go-pantheon/lares/app/notice/internal/admin/service/v1"
+	"github.com/go-pantheon/lares/app/notice/internal/conf"
+	"github.com/go-pantheon/lares/app/notice/internal/data"
+	"github.com/go-pantheon/lares/app/notice/internal/http/biz"
+	data2 "github.com/go-pantheon/lares/app/notice/internal/http/data"
+	"github.com/go-pantheon/lares/app/notice/internal/http/service/v1"
+	"github.com/go-pantheon/lares/app/notice/internal/server"
 )
 
 // Injectors from wire.go:

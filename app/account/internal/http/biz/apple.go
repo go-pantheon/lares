@@ -3,9 +3,9 @@ package biz
 import (
 	"context"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/domain"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 )
 
 func (uc *AccountUseCase) LoginByAppleToken(ctx context.Context, token, secret string, ip string) (acc *domain.Account, isRegister bool, state string, err error) {

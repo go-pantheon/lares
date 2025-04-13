@@ -2,6 +2,8 @@ package domain
 
 import (
 	"context"
+
+	"github.com/go-kratos/kratos/v2/log"
 )
 
 type UsernameDomain struct {

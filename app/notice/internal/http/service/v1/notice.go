@@ -3,8 +3,9 @@ package v1
 import (
 	"context"
 
-	"github.com/luffy050596/rec-account/app/notice/internal/http/biz"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/notice/interface/notice/v1"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/lares/app/notice/internal/http/biz"
+	v1 "github.com/go-pantheon/lares/gen/api/server/notice/interface/notice/v1"
 )
 
 type NoticeInterface struct {

@@ -5,9 +5,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-kit/ip"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-pantheon/fabrica-kit/ip"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 )
 
 const (

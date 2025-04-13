@@ -4,11 +4,12 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/luffy050596/rec-account/app/notice/internal/admin/biz"
-	adminv1 "github.com/luffy050596/rec-account/gen/api/server/notice/admin/notice/v1"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/xerrors"
-	"github.com/luffy050596/rec-util/xtime"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/fabrica-util/xtime"
+	"github.com/go-pantheon/lares/app/notice/internal/admin/biz"
+	adminv1 "github.com/go-pantheon/lares/gen/api/server/notice/admin/notice/v1"
 )
 
 type NoticeAdmin struct {

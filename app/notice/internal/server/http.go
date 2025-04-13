@@ -3,12 +3,19 @@ package server
 import (
 	"strings"
 
-	adv1 "github.com/luffy050596/rec-account/app/notice/internal/admin/service/v1"
-	"github.com/luffy050596/rec-account/app/notice/internal/conf"
-	ifacev1 "github.com/luffy050596/rec-account/app/notice/internal/http/service/v1"
-	adminv1 "github.com/luffy050596/rec-account/gen/api/server/notice/admin/notice/v1"
-	interfacev1 "github.com/luffy050596/rec-account/gen/api/server/notice/interface/notice/v1"
-	"github.com/luffy050596/rec-kit/metrics"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware"
+	"github.com/go-kratos/kratos/v2/middleware/logging"
+	"github.com/go-kratos/kratos/v2/middleware/metadata"
+	"github.com/go-kratos/kratos/v2/middleware/recovery"
+	"github.com/go-kratos/kratos/v2/middleware/tracing"
+	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-pantheon/fabrica-kit/metrics"
+	adv1 "github.com/go-pantheon/lares/app/notice/internal/admin/service/v1"
+	"github.com/go-pantheon/lares/app/notice/internal/conf"
+	ifacev1 "github.com/go-pantheon/lares/app/notice/internal/http/service/v1"
+	adminv1 "github.com/go-pantheon/lares/gen/api/server/notice/admin/notice/v1"
+	interfacev1 "github.com/go-pantheon/lares/gen/api/server/notice/interface/notice/v1"
 )
 
 func NewHTTPServer(label *conf.Label, c *conf.Server, logger log.Logger,

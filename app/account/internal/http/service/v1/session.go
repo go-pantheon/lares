@@ -5,12 +5,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/domain"
-	"github.com/luffy050596/rec-account/app/account/internal/pkg/security"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	gatev1 "github.com/luffy050596/rec-account/gen/api/server/gate/intra/v1"
-	"github.com/luffy050596/rec-util/id"
-	"github.com/luffy050596/rec-util/xrand"
+	"github.com/go-pantheon/fabrica-util/id"
+	"github.com/go-pantheon/fabrica-util/xrand"
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
+	gatev1 "github.com/go-pantheon/lares/gen/api/server/gate/intra/v1"
 	"github.com/pkg/errors"
 	"google.golang.org/protobuf/proto"
 )

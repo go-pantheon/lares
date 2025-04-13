@@ -5,10 +5,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/biz"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-kit/xerrors"
-	"github.com/luffy050596/rec-util/id"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/fabrica-util/id"
+	"github.com/go-pantheon/lares/app/account/internal/http/biz"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 )
 
 const (

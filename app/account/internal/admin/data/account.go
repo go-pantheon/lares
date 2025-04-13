@@ -4,10 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/luffy050596/rec-account/app/account/internal/admin/biz"
-	"github.com/luffy050596/rec-account/app/account/internal/data"
-	"github.com/luffy050596/rec-kit/xerrors"
-	"github.com/luffy050596/rec-util/id"
+	"github.com/go-kratos/kratos/v2/errors"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/fabrica-util/id"
+	"github.com/go-pantheon/lares/app/account/internal/admin/biz"
+	"github.com/go-pantheon/lares/app/account/internal/data"
 	"gorm.io/gorm"
 )
 

@@ -6,16 +6,17 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/luffy050596/rec-account/app/account/internal/http/domain"
-	"github.com/luffy050596/rec-account/app/account/internal/pkg/security"
-	v1 "github.com/luffy050596/rec-account/gen/api/server/account/interface/account/v1"
-	"github.com/luffy050596/rec-kit/ip"
-	"github.com/luffy050596/rec-kit/xerrors"
+	khttp "github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-pantheon/fabrica-kit/ip"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/http/domain"
+	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
+	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 	"github.com/pkg/errors"
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
-const _callback = "rec-account://luffy050596.io/auth"
+const _callback = "lares://go-pantheon.io/auth"
 
 func (s *AccountInterface) AppleLogin(ctx context.Context, req *v1.AppleLoginRequest) (*v1.AppleLoginResponse, error) {
 	var (

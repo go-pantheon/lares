@@ -4,11 +4,13 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/luffy050596/rec-account/app/account/internal/admin/biz"
-	"github.com/luffy050596/rec-account/app/account/internal/pkg/i64"
-	adminv1 "github.com/luffy050596/rec-account/gen/api/server/account/admin/account/v1"
-	"github.com/luffy050596/rec-kit/profile"
-	"github.com/luffy050596/rec-kit/xerrors"
+	"github.com/go-kratos/kratos/v2/errors"
+	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-pantheon/fabrica-kit/profile"
+	"github.com/go-pantheon/fabrica-kit/xerrors"
+	"github.com/go-pantheon/lares/app/account/internal/admin/biz"
+	"github.com/go-pantheon/lares/app/account/internal/pkg/i64"
+	adminv1 "github.com/go-pantheon/lares/gen/api/server/account/admin/account/v1"
 )
 
 type AccountAdmin struct {
