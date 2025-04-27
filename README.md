@@ -2,6 +2,8 @@
 
 Lares is a high-performance account system service framework based on microservice architecture, developed in Go. This framework aims to provide scalable user authentication and account management infrastructure, supporting various login methods and authentication processes. Lares is a core component of the go-pantheon ecosystem, responsible for implementing user account management and authentication logic.
 
+For more, please check out: [deepwiki/go-pantheon/lares](https://deepwiki.com/go-pantheon/lares)
+
 ## go-pantheon Ecosystem
 
 **go-pantheon** is an out-of-the-box game server framework providing high-performance, highly available game server cluster solutions based on microservices architecture. Lares, as the account management implementation component, works alongside other core services to form a complete game service ecosystem:
