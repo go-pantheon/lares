@@ -8,6 +8,8 @@ import (
 )
 
 func TestMax(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -23,12 +25,16 @@ func TestMax(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Max(tt.x, tt.y))
 		})
 	}
 }
 
 func TestMin(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -44,12 +50,16 @@ func TestMin(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Min(tt.x, tt.y))
 		})
 	}
 }
 
 func TestReduce(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -64,12 +74,16 @@ func TestReduce(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Reduce(tt.x, tt.y))
 		})
 	}
 }
 
 func TestAdd(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -83,12 +97,44 @@ func TestAdd(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Add(tt.x, tt.y))
 		})
 	}
 }
 
+func TestRandom(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		v    int64
+	}{
+		{"zero value", 0},
+		{"small value", 10},
+		{"large value", math.MaxInt64},
+		{"overflow value", math.MaxInt64},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			got := Random(tt.v)
+
+			if tt.v == 0 {
+				assert.Equal(t, int64(0), got)
+			} else {
+				assert.True(t, got < tt.v)
+			}
+		})
+	}
+}
+
 func TestDivide2f64(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -104,12 +150,16 @@ func TestDivide2f64(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Divide2f64(tt.x, tt.y))
 		})
 	}
 }
 
 func TestF64WithDigits(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		v        float64
@@ -125,6 +175,8 @@ func TestF64WithDigits(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			got := F64WithDigits(tt.v, tt.dig)
 			assert.Equal(t, tt.expected, got)
 		})
@@ -132,6 +184,8 @@ func TestF64WithDigits(t *testing.T) {
 }
 
 func TestPow(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		a, n     int64
@@ -146,12 +200,16 @@ func TestPow(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Pow(tt.a, tt.n))
 		})
 	}
 }
 
 func TestExp(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x        int64
@@ -165,12 +223,16 @@ func TestExp(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, Exp(tt.x))
 		})
 	}
 }
 
 func TestCeilDivide(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x, y     int64
@@ -186,12 +248,16 @@ func TestCeilDivide(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, CeilDivide(tt.x, tt.y))
 		})
 	}
 }
 
 func TestToI32(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		x        int64
@@ -206,12 +272,16 @@ func TestToI32(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			assert.Equal(t, tt.expected, ToI32(tt.x))
 		})
 	}
 }
 
 func TestToI64(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		s        string
@@ -228,6 +298,8 @@ func TestToI64(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			got, err := ToI64(tt.s)
 			assert.Equal(t, tt.wantErr, err != nil)
 			assert.Equal(t, tt.expected, got)
@@ -237,67 +309,97 @@ func TestToI64(t *testing.T) {
 
 // Benchmark tests
 func BenchmarkMax(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Max(int64(i), int64(i+1))
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Max(int64(b.N), int64(b.N+1))
+		}
+	})
 }
 
 func BenchmarkMin(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Min(int64(i), int64(i+1))
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Min(int64(b.N), int64(b.N+1))
+		}
+	})
 }
 
 func BenchmarkReduce(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Reduce(int64(i+1), int64(i))
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Reduce(int64(b.N+1), int64(b.N))
+		}
+	})
 }
 
 func BenchmarkAdd(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Add(int64(i), int64(i))
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Add(int64(b.N), int64(b.N))
+		}
+	})
+}
+
+func BenchmarkRandom(b *testing.B) {
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Random(1000)
+		}
+	})
 }
 
 func BenchmarkDivide2f64(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Divide2f64(1000, 10)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Divide2f64(1000, 10)
+		}
+	})
 }
 
 func BenchmarkF64WithDigits(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		F64WithDigits(3.14159, 2)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = F64WithDigits(3.14159, 2)
+		}
+	})
 }
 
 func BenchmarkPow(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Pow(2, 10)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Pow(2, 10)
+		}
+	})
 }
 
 func BenchmarkExp(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		Exp(5)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = Exp(5)
+		}
+	})
 }
 
 func BenchmarkCeilDivide(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		CeilDivide(1000, 3)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = CeilDivide(1000, 3)
+		}
+	})
 }
 
 func BenchmarkToI32(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		ToI32(int64(i))
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = ToI32(int64(b.N))
+		}
+	})
 }
 
 func BenchmarkToI64(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_, _ = ToI64("12345")
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, _ = ToI64("12345")
+		}
+	})
 }

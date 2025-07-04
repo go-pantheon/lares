@@ -42,6 +42,7 @@ func (s *NoticeInterface) NoticeList(ctx context.Context, req *v1.NoticeListRequ
 	for _, v := range list {
 		reply.List = append(reply.List, po2dto(v))
 	}
+
 	return reply, nil
 }
 

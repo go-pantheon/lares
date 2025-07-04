@@ -31,21 +31,27 @@ func NewGRPCServer(c *conf.Server, logger log.Logger,
 			),
 		),
 	}
+
 	if c.Grpc.Network != "" {
 		opts = append(opts, kgrpc.Network(c.Grpc.Network))
 	}
+
 	if c.Grpc.Addr != "" {
 		opts = append(opts, kgrpc.Address(c.Grpc.Addr))
 	}
+
 	if c.Grpc.Timeout != nil {
 		opts = append(opts, kgrpc.Timeout(c.Grpc.Timeout.AsDuration()))
 	}
+
 	opts = append(opts, kgrpc.Options(
 		grpc.InitialConnWindowSize(1<<30),
 		grpc.InitialWindowSize(1<<30),
 		grpc.MaxConcurrentStreams(math.MaxInt32),
 	))
+
 	srv := kgrpc.NewServer(opts...)
 	adminv1.RegisterNoticeAdminServer(srv, noticeAdminV1)
+
 	return srv
 }

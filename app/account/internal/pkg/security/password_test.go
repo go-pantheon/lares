@@ -3,9 +3,14 @@ package security
 import (
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestHashPassword(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		name     string
 		password string
@@ -35,101 +40,93 @@ func TestHashPassword(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			hash, err := HashPassword(tt.password)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("HashPassword() error = %v, wantErr %v", err, tt.wantErr)
+			if tt.wantErr {
+				assert.Error(t, err)
 				return
 			}
-			if !tt.wantErr {
-				if hash == tt.password {
-					t.Errorf("HashPassword() failed, hash equals original password")
-				}
-				if !strings.HasPrefix(hash, "$argon2id$") {
-					t.Errorf("HashPassword() generated invalid hash format: %s", hash)
-				}
-				// Check if the hash format is correct
-				_, _, _, err := decodeArgon2idHash(hash)
-				if err != nil {
-					t.Errorf("HashPassword() generated invalid hash: %v", err)
-				}
-			}
+
+			assert.NotEqual(t, hash, tt.password)
+			assert.True(t, strings.HasPrefix(hash, "$argon2id$"))
+
+			_, _, _, err = decodeArgon2idHash(hash)
+			assert.NoError(t, err)
 		})
 	}
 }
 
 func TestVerifyPassword(t *testing.T) {
-	// Generate a test password hash
+	t.Parallel()
+
 	password := "test_password"
+
 	hash, err := HashPassword(password)
-	if err != nil {
-		t.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(t, err)
 
 	tests := []struct {
 		name       string
 		password   string
 		storedHash string
-		want       bool
 		wantErr    bool
 	}{
 		{
 			name:       "correct password",
 			password:   password,
 			storedHash: hash,
-			want:       true,
 			wantErr:    false,
 		},
 		{
 			name:       "wrong password",
 			password:   "wrong_password",
 			storedHash: hash,
-			want:       false,
 			wantErr:    false,
 		},
 		{
 			name:       "empty password",
 			password:   "",
 			storedHash: hash,
-			want:       false,
 			wantErr:    false,
 		},
 		{
 			name:       "invalid hash format",
 			password:   password,
 			storedHash: "invalid_hash",
-			want:       false,
 			wantErr:    true,
 		},
 		{
 			name:       "non-Argon2id hash",
 			password:   password,
 			storedHash: "$bcrypt$notvalid",
-			want:       false,
 			wantErr:    true,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := VerifyPassword(tt.password, tt.storedHash)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("VerifyPassword() error = %v, wantErr %v", err, tt.wantErr)
+			t.Parallel()
+
+			verifed, err := VerifyPassword(tt.password, tt.storedHash)
+			if tt.wantErr {
+				assert.Error(t, err)
 				return
 			}
-			if got != tt.want {
-				t.Errorf("VerifyPassword() = %v, want %v", got, tt.want)
-			}
+
+			assert.NoError(t, err)
+			assert.True(t, verifed)
 		})
 	}
 }
 
 func TestDecodeArgon2idHash(t *testing.T) {
+	t.Parallel()
+
 	// Generate a valid hash for testing
 	password := "test_password"
+
 	validHash, err := HashPassword(password)
-	if err != nil {
-		t.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(t, err)
 
 	tests := []struct {
 		name        string
@@ -185,33 +182,33 @@ func TestDecodeArgon2idHash(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			params, salt, hash, err := decodeArgon2idHash(tt.encodedHash)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("DecodeArgon2idHash() error = %v, wantErr %v", err, tt.wantErr)
+			if tt.wantErr {
+				assert.Error(t, err)
 				return
 			}
-			if !tt.wantErr {
-				if params == nil {
-					t.Errorf("DecodeArgon2idHash() params is nil")
-				}
-				if len(salt) == 0 {
-					t.Errorf("DecodeArgon2idHash() salt is empty")
-				}
-				if len(hash) == 0 {
-					t.Errorf("DecodeArgon2idHash() hash is empty")
-				}
-			}
+
+			assert.Equal(t, 64*1024, params.Memory)
+			assert.Equal(t, 3, params.Time)
+			assert.Equal(t, 4, params.Threads)
+			assert.Equal(t, 32, params.KeyLength)
+			assert.Equal(t, 16, params.SaltLength)
+			assert.NotEmpty(t, salt)
+			assert.NotEmpty(t, hash)
 		})
 	}
 }
 
 func TestUpdateHashIfNeeded(t *testing.T) {
+	t.Parallel()
+
 	// Generate a standard hash for testing
 	password := "test_password"
+
 	standardHash, err := HashPassword(password)
-	if err != nil {
-		t.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(t, err)
 
 	// Create an old format hash (non-Argon2id)
 	oldFormatHash := "$bcrypt$somehash"
@@ -258,34 +255,28 @@ func TestUpdateHashIfNeeded(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			newHash, updated, err := UpdateHashIfNeeded(tt.password, tt.storedHash)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("UpdateHashIfNeeded() error = %v, wantErr %v", err, tt.wantErr)
+			if tt.wantErr {
+				assert.Error(t, err)
 				return
 			}
-			if updated != tt.wantUpdate {
-				t.Errorf("UpdateHashIfNeeded() updated = %v, want %v", updated, tt.wantUpdate)
-			}
-			if updated {
-				if !strings.HasPrefix(newHash, "$argon2id$") {
-					t.Errorf("UpdateHashIfNeeded() invalid new hash format: %s", newHash)
-				}
-			} else {
-				if newHash != tt.storedHash {
-					t.Errorf("UpdateHashIfNeeded() hash changed when not expected")
-				}
-			}
+
+			assert.Equal(t, tt.wantUpdate, updated)
+			assert.True(t, strings.HasPrefix(newHash, "$argon2id$"))
 		})
 	}
 }
 
 func TestNeedsRehash(t *testing.T) {
+	t.Parallel()
+
 	// Generate a standard hash for testing
 	password := "test_password"
+
 	standardHash, err := HashPassword(password)
-	if err != nil {
-		t.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(t, err)
 
 	tests := []struct {
 		name      string
@@ -316,106 +307,88 @@ func TestNeedsRehash(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := needsRehash(tt.hashValue); got != tt.want {
-				t.Errorf("needsRehash() = %v, want %v", got, tt.want)
-			}
+			t.Parallel()
+
+			assert.Equal(t, tt.want, needsRehash(tt.hashValue))
 		})
 	}
 }
 
 func TestDefaultArgon2Params(t *testing.T) {
-	params := DefaultArgon2Params()
+	t.Parallel()
 
-	if params == nil {
-		t.Fatal("DefaultArgon2Params() returned nil")
-	}
+	params := DefaultArgon2Params()
+	require.NotNil(t, params)
 
 	// Verify if the parameter values are as expected
-	if params.Memory != 64*1024 {
-		t.Errorf("DefaultArgon2Params() Memory = %v, want %v", params.Memory, 64*1024)
-	}
-	if params.Time != 3 {
-		t.Errorf("DefaultArgon2Params() Time = %v, want %v", params.Time, 3)
-	}
-	if params.Threads != 4 {
-		t.Errorf("DefaultArgon2Params() Threads = %v, want %v", params.Threads, 4)
-	}
-	if params.KeyLength != 32 {
-		t.Errorf("DefaultArgon2Params() KeyLength = %v, want %v", params.KeyLength, 32)
-	}
-	if params.SaltLength != 16 {
-		t.Errorf("DefaultArgon2Params() SaltLength = %v, want %v", params.SaltLength, 16)
-	}
+	assert.Equal(t, 64*1024, params.Memory)
+	assert.Equal(t, 3, params.Time)
+	assert.Equal(t, 4, params.Threads)
+	assert.Equal(t, 32, params.KeyLength)
+	assert.Equal(t, 16, params.SaltLength)
 }
 
 // Benchmark tests
 
 func BenchmarkHashPassword(b *testing.B) {
 	password := "benchmark_password"
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_, err := HashPassword(password)
-		if err != nil {
-			b.Fatalf("HashPassword() failed: %v", err)
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, _ = HashPassword(password)
 		}
-	}
+	})
 }
 
 func BenchmarkVerifyPassword(b *testing.B) {
 	password := "benchmark_password"
-	hash, err := HashPassword(password)
-	if err != nil {
-		b.Fatalf("setup failed: %v", err)
-	}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_, err := VerifyPassword(password, hash)
-		if err != nil {
-			b.Fatalf("VerifyPassword() failed: %v", err)
+	hash, err := HashPassword(password)
+	require.NoError(b, err)
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, _ = VerifyPassword(password, hash)
 		}
-	}
+	})
 }
 
 func BenchmarkDecodeArgon2idHash(b *testing.B) {
 	password := "benchmark_password"
+
 	hash, err := HashPassword(password)
-	if err != nil {
-		b.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(b, err)
 
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_, _, _, err := decodeArgon2idHash(hash)
-		if err != nil {
-			b.Fatalf("DecodeArgon2idHash() failed: %v", err)
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, _, _, _ = decodeArgon2idHash(hash)
 		}
-	}
+	})
 }
 
 func BenchmarkUpdateHashIfNeeded(b *testing.B) {
 	password := "benchmark_password"
+
 	hash, err := HashPassword(password)
-	if err != nil {
-		b.Fatalf("setup failed: %v", err)
-	}
+	require.NoError(b, err)
 
 	b.Run("NoUpdate", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
-			_, _, err := UpdateHashIfNeeded(password, hash)
-			if err != nil {
-				b.Fatalf("UpdateHashIfNeeded() failed: %v", err)
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				_, _, _ = UpdateHashIfNeeded(password, hash)
 			}
-		}
+		})
 	})
 
 	b.Run("NeedsUpdate", func(b *testing.B) {
 		oldHash := "$bcrypt$somehash"
-		for i := 0; i < b.N; i++ {
-			_, _, err := UpdateHashIfNeeded(password, oldHash)
-			if err != nil {
-				b.Fatalf("UpdateHashIfNeeded() failed: %v", err)
+
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				_, _, _ = UpdateHashIfNeeded(password, oldHash)
 			}
-		}
+		})
 	})
 }

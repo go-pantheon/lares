@@ -44,13 +44,15 @@ func NewNoticeUseCase(repo NoticeRepo, logger log.Logger) *NoticeUseCase {
 func (uc *NoticeUseCase) GetList(ctx context.Context, index, size int64) (list []*Notice, count int64, err error) {
 	list, err = uc.repo.GetList(ctx, index, size)
 	if err != nil {
-		return
+		return nil, 0, err
 	}
+
 	count, err = uc.repo.Count(ctx)
 	if err != nil {
-		return
+		return nil, 0, err
 	}
-	return
+
+	return list, count, nil
 }
 
 func (uc *NoticeUseCase) Count(ctx context.Context) (int64, error) {

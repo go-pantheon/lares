@@ -33,7 +33,7 @@ func (s *AccountAdmin) GetList(ctx context.Context, req *adminv1.ListRequest) (r
 		return nil, err
 	}
 
-	accounts, count, err := s.ac.GetList(ctx, i64.Max(int64(page-1), 0)*pageSize, pageSize, cond)
+	accounts, count, err := s.ac.GetList(ctx, i64.Max(page-1, 0)*pageSize, pageSize, cond)
 	if err != nil {
 		return nil, err
 	}
@@ -47,32 +47,36 @@ func (s *AccountAdmin) GetList(ctx context.Context, req *adminv1.ListRequest) (r
 	for _, bo := range accounts {
 		reply.Accounts = append(reply.Accounts, accountBo2dto(bo))
 	}
+
 	return reply, nil
 }
 
 func buildListCond(req *adminv1.ListRequest) (cond *biz.Account, start, limit int64, err error) {
 	if req.PageSize > profile.MaxPageSize {
-		err = xerrors.APIPageParamInvalid("page size <= %d", profile.MaxPageSize)
-		return
+		return nil, 0, 0, xerrors.APIPageParamInvalid("page size <= %d", profile.MaxPageSize)
 	}
 
 	start, limit = profile.PageStartLimit(req.Page, req.PageSize)
 
 	cond = &biz.Account{}
+
 	if req.Condition == nil {
-		return
+		return nil, 0, 0, nil
 	}
 
 	if len(req.Condition.Name) > 0 {
 		cond.Name = req.Condition.Name
 	}
+
 	if len(req.Condition.AppleId) > 0 {
 		cond.AppleId = req.Condition.AppleId
 	}
+
 	if len(req.Condition.GoogleId) > 0 {
 		cond.GoogleId = req.Condition.GoogleId
 	}
-	return
+
+	return cond, start, limit, nil
 }
 
 func (s *AccountAdmin) GetById(ctx context.Context, req *adminv1.GetByIdRequest) (*adminv1.GetByIdResponse, error) {
@@ -98,5 +102,6 @@ func accountBo2dto(bo *biz.Account) *adminv1.AccountProto {
 		LastLoginIp: bo.LastLoginIp,
 		CreatedAt:   bo.CreatedAt.Unix(),
 	}
+
 	return dto
 }

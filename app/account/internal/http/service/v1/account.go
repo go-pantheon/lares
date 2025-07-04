@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	"github.com/go-pantheon/fabrica-util/id"
+	"github.com/go-pantheon/fabrica-util/xid"
 	"github.com/go-pantheon/lares/app/account/internal/http/biz"
 	v1 "github.com/go-pantheon/lares/gen/api/server/account/interface/account/v1"
 )
@@ -33,7 +33,6 @@ func NewAccountInterface(logger log.Logger, ac *biz.AccountUseCase) *AccountInte
 }
 
 func (s *AccountInterface) ClientNetHealthy(ctx context.Context, req *v1.DevPingRequest) (*v1.DevPingResponse, error) {
-
 	return &v1.DevPingResponse{
 		Message: req.Message,
 		Time:    time.Now().Format(time.RFC3339),
@@ -41,8 +40,7 @@ func (s *AccountInterface) ClientNetHealthy(ctx context.Context, req *v1.DevPing
 }
 
 func (s *AccountInterface) Refresh(ctx context.Context, req *v1.RefreshRequest) (*v1.RefreshResponse, error) {
-
-	accountId, err := id.DecodeId(req.AccountId)
+	accountId, err := xid.DecodeID(req.AccountId)
 	if err != nil {
 		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
 	}
@@ -50,10 +48,12 @@ func (s *AccountInterface) Refresh(ctx context.Context, req *v1.RefreshRequest) 
 	if len(req.Session) == 0 {
 		return nil, xerrors.APIParamInvalid("session is empty")
 	}
+
 	ss, err := unmarshalSession(req.Session)
 	if err != nil {
 		return nil, xerrors.APIParamInvalid("session=%s", req.Session).WithCause(err)
 	}
+
 	if time.Now().Unix() > ss.Timeout {
 		return nil, xerrors.APISessionTimeout("session timeout")
 	}
@@ -79,7 +79,7 @@ func (s *AccountInterface) Refresh(ctx context.Context, req *v1.RefreshRequest) 
 }
 
 func (s *AccountInterface) Token(ctx context.Context, req *v1.TokenRequest) (*v1.TokenResponse, error) {
-	accountId, err := id.DecodeId(req.AccountId)
+	accountId, err := xid.DecodeID(req.AccountId)
 	if err != nil {
 		return nil, xerrors.APIParamInvalid("id=%s", req.AccountId).WithCause(err)
 	}
@@ -87,10 +87,12 @@ func (s *AccountInterface) Token(ctx context.Context, req *v1.TokenRequest) (*v1
 	if len(req.Session) == 0 {
 		return nil, xerrors.APIParamInvalid("session is empty")
 	}
+
 	ss, err := unmarshalSession(req.Session)
 	if err != nil {
 		return nil, xerrors.APIParamInvalid("session=%s", req.Session).WithCause(err)
 	}
+
 	if time.Now().Unix() > ss.Timeout {
 		return nil, xerrors.APISessionTimeout("session timeout")
 	}

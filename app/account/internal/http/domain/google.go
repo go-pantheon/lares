@@ -35,7 +35,8 @@ func NewGoogleDomain(logger log.Logger, label *conf.Label, c *conf.Platform, rep
 
 	if profile.IsDevStr(label.Profile) {
 		do.log.Infof("use mock google login client")
-		return
+
+		return do, nil
 	}
 
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, &http.Client{
@@ -48,14 +49,14 @@ func NewGoogleDomain(logger log.Logger, label *conf.Label, c *conf.Platform, rep
 			DisableKeepAlives:   false,
 		},
 	})
+
 	jwtConf, err := google.JWTConfigFromJSON([]byte(do.conf.Json), goauth2.OpenIDScope)
 	if err != nil {
 		return nil, xerrors.APIPlatformAuthFailed("build google jwt config failed")
 	}
 
 	val := jwtConf.Client(ctx).Transport.(*oauth2.Transport)
-	_, err = val.Source.Token()
-	if err != nil {
+	if _, err = val.Source.Token(); err != nil {
 		return nil, xerrors.APIPlatformAuthFailed("get google token failed")
 	}
 
@@ -63,6 +64,7 @@ func NewGoogleDomain(logger log.Logger, label *conf.Label, c *conf.Platform, rep
 	if err != nil {
 		return nil, xerrors.APIPlatformAuthFailed("build google validator failed")
 	}
+
 	return do, nil
 }
 
@@ -96,11 +98,11 @@ func (do *GoogleDomain) RequestPlatformId(ctx context.Context, token string) (st
 func (do *GoogleDomain) GetOrCreateAccount(ctx context.Context, googleId string, ip string) (acc *Account, isRegister bool, err error) {
 	acc, err = do.repo.GetByGoogle(ctx, googleId)
 	if err == nil {
-		return
+		return acc, false, nil
 	}
 
 	if !errors.Is(err, xerrors.ErrDBRecordNotFound) {
-		return
+		return nil, false, err
 	}
 
 	param := &Account{
@@ -109,9 +111,13 @@ func (do *GoogleDomain) GetOrCreateAccount(ctx context.Context, googleId string,
 		RegisterIp:  ip,
 		LastLoginIp: ip,
 	}
+
 	acc, err = do.repo.Create(ctx, param)
-	isRegister = true
-	return
+	if err != nil {
+		return nil, false, err
+	}
+
+	return acc, true, nil
 }
 
 func (do *GoogleDomain) GetAccount(ctx context.Context, googleId string) (*Account, error) {

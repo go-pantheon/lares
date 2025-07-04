@@ -3,10 +3,10 @@ package v1
 import (
 	"context"
 	"fmt"
-	"net/http"
+	gohttp "net/http"
 	"strings"
 
-	khttp "github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/go-pantheon/fabrica-kit/ip"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
@@ -30,6 +30,7 @@ func (s *AccountInterface) AppleLogin(ctx context.Context, req *v1.AppleLoginReq
 		if err != nil {
 			return nil, err
 		}
+
 		return &v1.AppleLoginResponse{Info: info}, nil
 	}
 
@@ -38,6 +39,7 @@ func (s *AccountInterface) AppleLogin(ctx context.Context, req *v1.AppleLoginReq
 		if err != nil {
 			return nil, err
 		}
+
 		return &v1.AppleLoginResponse{Info: info}, nil
 	}
 
@@ -54,6 +56,7 @@ func (s *AccountInterface) tokenLogin(ctx context.Context, token, appleId, color
 	if err != nil {
 		return nil, err
 	}
+
 	return info, nil
 }
 
@@ -72,7 +75,7 @@ func (s *AccountInterface) AppleLoginCallback(ctx context.Context, req *v1.Apple
 		err   error
 	)
 
-	kctx, ok := ctx.(khttp.Context)
+	kctx, ok := ctx.(http.Context)
 	if !ok {
 		s.appleCallbackFail(kctx, v1.AppleLoginCallbackResponse_CODE_ERR_UNSPECIFIED, errors.New("ctx is not kratos.Context"))
 		return reply, nil
@@ -106,6 +109,7 @@ func (s *AccountInterface) AppleLoginCallback(ctx context.Context, req *v1.Apple
 		} else {
 			s.appleCallbackFail(kctx, v1.AppleLoginCallbackResponse_CODE_ERR_UNSPECIFIED, err)
 		}
+
 		return reply, nil
 	}
 
@@ -120,19 +124,20 @@ func (s *AccountInterface) AppleLoginCallback(ctx context.Context, req *v1.Apple
 	}
 
 	s.appleCallbackSuccess(kctx, k)
+
 	return reply, nil
 }
 
-func (s *AccountInterface) appleCallbackSuccess(kctx khttp.Context, k string) {
+func (s *AccountInterface) appleCallbackSuccess(kctx http.Context, k string) {
 	cb := fmt.Sprintf("%s?k=%s", _callback, k)
-	http.Redirect(kctx.Response(), kctx.Request(), cb, http.StatusSeeOther)
+	gohttp.Redirect(kctx.Response(), kctx.Request(), cb, gohttp.StatusSeeOther)
 }
 
-func (s *AccountInterface) appleCallbackFail(kctx khttp.Context, errCode v1.AppleLoginCallbackResponse_Code, err error) {
+func (s *AccountInterface) appleCallbackFail(kctx http.Context, errCode v1.AppleLoginCallbackResponse_Code, err error) {
 	s.log.WithContext(kctx).Errorf("apple failed callback. code=%s, %+v", v1.AppleLoginCallbackResponse_Code_name[int32(errCode)], err)
 
 	cb := fmt.Sprintf("%s?e=%s", _callback, v1.AppleLoginCallbackResponse_Code_name[int32(errCode)])
-	http.Redirect(kctx.Response(), kctx.Request(), cb, http.StatusSeeOther)
+	gohttp.Redirect(kctx.Response(), kctx.Request(), cb, gohttp.StatusSeeOther)
 }
 
 func encryptLoginInfo(info *v1.LoginInfo) (string, error) {
@@ -145,5 +150,6 @@ func encryptLoginInfo(info *v1.LoginInfo) (string, error) {
 	if err != nil {
 		return "", errors.Wrapf(err, "login info encrypt failed")
 	}
+
 	return ser, nil
 }

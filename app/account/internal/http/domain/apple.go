@@ -63,13 +63,15 @@ func NewAppleDomain(logger log.Logger, label *conf.Label, c *conf.Platform, repo
 	if profile.IsDevStr(label.Profile) {
 		do.priKey, _ = ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
 		do.log.Infof("use mock apple login client")
-		return
+
+		return do, nil
 	}
 
 	do.priKey, err = jwt.ParseECPrivateKeyFromPEM([]byte(do.conf.Secret))
 	if err != nil {
 		return nil, err
 	}
+
 	return do, nil
 }
 
@@ -89,9 +91,13 @@ func (do *AppleDomain) GetOrCreateAccount(ctx context.Context, appleId string, i
 		RegisterIp:  ip,
 		LastLoginIp: ip,
 	}
+
 	acc, err = do.repo.Create(ctx, param)
-	isCreated = true
-	return
+	if err != nil {
+		return nil, false, err
+	}
+
+	return acc, true, nil
 }
 
 func (do *AppleDomain) GetAccount(ctx context.Context, appleId string) (*Account, error) {
@@ -105,6 +111,7 @@ func (do *AppleDomain) CreateAccount(ctx context.Context, appleId string, ip str
 		RegisterIp:  ip,
 		LastLoginIp: ip,
 	}
+
 	return do.repo.Create(ctx, param)
 }
 
@@ -122,16 +129,14 @@ func (do *AppleDomain) RequestPlatformIdByWebToken(ctx context.Context, token st
 }
 
 func (do *AppleDomain) requestPlatformId(ctx context.Context, token string, aud string) (appleId string, err error) {
-	var (
-		info *xjwt.Payload
-	)
+	var info *xjwt.Payload
 
 	info, err = do.validator.Validate(ctx, token, aud)
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("validate apple token failed")
 	}
-	appleId = info.Subject
-	return
+
+	return info.Subject, nil
 }
 
 func (do *AppleDomain) RequestToken(ctx context.Context, code string) (string, error) {
@@ -153,12 +158,14 @@ func (do *AppleDomain) RequestToken(ctx context.Context, code string) (string, e
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("create apple auth token request failed")
 	}
+
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	resp, err := do.cli.Do(req)
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("do apple auth token request failed")
 	}
+
 	defer func() {
 		if err := resp.Body.Close(); err != nil {
 			do.log.Errorf("close apple auth token response body failed: %v", err)
@@ -201,6 +208,7 @@ func (do *AppleDomain) buildSecret() (k string, err error) {
 		},
 		Method: jwt.SigningMethodES256,
 	}
+
 	return token.SignedString(do.priKey)
 }
 

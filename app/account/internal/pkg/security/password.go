@@ -102,43 +102,46 @@ func decodeArgon2idHash(encodedHash string) (params *Argon2Params, salt, hash []
 	// Format: $argon2id$v=19$m=65536,t=3,p=4$[salt]$[hash]
 	parts := strings.Split(encodedHash, "$")
 	if len(parts) != 6 {
-		return nil, nil, nil, fmt.Errorf("invalid hash format, expected format: $argon2id$v=[version]$m=[memory],t=[time],p=[threads]$[salt]$[hash]")
+		return nil, nil, nil, errors.New("invalid hash format")
 	}
 
 	// Check algorithm type
 	if parts[1] != "argon2id" {
-		return nil, nil, nil, fmt.Errorf("unsupported algorithm: %s, only supports argon2id", parts[1])
+		return nil, nil, nil, errors.Errorf("unsupported algorithm: %s, only supports argon2id", parts[1])
 	}
 
 	// Parse version number
 	var version int
 	if _, err := fmt.Sscanf(parts[2], "v=%d", &version); err != nil {
-		return nil, nil, nil, fmt.Errorf("failed to parse version number: %w", err)
+		return nil, nil, nil, errors.Wrapf(err, "failed to parse version number")
 	}
 
 	// Parse parameters
 	params = &Argon2Params{}
-	_, err = fmt.Sscanf(parts[3], "m=%d,t=%d,p=%d", &params.Memory, &params.Time, &params.Threads)
-	if err != nil {
-		return nil, nil, nil, fmt.Errorf("failed to parse parameters: %w", err)
+
+	if _, err = fmt.Sscanf(parts[3], "m=%d,t=%d,p=%d", &params.Memory, &params.Time, &params.Threads); err != nil {
+		return nil, nil, nil, errors.Wrapf(err, "failed to parse parameters")
 	}
 
 	// Decode salt
 	salt, err = base64.RawStdEncoding.DecodeString(parts[4])
 	if err != nil {
-		return nil, nil, nil, fmt.Errorf("failed to decode salt: %w", err)
+		return nil, nil, nil, errors.Wrapf(err, "failed to decode salt")
 	}
+
 	params.SaltLength = len(salt)
 
 	// Decode hash
 	hash, err = base64.RawStdEncoding.DecodeString(parts[5])
 	if err != nil {
-		return nil, nil, nil, fmt.Errorf("failed to decode hash: %w", err)
+		return nil, nil, nil, errors.Wrapf(err, "failed to decode hash")
 	}
+
 	lenHash := len(hash)
 	if lenHash > math.MaxUint32 {
-		return nil, nil, nil, fmt.Errorf("hash length is too long: %d", lenHash)
+		return nil, nil, nil, errors.Errorf("hash length is too long. len=%d", lenHash)
 	}
+
 	params.KeyLength = uint32(lenHash)
 
 	return params, salt, hash, nil
@@ -151,8 +154,13 @@ func UpdateHashIfNeeded(password, storedHash string) (string, bool, error) {
 	if needsRehash(storedHash) {
 		// Create a new hash using the latest Argon2id parameters
 		newHash, err := HashPassword(password)
-		return newHash, true, err
+		if err != nil {
+			return "", false, err
+		}
+
+		return newHash, true, nil
 	}
+
 	return storedHash, false, nil
 }
 

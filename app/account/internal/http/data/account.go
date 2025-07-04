@@ -2,6 +2,7 @@ package data
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"sync"
 	"time"
@@ -10,11 +11,12 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-pantheon/fabrica-kit/profile"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	xid "github.com/go-pantheon/fabrica-util/id"
+	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/postgresql/migrate"
+	"github.com/go-pantheon/fabrica-util/xid"
 	"github.com/go-pantheon/lares/app/account/internal/data"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
 	"github.com/go-pantheon/lares/app/account/internal/pkg/security"
-	"gorm.io/gorm"
 )
 
 const (
@@ -44,8 +46,13 @@ type Account struct {
 }
 
 func po2bo(in *Account) (out *domain.Account) {
+	uid, err := xid.BuildUID(in.AccountId, uint8(profile.Zone()))
+	if err != nil {
+		return nil
+	}
+
 	out = &domain.Account{
-		Id:           xid.CombineZoneId(in.AccountId, uint8(profile.Zone())),
+		Id:           uid,
 		Zone:         in.Zone,
 		Apple:        in.Apple,
 		Google:       in.Google,
@@ -61,7 +68,8 @@ func po2bo(in *Account) (out *domain.Account) {
 		CreatedAt:    in.CreatedAt,
 		UpdatedAt:    in.UpdatedAt,
 	}
-	return
+
+	return out
 }
 
 var _ domain.AccountRepo = (*accountData)(nil)
@@ -79,26 +87,24 @@ func NewAccountData(data *data.Data, logger log.Logger) (domain.AccountRepo, err
 		data: data,
 		log:  log.NewHelper(log.With(logger, "module", "account/http/data/account")),
 	}
-	if err := data.Mdb.AutoMigrate(&Account{}); err != nil {
+
+	if err := migrate.Migrate(context.Background(), data.Pdb.GetPool(), "accounts", &Account{}, nil); err != nil {
 		return nil, err
 	}
 
-	if err := d.createQaAccounts(context.Background(), data, 100); err != nil {
+	if err := d.createQaAccounts(context.Background(), 100); err != nil {
 		return nil, err
 	}
+
 	return d, nil
 }
 
-func (d *accountData) createQaAccounts(ctx context.Context, data *data.Data, num int) error {
-	if !data.Mdb.Migrator().HasTable(&Account{}) {
-
-		return xerrors.APIDBFailed("table=accounts not exists")
-	}
-
+func (d *accountData) createQaAccounts(ctx context.Context, num int) error {
 	var count int64
-	if err := d.data.Mdb.WithContext(ctx).Model(&Account{}).Count(&count).Error; err != nil {
+	if err := d.data.Pdb.QueryRowContext(ctx, "SELECT COUNT(*) FROM accounts").Scan(&count); err != nil {
 		return xerrors.APIDBFailed("count failed").WithCause(err)
 	}
+
 	if count > 0 {
 		return nil
 	}
@@ -108,6 +114,7 @@ func (d *accountData) createQaAccounts(ctx context.Context, data *data.Data, num
 
 		for i := minQaAccountId; i <= maxQaAccountId; i++ {
 			username := fmt.Sprintf("%s%d", defaultQAPrefix, i)
+
 			password, err := security.HashPassword(username)
 			if err != nil {
 				d.log.WithContext(ctx).Errorf("hash password failed. err=%v", err)
@@ -130,19 +137,81 @@ func (d *accountData) createQaAccounts(ctx context.Context, data *data.Data, num
 }
 
 func (d *accountData) Create(ctx context.Context, acc *domain.Account) (*domain.Account, error) {
-	po, fields, err := d.buildCreatePo(acc)
+	po := d.buildCreatePo(acc)
+
+	fb := upg.NewInsertSQLFieldBuilder()
+
+	fb.Append("zone", po.Zone)
+	fb.Append("device", po.Device)
+	fb.Append("apple", po.Apple)
+	fb.Append("google", po.Google)
+	fb.Append("facebook", po.Facebook)
+	fb.Append("username", po.Username)
+	fb.Append("password", po.PasswordHash)
+	fb.Append("register_ip", po.RegisterIp)
+	fb.Append("last_login_ip", po.LastLoginIp)
+	fb.Append("default_color", po.DefaultColor)
+	fb.Append("channel", po.Channel)
+
+	colSql, argSql, values := fb.Build()
+
+	sqlStr := fmt.Sprintf("INSERT INTO accounts (%s) VALUES (%s)", colSql, argSql)
+
+	result, err := d.data.Pdb.ExecContext(ctx, sqlStr, values...)
 	if err != nil {
-		return nil, err
+		return nil, xerrors.APIDBFailed("%s", acc.LogInfo()).WithCause(err)
 	}
 
-	result := d.data.Mdb.WithContext(ctx).Select(fields).Create(&po)
-	if result.Error != nil {
-		return nil, xerrors.APIDBFailed("username=%s apple=%s google=%s facebook=%s", acc.Username, acc.Apple, acc.Google, acc.Facebook).WithCause(result.Error)
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return nil, xerrors.APIDBFailed("%s", acc.LogInfo()).WithCause(err)
 	}
+
+	if rows == 0 {
+		return nil, xerrors.APIDBFailed("%s", acc.LogInfo())
+	}
+
 	return po2bo(&po), nil
 }
 
-func (d *accountData) buildCreatePo(acc *domain.Account) (po Account, fields []string, err error) {
+func (d *accountData) GetById(ctx context.Context, id int64) (*domain.Account, error) {
+	gameID, zone := xid.SplitUID(id)
+	po := Account{AccountId: gameID, Zone: zone}
+
+	fb := upg.NewSelectSQLFieldBuilder()
+	fb.Append("account_id", &po.AccountId)
+	fb.Append("zone", &po.Zone)
+	fb.Append("device", &po.Device)
+	fb.Append("apple", &po.Apple)
+	fb.Append("google", &po.Google)
+	fb.Append("facebook", &po.Facebook)
+	fb.Append("username", &po.Username)
+	fb.Append("password", &po.PasswordHash)
+	fb.Append("register_ip", &po.RegisterIp)
+	fb.Append("last_login_ip", &po.LastLoginIp)
+	fb.Append("default_color", &po.DefaultColor)
+	fb.Append("channel", &po.Channel)
+	fb.Append("state", &po.State)
+	fb.Append("created_at", &po.CreatedAt)
+	fb.Append("updated_at", &po.UpdatedAt)
+
+	fieldSql, values := fb.Build()
+
+	sqlStr := fmt.Sprintf("SELECT %s FROM accounts WHERE account_id = $1", fieldSql)
+
+	row := d.data.Pdb.QueryRowContext(ctx, sqlStr, id)
+	if err := row.Scan(values...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, xerrors.APINotFound("id=%d", id)
+		}
+
+		return nil, xerrors.APIDBFailed("id=%d", id).WithCause(err)
+	}
+
+	return po2bo(&po), nil
+}
+
+func (d *accountData) buildCreatePo(acc *domain.Account) (po Account) {
 	po = Account{
 		Zone:         uint8(profile.Zone()),
 		Device:       acc.Device,
@@ -157,42 +226,5 @@ func (d *accountData) buildCreatePo(acc *domain.Account) (po Account, fields []s
 		Channel:      acc.Channel,
 	}
 
-	fields = make([]string, 0, 5)
-	if acc.Username != "" {
-		fields = append(fields, "Username")
-		fields = append(fields, "PasswordHash")
-	}
-	if acc.Device != "" {
-		fields = append(fields, "Device")
-	}
-	if acc.Apple != "" {
-		fields = append(fields, "Apple")
-	}
-	if acc.Google != "" {
-		fields = append(fields, "Google")
-	}
-	if acc.Facebook != "" {
-		fields = append(fields, "Facebook")
-	}
-
-	if len(fields) == 0 {
-		err = xerrors.APIDBFailed("no username or token")
-		return
-	}
-	fields = append(fields, "RegisterIp", "LastLoginIp", "Channel")
-
-	return po, fields, nil
-}
-
-func (d *accountData) GetById(ctx context.Context, id int64) (*domain.Account, error) {
-	zoneId, zone := xid.SplitId(id)
-	po := Account{AccountId: zoneId, Zone: zone}
-	result := d.data.Mdb.Debug().WithContext(ctx).First(&po)
-	if result.Error != nil {
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return nil, xerrors.APINotFound("id=%d", id)
-		}
-		return nil, xerrors.APIDBFailed("id=%d", id).WithCause(result.Error)
-	}
-	return po2bo(&po), nil
+	return po
 }

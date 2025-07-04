@@ -18,16 +18,16 @@ server:
     addr: 0.0.0.0:9001
     timeout: 5s
 data:
-  postgres:
-    driver: postgres
-    source: host=localhost user={{PG_USER}} password={{PG_PASSWORD}} dbname=rec_account port=5432 TimeZone=Asia/Singapore
-    max_idle_conns: 20
-    max_open_conns: 200
+  postgresql:
+    source: ${POSTGRES_SOURCE}
+    database: ${POSTGRES_DATABASE}
+    dial_timeout: ${POSTGRES_DIAL_TIMEOUT}
   redis:
-    addr: localhost:6379
-    password: {{REDIS_PASSWORD}}
-    read_timeout: 0.5s
-    write_timeout: 0.5s
+    addr: ${REDIS_ADDR}
+    password: ${REDIS_PASSWORD}
+    dial_timeout: ${REDIS_DIAL_TIMEOUT}
+    read_timeout: ${REDIS_READ_TIMEOUT}
+    write_timeout: ${REDIS_WRITE_TIMEOUT}
 platform:
   apple:
     aud: {{APPLE_AUD}}

@@ -67,14 +67,17 @@ func (v *Validator) Validate(ctx context.Context, idToken string, audience strin
 	if err != nil {
 		return nil, err
 	}
+
 	header, err := jwt.parsedHeader()
 	if err != nil {
 		return nil, err
 	}
+
 	payload, err := jwt.parsedPayload()
 	if err != nil {
 		return nil, err
 	}
+
 	sig, err := jwt.decodedSignature()
 	if err != nil {
 		return nil, err
@@ -105,14 +108,17 @@ func (v *Validator) validateRS256(ctx context.Context, keyID string, hashedConte
 	if err != nil {
 		return err
 	}
+
 	j, err := findMatchingKey(certResp, keyID)
 	if err != nil {
 		return err
 	}
+
 	dn, err := decode(j.N)
 	if err != nil {
 		return err
 	}
+
 	de, err := decode(j.E)
 	if err != nil {
 		return err
@@ -122,6 +128,7 @@ func (v *Validator) validateRS256(ctx context.Context, keyID string, hashedConte
 		N: new(big.Int).SetBytes(dn),
 		E: int(new(big.Int).SetBytes(de).Int64()),
 	}
+
 	return rsa.VerifyPKCS1v15(pk, crypto.SHA256, hashedContent, sig)
 }
 
@@ -129,11 +136,13 @@ func findMatchingKey(response *certResponse, keyID string) (*jwk, error) {
 	if response == nil {
 		return nil, errors.Errorf("idtoken: cert response is nil")
 	}
+
 	for _, v := range response.Keys {
 		if v.Kid == keyID {
 			return &v, nil
 		}
 	}
+
 	return nil, errors.Errorf("idtoken: could not find matching cert keyId for the token provided")
 }
 
@@ -142,6 +151,7 @@ func parseJWT(idToken string) (*jwt, error) {
 	if len(segments) != 3 {
 		return nil, errors.Errorf("idtoken: invalid token, token must have three segments; found %d", len(segments))
 	}
+
 	return &jwt{
 		header:    segments[0],
 		payload:   segments[1],
@@ -155,6 +165,7 @@ func (j *jwt) decodedHeader() ([]byte, error) {
 	if err != nil {
 		return nil, errors.Errorf("idtoken: unable to decode JWT header: %v", err)
 	}
+
 	return dh, nil
 }
 
@@ -164,6 +175,7 @@ func (j *jwt) decodedPayload() ([]byte, error) {
 	if err != nil {
 		return nil, errors.Errorf("idtoken: unable to decode JWT payload: %v", err)
 	}
+
 	return p, nil
 }
 
@@ -173,36 +185,43 @@ func (j *jwt) decodedSignature() ([]byte, error) {
 	if err != nil {
 		return nil, errors.Errorf("idtoken: unable to decode JWT signature: %v", err)
 	}
+
 	return p, nil
 }
 
 // parsedHeader returns a struct representing a JWT header.
 func (j *jwt) parsedHeader() (jwtHeader, error) {
 	var h jwtHeader
+
 	dh, err := j.decodedHeader()
 	if err != nil {
 		return h, err
 	}
-	err = json.Unmarshal(dh, &h)
-	if err != nil {
+
+	if err = json.Unmarshal(dh, &h); err != nil {
 		return h, errors.Errorf("idtoken: unable to unmarshal JWT header: %v", err)
 	}
+
 	return h, nil
 }
 
 // parsedPayload returns a struct representing a JWT payload.
 func (j *jwt) parsedPayload() (*Payload, error) {
 	var p Payload
+
 	dp, err := j.decodedPayload()
 	if err != nil {
 		return nil, err
 	}
-	if err := json.Unmarshal(dp, &p); err != nil {
+
+	if err = json.Unmarshal(dp, &p); err != nil {
 		return nil, errors.Errorf("idtoken: unable to unmarshal JWT payload: %v", err)
 	}
-	if err := json.Unmarshal(dp, &p.Claims); err != nil {
+
+	if err = json.Unmarshal(dp, &p.Claims); err != nil {
 		return nil, errors.Errorf("idtoken: unable to unmarshal JWT payload claims: %v", err)
 	}
+
 	return &p, nil
 }
 
@@ -210,6 +229,7 @@ func (j *jwt) parsedPayload() (*Payload, error) {
 func (j *jwt) hashedContent() []byte {
 	signedContent := j.header + "." + j.payload
 	hashed := sha256.Sum256([]byte(signedContent))
+
 	return hashed[:]
 }
 

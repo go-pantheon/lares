@@ -1,1 +1,1 @@
-# lares-notice Notice service
+# Notice: provide notice display and managemet for lares

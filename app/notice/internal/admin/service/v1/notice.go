@@ -36,6 +36,7 @@ func (s *NoticeAdmin) GetById(ctx context.Context, req *adminv1.GetByIdRequest) 
 		Code: http.StatusOK,
 		Item: noticeBo2dto(item),
 	}
+
 	return reply, nil
 }
 
@@ -59,6 +60,7 @@ func (s *NoticeAdmin) GetList(ctx context.Context, req *adminv1.GetListRequest) 
 	for _, bo := range bos {
 		reply.List = append(reply.List, noticeBo2dto(bo))
 	}
+
 	return reply, nil
 }
 
@@ -70,6 +72,7 @@ func (s *NoticeAdmin) Create(ctx context.Context, req *adminv1.CreateRequest) (*
 	if err := s.uc.Create(ctx, noticeDto2Bo(req.Item)); err != nil {
 		return nil, err
 	}
+
 	return &adminv1.CreateResponse{
 		Code: http.StatusOK,
 	}, nil
@@ -83,6 +86,7 @@ func (s *NoticeAdmin) Update(ctx context.Context, req *adminv1.UpdateRequest) (*
 	if err := s.uc.Update(ctx, noticeDto2Bo(req.Item)); err != nil {
 		return nil, err
 	}
+
 	return &adminv1.UpdateResponse{
 		Code: http.StatusOK,
 	}, nil
@@ -92,6 +96,7 @@ func (s *NoticeAdmin) Delete(ctx context.Context, req *adminv1.DeleteRequest) (*
 	if err := s.uc.Delete(ctx, req.Id); err != nil {
 		return nil, err
 	}
+
 	return &adminv1.DeleteResponse{
 		Code: http.StatusOK,
 	}, nil
@@ -99,11 +104,12 @@ func (s *NoticeAdmin) Delete(ctx context.Context, req *adminv1.DeleteRequest) (*
 
 func buildGetListCond(req *adminv1.GetListRequest) (start, limit int64, err error) {
 	if req.PageSize > profile.MaxPageSize {
-		err = xerrors.APIPageParamInvalid("page size too large")
-		return
+		return 0, 0, xerrors.APIPageParamInvalid("page size too large")
 	}
-	start, limit = profile.PageStartLimit(int64(req.Page), int64(req.PageSize))
-	return
+
+	start, limit = profile.PageStartLimit(req.Page, req.PageSize)
+
+	return start, limit, nil
 }
 
 func noticeBo2dto(bo *biz.Notice) *adminv1.NoticeProto {
@@ -117,6 +123,7 @@ func noticeBo2dto(bo *biz.Notice) *adminv1.NoticeProto {
 		CreatedTime: bo.CreatedAt.Unix(),
 		UpdatedTime: bo.UpdatedAt.Unix(),
 	}
+
 	return dto
 }
 
@@ -131,6 +138,7 @@ func noticeDto2Bo(dto *adminv1.NoticeProto) *biz.Notice {
 		CreatedAt: xtime.Time(dto.CreatedTime),
 		UpdatedAt: xtime.Time(dto.UpdatedTime),
 	}
+
 	return o
 }
 
@@ -138,11 +146,14 @@ func checkParam(dto *adminv1.NoticeProto) error {
 	if dto.Title == "" {
 		return xerrors.APIParamInvalid("title is empty")
 	}
+
 	if dto.Content == "" {
 		return xerrors.APIParamInvalid("content is empty")
 	}
+
 	if dto.StartTime >= dto.EndTime {
 		return xerrors.APIParamInvalid("time invalid")
 	}
+
 	return nil
 }

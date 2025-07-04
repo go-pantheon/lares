@@ -2,6 +2,7 @@ package i64
 
 import (
 	"math"
+	"math/rand/v2"
 	"strconv"
 )
 
@@ -9,6 +10,7 @@ func Max(x, y int64) int64 {
 	if x > y {
 		return x
 	}
+
 	return y
 }
 
@@ -16,6 +18,7 @@ func Min(x, y int64) int64 {
 	if x < y {
 		return x
 	}
+
 	return y
 }
 
@@ -25,6 +28,7 @@ func Reduce(x, y int64) int64 {
 	if x <= y {
 		return 0
 	}
+
 	return x - y
 }
 
@@ -36,6 +40,7 @@ func Add(x, y int64) int64 {
 	if x == 0 {
 		return y
 	}
+
 	if y == 0 {
 		return x
 	}
@@ -55,10 +60,22 @@ func Add(x, y int64) int64 {
 	return r
 }
 
+// Random generates a random number between 0 and v-1
+// Note: Call rand.Seed() before using this function
+// to ensure proper randomness
+func Random(v int64) int64 {
+	if v <= 0 {
+		return 0
+	}
+
+	return rand.Int64N(v)
+}
+
 func Divide2f64(x, y int64) float64 {
 	if x == 0 || y == 0 {
 		return 0
 	}
+
 	return float64(x) / float64(y)
 }
 
@@ -75,34 +92,42 @@ func Pow(a, n int64) int64 {
 	if n < 0 {
 		return 0 // Return 0 for negative exponents
 	}
+
 	if n == 0 {
 		return 1 // Any number to power 0 is 1
 	}
+
 	if a == 0 {
 		return 0 // 0 to any positive power is 0
 	}
+
 	if a == 1 {
 		return 1 // 1 to any power is 1
 	}
 
 	// Binary exponentiation
 	var result int64 = 1
+
 	for n > 0 {
 		if n&1 == 1 {
 			// Check for overflow before multiplying
 			if willOverflow(result, a) {
 				return math.MaxInt64
 			}
+
 			result *= a
 		}
+
 		n >>= 1
 		if n != 0 { // Skip last squaring
 			if a > math.MaxInt64/a { // check overflow
 				return math.MaxInt64
 			}
+
 			a *= a
 		}
 	}
+
 	return result
 }
 
@@ -111,7 +136,9 @@ func willOverflow(a, b int64) bool {
 	if a == 0 || b == 0 {
 		return false
 	}
+
 	result := a * b
+
 	return a != result/b
 }
 
@@ -123,6 +150,7 @@ func Abs(x int64) int64 {
 	if x < 0 {
 		return -x
 	}
+
 	return x
 }
 
@@ -130,9 +158,11 @@ func CeilDivide(x, y int64) int64 {
 	if x == 0 || y == 0 {
 		return 0
 	}
+
 	if x >= 0 && y < 0 {
 		return 0
 	}
+
 	if x <= y {
 		return 1
 	}
@@ -140,6 +170,7 @@ func CeilDivide(x, y int64) int64 {
 	if x%y > 0 {
 		return x/y + 1
 	}
+
 	return x / y
 }
 
@@ -147,9 +178,11 @@ func ToI32(x int64) int32 {
 	if x <= 0 {
 		return 0
 	}
+
 	if x > math.MaxInt32 {
 		return math.MaxInt32
 	}
+
 	return int32(x)
 }
 

@@ -14,16 +14,14 @@ func (uc *AccountUseCase) LoginByAppleToken(ctx context.Context, token, secret s
 	)
 
 	if appleId, err = uc.appledo.RequestPlatformIdByAppToken(ctx, token); err != nil {
-		err = xerrors.ErrAPIPlatformAuthFailed.WithCause(err)
-		return
+		return nil, false, "", xerrors.ErrAPIPlatformAuthFailed.WithCause(err)
 	}
 
 	if len(secret) > 0 {
 		var idInfo *v1.AppleId
 
 		if idInfo, err = uc.appledo.CheckAppleId(ctx, secret); err != nil {
-			err = xerrors.ErrAPIPlatformAuthFailed.WithCause(err)
-			return
+			return nil, false, "", xerrors.ErrAPIPlatformAuthFailed.WithCause(err)
 		}
 
 		if idInfo.AppleId != appleId {
@@ -31,7 +29,8 @@ func (uc *AccountUseCase) LoginByAppleToken(ctx context.Context, token, secret s
 				"secretAppleId": idInfo.AppleId,
 				"tokenAppleId":  appleId,
 			})
-			return
+
+			return nil, false, "", err
 		}
 
 		state = idInfo.State
@@ -39,7 +38,7 @@ func (uc *AccountUseCase) LoginByAppleToken(ctx context.Context, token, secret s
 
 	acc, isRegister, err = uc.appledo.GetOrCreateAccount(ctx, appleId, ip)
 	if err != nil {
-		return
+		return nil, false, "", err
 	}
 
 	return acc, isRegister, state, nil
@@ -69,5 +68,6 @@ func (uc *AccountUseCase) LoginByAppleId(ctx context.Context, secret string) (*d
 	if err != nil {
 		return nil, "", xerrors.ErrAPIPlatformAuthFailed.WithCause(err)
 	}
+
 	return acc, idInfo.State, nil
 }

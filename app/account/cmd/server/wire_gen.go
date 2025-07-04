@@ -9,7 +9,7 @@ package main
 import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-pantheon/fabrica-net/health"
+	"github.com/go-pantheon/fabrica-net/http/health"
 	biz2 "github.com/go-pantheon/lares/app/account/internal/admin/biz"
 	data3 "github.com/go-pantheon/lares/app/account/internal/admin/data"
 	v1_2 "github.com/go-pantheon/lares/app/account/internal/admin/service/v1"

@@ -14,6 +14,7 @@ func (uc *AccountUseCase) CreateByUsername(ctx context.Context, username, pwd, i
 	if err != nil && !errors.Is(err, xerrors.ErrDBRecordNotFound) {
 		return nil, err
 	}
+
 	if acc != nil {
 		// return 401 to blur the error for security
 		return nil, xerrors.APIAuthFailed("username=%s is already registered", username)
@@ -37,8 +38,9 @@ func (uc *AccountUseCase) GetByUsernameAndPassword(ctx context.Context, name, pw
 	if err != nil {
 		if errors.Is(err, xerrors.ErrDBRecordNotFound) {
 			// return 401 to blur the error for security
-			err = xerrors.APIAuthFailed("username=%s is not registered", name)
+			return nil, xerrors.APIAuthFailed("username=%s is not registered", name)
 		}
+
 		return nil, err
 	}
 
@@ -46,8 +48,10 @@ func (uc *AccountUseCase) GetByUsernameAndPassword(ctx context.Context, name, pw
 	if err != nil {
 		return nil, xerrors.APIAuthFailed("password is invalid").WithCause(err)
 	}
+
 	if !valid {
 		return nil, xerrors.APIAuthFailed("password is invalid")
 	}
+
 	return po, nil
 }

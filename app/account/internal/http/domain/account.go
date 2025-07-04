@@ -2,6 +2,8 @@ package domain
 
 import (
 	"context"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -56,6 +58,7 @@ func NewAccountDomain(logger log.Logger, repo AccountRepo) (do *AccountDomain) {
 		log:  log.NewHelper(log.With(logger, "module", "account/http/domain/account")),
 		repo: repo,
 	}
+
 	return do
 }
 
@@ -65,4 +68,20 @@ func (do *AccountDomain) GetById(ctx context.Context, id int64) (*Account, error
 
 func (do *AccountDomain) Create(ctx context.Context, acc *Account) (*Account, error) {
 	return do.repo.Create(ctx, acc)
+}
+
+func (acc *Account) LogInfo() string {
+	b := strings.Builder{}
+
+	b.WriteString("ID=")
+	b.WriteString(strconv.FormatInt(acc.Id, 10))
+	b.WriteString(" Apple=")
+	b.WriteString(acc.Apple)
+	b.WriteString(" Google=")
+	b.WriteString(acc.Google)
+	b.WriteString(" Facebook=")
+	b.WriteString(acc.Facebook)
+	b.WriteString(" Username=")
+
+	return b.String()
 }

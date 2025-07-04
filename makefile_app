@@ -22,15 +22,13 @@ version:
 wire:
 	cd cmd/server && wire
 
+.PHONY: run
+run: stop build start log
+
 .PHONY: build
 # Build executable file
 build:
 	@rm -rf bin/ && mkdir -p bin/ && $(GOBUILD) -ldflags "-X main.Version=$(VERSION)" -o ./bin/ ./...
-
-.PHONY: test
-# Test
-test:
-	go test -v ./... -cover
 
 .PHONY: start
 start:

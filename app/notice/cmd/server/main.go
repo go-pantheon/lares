@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"math"
 	"path/filepath"
 
@@ -18,7 +17,8 @@ import (
 	"github.com/go-pantheon/fabrica-kit/profile"
 	"github.com/go-pantheon/fabrica-kit/trace"
 	"github.com/go-pantheon/fabrica-kit/xlog"
-	"github.com/go-pantheon/fabrica-net/health"
+	"github.com/go-pantheon/fabrica-net/http/health"
+	"github.com/go-pantheon/fabrica-util/errors"
 	"github.com/go-pantheon/fabrica-util/xtime"
 	"github.com/go-pantheon/lares/app/notice/internal/conf"
 )
@@ -33,11 +33,11 @@ func init() {
 
 func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, health *health.Server, label *conf.Label, rr registry.Registrar) *kratos.App {
 	md := map[string]string{
-		profile.SERVICE: label.Service,
-		profile.PROFILE: label.Profile,
-		profile.VERSION: label.Version,
-		profile.COLOR:   label.Color,
-		profile.NODE:    label.Node,
+		profile.ServiceKey: label.Service,
+		profile.ProfileKey: label.Profile,
+		profile.VersionKey: label.Version,
+		profile.ColorKey:   label.Color,
+		profile.NodeKey:    label.Node,
 	}
 
 	url, err := gs.Endpoint()
@@ -45,11 +45,11 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, health *health.
 		panic(err)
 	}
 
-	if label.Zone > math.MaxUint8 {
-		panic(fmt.Errorf("zone must be less than %d", math.MaxUint8))
-	}
+	profile.SetGRPCEndpoint(url)
 
-	profile.Init(label.Profile, label.Color, uint8(label.Zone), label.Version, label.Node, url)
+	if label.Zone > math.MaxUint8 {
+		panic(errors.Errorf("zone must be less than %d", math.MaxUint8))
+	}
 
 	return kratos.New(
 		kratos.Name(label.Service),
@@ -71,7 +71,7 @@ func main() {
 
 	c := config.New(
 		config.WithSource(
-			env.NewSource(profile.ORG_PREFIX),
+			env.NewSource(profile.OrgPrefix),
 			file.NewSource(flagConf),
 		),
 	)
@@ -84,10 +84,14 @@ func main() {
 		panic(err)
 	}
 
-	xtime.Init(bc.Label.Language)
-
 	var rc conf.Registry
 	if err := c.Scan(&rc); err != nil {
+		panic(err)
+	}
+
+	profile.Init(bc.Label.Service, bc.Label.Profile, bc.Label.Color, bc.Label.Zone, bc.Label.Version, bc.Label.Node)
+
+	if err := xtime.InitSimple(bc.Label.Language); err != nil {
 		panic(err)
 	}
 
@@ -95,8 +99,9 @@ func main() {
 		panic(err)
 	}
 
-	logger := xlog.Init(bc.Log.Type, bc.Log.Level, bc.Label.Profile, bc.Label.Color, bc.Label.Service, bc.Label.Version, bc.Label.Node)
 	metrics.Init(bc.Label.Service)
+
+	logger := xlog.Init(bc.Log.Type, bc.Log.Level, bc.Label.Profile, bc.Label.Color, bc.Label.Service, bc.Label.Version, bc.Label.Node)
 
 	app, cleanup, err := initApp(bc.Server, bc.Label, &rc, bc.Data, logger, health.NewServer(bc.Server.Health))
 	if err != nil {

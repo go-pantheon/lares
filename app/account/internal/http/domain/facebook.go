@@ -65,17 +65,18 @@ func (do *FacebookDomain) RequestPlatformId(ctx context.Context, token string) (
 	if err != nil {
 		return "", xerrors.APIPlatformAuthFailed("check facebook token failed")
 	}
+
 	return facebookId, nil
 }
 
 func (do *FacebookDomain) GetOrCreateAccount(ctx context.Context, facebookId string, ip string) (acc *Account, isCreated bool, err error) {
 	acc, err = do.repo.GetByFacebook(ctx, facebookId)
 	if err == nil {
-		return
+		return acc, false, nil
 	}
 
 	if !errors.Is(err, xerrors.ErrDBRecordNotFound) {
-		return
+		return nil, false, err
 	}
 
 	param := &Account{
@@ -84,9 +85,13 @@ func (do *FacebookDomain) GetOrCreateAccount(ctx context.Context, facebookId str
 		RegisterIp:  ip,
 		LastLoginIp: ip,
 	}
+
 	acc, err = do.repo.Create(ctx, param)
-	isCreated = true
-	return
+	if err != nil {
+		return nil, false, err
+	}
+
+	return acc, true, nil
 }
 
 func (do *FacebookDomain) GetAccount(ctx context.Context, facebookId string) (*Account, error) {

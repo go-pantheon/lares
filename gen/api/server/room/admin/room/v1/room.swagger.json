@@ -80,13 +80,6 @@
     "v1GetByIdResponse": {
       "type": "object",
       "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
         "item": {
           "$ref": "#/definitions/v1RoomProto"
         }

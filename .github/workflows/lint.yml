@@ -1,50 +1,67 @@
 name: Lint
+
 on:
   push:
+    branches:
+      - main
+      - develop
+    paths:
+      - "**/*.go"
+      - "go.mod"
+      - "go.sum"
+      - ".golangci.yml"
+      - ".github/workflows/lint.yml"
   pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - "**/*.go"
+      - "go.mod"
+      - "go.sum"
+      - ".golangci.yml"
+      - ".github/workflows/lint.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  lint:
+  resolve-modules:
+    name: resolve module
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Check out code
+      - name: Checkout Repo
         uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          fetch-depth: 0
+          submodules: true
 
-      - name: Verify dependencies
-        run: |
-          go mod verify
-          go mod download
+      - id: set-matrix
+        run: ./.hack/resolve-modules.sh
 
-          LINT_VERSION=1.64.8
-          curl -fsSL https://github.com/golangci/golangci-lint/releases/download/v${LINT_VERSION}/golangci-lint-${LINT_VERSION}-linux-amd64.tar.gz | \
-            tar xz --strip-components 1 --wildcards \*/golangci-lint
-          mkdir -p bin && mv golangci-lint bin/
+  lint:
+    name: lint module
+    runs-on: ubuntu-latest
+    needs: resolve-modules
+    strategy:
+      matrix: ${{ fromJson(needs.resolve-modules.outputs.matrix) }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
 
-      - name: Run checks
-        run: |
-          STATUS=0
-          assert-nothing-changed() {
-            local diff
-            "$@" >/dev/null || return 1
-            if ! diff="$(git diff -U1 --color --exit-code)"; then
-              printf '\e[31mError: running `\e[1m%s\e[22m` results in modifications that you must check into version control:\e[0m\n%s\n\n' "$*" "$diff" >&2
-              git checkout -- .
-              STATUS=1
-            fi
-          }
-
-          assert-nothing-changed go fmt ./...
-          assert-nothing-changed go mod tidy
-
-          bin/golangci-lint run --out-format=colored-line-number --timeout=3m || STATUS=$?
-
-          exit $STATUS
+      - name: Lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.1
+          working-directory: ${{ matrix.workdir }}

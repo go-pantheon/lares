@@ -18,7 +18,7 @@ func NewRegistrar(conf *conf.Registry) (registry.Registrar, error) {
 		Password:  conf.Etcd.Password,
 	})
 	if err != nil {
-		return nil, errors.Wrapf(err, "[etcdclient.New] etcd 客户端创建失败。")
+		return nil, errors.Wrapf(err, "[etcdclient.New] etcd client create failed")
 	}
 
 	return etcd.New(client), nil

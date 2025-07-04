@@ -45,6 +45,7 @@ func (c *cacheCertGetter) requestCert(ctx context.Context, url string) (*certRes
 	if response, ok := c.get(url); ok {
 		return response, nil
 	}
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return nil, err
@@ -54,6 +55,7 @@ func (c *cacheCertGetter) requestCert(ctx context.Context, url string) (*certRes
 	if err != nil {
 		return nil, err
 	}
+
 	defer func() {
 		if err := resp.Body.Close(); err != nil {
 			log.Errorf("close apple auth token response body failed: %v", err)
@@ -73,7 +75,9 @@ func (c *cacheCertGetter) requestCert(ctx context.Context, url string) (*certRes
 	if err := json.Unmarshal(body, certResp); err != nil {
 		return nil, err
 	}
+
 	c.set(url, certResp, resp.Header)
+
 	return certResp, nil
 }
 
@@ -81,27 +85,33 @@ func (c *cacheCertGetter) now() time.Time {
 	if c.clock != nil {
 		return c.clock()
 	}
+
 	return time.Now()
 }
 
 func (c *cacheCertGetter) get(url string) (*certResponse, bool) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
+
 	cachedResp, ok := c.certs[url]
 	if !ok {
 		return nil, false
 	}
+
 	if c.now().After(cachedResp.exp) {
 		return nil, false
 	}
+
 	return cachedResp.resp, true
 }
 
 func (c *cacheCertGetter) set(url string, resp *certResponse, headers http.Header) {
 	exp := c.calculateExpireTime(headers)
+
 	c.mu.Lock()
+	defer c.mu.Unlock()
+
 	c.certs[url] = &cachedResponse{resp: resp, exp: exp}
-	c.mu.Unlock()
 }
 
 // calculateExpireTime will determine the expire time for the cache based on
@@ -109,27 +119,33 @@ func (c *cacheCertGetter) set(url string, resp *certResponse, headers http.Heade
 // to set the cache to expire now.
 func (c *cacheCertGetter) calculateExpireTime(headers http.Header) time.Time {
 	var maxAge int
-	cc := strings.Split(headers.Get("cache-control"), ",")
-	for _, v := range cc {
+
+	cc := strings.SplitSeq(headers.Get("cache-control"), ",")
+	for v := range cc {
 		if strings.Contains(v, "max-age") {
 			ss := strings.Split(v, "=")
 			if len(ss) < 2 {
 				return c.now()
 			}
+
 			ma, err := strconv.Atoi(ss[1])
 			if err != nil {
 				return c.now()
 			}
+
 			maxAge = ma
 		}
 	}
+
 	a := headers.Get("age")
 	if a == "" {
 		return c.now().Add(time.Duration(maxAge) * time.Second)
 	}
+
 	age, err := strconv.Atoi(a)
 	if err != nil {
 		return c.now()
 	}
+
 	return c.now().Add(time.Duration(maxAge-age) * time.Second)
 }

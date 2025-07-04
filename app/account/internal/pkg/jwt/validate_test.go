@@ -17,6 +17,9 @@ import (
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 const (
@@ -25,6 +28,8 @@ const (
 )
 
 func TestValidateRS256(t *testing.T) {
+	t.Parallel()
+
 	idToken, pk := createRS256JWT(t)
 	tests := []struct {
 		name    string
@@ -58,6 +63,8 @@ func TestValidateRS256(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			client := &http.Client{
 				Transport: RoundTripFn(func(req *http.Request) *http.Response {
 					cr := certResponse{
@@ -69,10 +76,10 @@ func TestValidateRS256(t *testing.T) {
 							},
 						},
 					}
+
 					b, err := json.Marshal(&cr)
-					if err != nil {
-						t.Fatalf("unable to marshal response: %v", err)
-					}
+					require.NoError(t, err)
+
 					return &http.Response{
 						StatusCode: 200,
 						Body:       io.NopCloser(bytes.NewReader(b)),
@@ -83,62 +90,52 @@ func TestValidateRS256(t *testing.T) {
 
 			v := NewValidator(context.Background(), testAppleSACertsURL, client)
 			payload, err := v.Validate(context.Background(), idToken, testAudience)
-			if tt.wantErr && err != nil {
-				// Got the error we wanted.
+
+			if tt.wantErr {
+				assert.Error(t, err)
 				return
 			}
-			if !tt.wantErr && err != nil {
-				t.Fatalf("Validate(ctx, %s, %s): got err %q, want nil", idToken, testAudience, err)
-			}
-			if tt.wantErr && err == nil {
-				t.Fatalf("Validate(ctx, %s, %s): got nil err, want err", idToken, testAudience)
-			}
-			if payload == nil {
-				t.Fatalf("Got nil payload, err: %v", err)
-			}
-			if payload.Audience != testAudience {
-				t.Fatalf("Validate(ctx, %s, %s): got %v, want %v", idToken, testAudience, payload.Audience, testAudience)
-			}
-			if len(payload.Claims) == 0 {
-				t.Fatalf("Validate(ctx, %s, %s): missing Claims map. payload.Claims = %+v", idToken, testAudience, payload.Claims)
-			}
-			if got, ok := payload.Claims["aud"]; !ok {
-				t.Fatalf("Validate(ctx, %s, %s): missing aud claim. payload.Claims = %+v", idToken, testAudience, payload.Claims)
-			} else {
-				got, ok := got.(string)
-				if !ok {
-					t.Fatalf("Validate(ctx, %s, %s): aud wasn't a string. payload.Claims = %+v", idToken, testAudience, payload.Claims)
-				}
-				if got != testAudience {
-					t.Fatalf("Validate(ctx, %s, %s): Payload[aud] want %v got %v", idToken, testAudience, testAudience, got)
-				}
-			}
+
+			require.NoError(t, err)
+			require.NotNil(t, payload)
+			assert.Equal(t, testAudience, payload.Audience)
+			assert.NotEmpty(t, payload.Claims)
+
+			got, ok := payload.Claims["aud"]
+			require.True(t, ok)
+
+			got, ok = got.(string)
+			require.True(t, ok)
+			assert.Equal(t, testAudience, got)
 		})
 	}
 }
 
 func createRS256JWT(t *testing.T) (string, rsa.PublicKey) {
 	t.Helper()
+
 	token := commonToken(t, "RS256")
+
 	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
-	if err != nil {
-		t.Fatalf("unable to generate key: %v", err)
-	}
+	require.NoError(t, err)
+
 	sig, err := rsa.SignPKCS1v15(rand.Reader, privateKey, crypto.SHA256, token.hashedContent())
-	if err != nil {
-		t.Fatalf("unable to sign content: %v", err)
-	}
+	require.NoError(t, err)
+
 	token.signature = base64.RawURLEncoding.EncodeToString(sig)
+
 	return token.String(), privateKey.PublicKey
 }
 
 func commonToken(t *testing.T, alg string) *jwt {
 	t.Helper()
+
 	header := jwtHeader{
 		KeyID:     keyID,
 		Algorithm: alg,
 		Type:      "JWT",
 	}
+
 	payload := Payload{
 		Issuer:   "example.com",
 		Audience: testAudience,
@@ -146,18 +143,14 @@ func commonToken(t *testing.T, alg string) *jwt {
 	}
 
 	hb, err := json.Marshal(&header)
-	if err != nil {
-		t.Fatalf("unable to marshall header: %v", err)
-	}
+	require.NoError(t, err)
+
 	pb, err := json.Marshal(&payload)
-	if err != nil {
-		t.Fatalf("unable to marshall payload: %v", err)
-	}
-	eb := base64.RawURLEncoding.EncodeToString(hb)
-	ep := base64.RawURLEncoding.EncodeToString(pb)
+	require.NoError(t, err)
+
 	return &jwt{
-		header:  eb,
-		payload: ep,
+		header:  base64.RawURLEncoding.EncodeToString(hb),
+		payload: base64.RawURLEncoding.EncodeToString(pb),
 	}
 }
 

@@ -1,54 +1,76 @@
 version: "2"
+
 run:
   timeout: 5m
   tests: true
   concurrency: 4
-  go: '1.21'
+  go: '1.24'
+
 
 linters:
-  disable-all: true
   enable:
+    - asasalint
+    - asciicheck
+    - bodyclose
+    - durationcheck
     - errcheck
+    - errorlint
+    - gocognit
+    - gocritic
+    - gocyclo
     - gosec
     - govet
-    - staticcheck
-    - bodyclose
-    - gocritic
     - ineffassign
-    - misspell
+    - makezero
+    - nakedret
+    - noctx
+    - paralleltest
+    - prealloc
+    - predeclared
+    - reassign
+    - revive
+    - staticcheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+    - wsl
 
-linters-settings:
-  govet:
-    check-shadowing: true
-  gocritic:
-    enabled-tags:
-      - diagnostic
-      - style
-      - performance
-  revive:
+  settings:
+    govet:
+      enable-all: true
+      disable:
+        - shadow
+        - fieldalignment
+    gocognit:
+      min-complexity: 30
+    gocyclo:
+      min-complexity: 30
+    gocritic:
+      disabled-tags: ["opinionated", "experimental"]
+    gosec:
+      excludes:
+        - G404  # Exclude weak random number generator check for tests
+        - G115  # Exclude integer overflow conversions check for tests
+    revive:
+      enable-all-rules: false
+      rules:
+        - name: package-comments
+          disabled: true
+        - name: exported
+          disabled: true
+  exclusions:
     rules:
-      - name: var-declaration
-        severity: warning
-      - name: exported
-        severity: warning
+      - path: gen/
+        linters:
+          - wsl
 
 formatters:
   enable:
     - gofmt
     - goimports
-
-output:
-  format: colored-line-number
-  print-issued-lines: true
-  print-linter-name: true
+    - gci
 
 issues:
-  exclude-rules:
-    - path: _test\.go
-      linters:
-        - errcheck
-        - gosec
-  
-  max-issues-per-linter: 50
-  
-  max-same-issues: 3
+  max-issues-per-linter: 0 # Unlimited
+  max-same-issues: 0 # Unlimited

@@ -31,7 +31,8 @@ func NewAccountUseCase(logger log.Logger, acc *domain.AccountDomain,
 		appledo:    ap,
 		facebookdo: fb,
 	}
-	return
+
+	return uc, nil
 }
 
 func (uc *AccountUseCase) GetById(ctx context.Context, id int64) (*domain.Account, error) {

@@ -39,15 +39,15 @@
             "name": "page",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "pageSize",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "cond.store",
@@ -239,13 +239,6 @@
     "v1GetOrderListResponse": {
       "type": "object",
       "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
         "orders": {
           "type": "array",
           "items": {
@@ -254,7 +247,7 @@
           }
         },
         "total": {
-          "type": "integer",
+          "type": "string",
           "format": "int64"
         }
       }

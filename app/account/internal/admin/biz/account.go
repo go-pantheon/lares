@@ -46,8 +46,13 @@ func (uc *AccountUseCase) GetById(ctx context.Context, id int64) (*Account, erro
 func (uc *AccountUseCase) GetList(ctx context.Context, index, size int64, cond *Account) (accounts []*Account, count int64, err error) {
 	accounts, err = uc.repo.GetList(ctx, index, size, cond)
 	if err != nil {
-		return
+		return nil, 0, err
 	}
+
 	count, err = uc.repo.Count(ctx, cond)
-	return
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return accounts, count, err
 }

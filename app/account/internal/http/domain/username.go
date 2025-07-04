@@ -16,6 +16,7 @@ func NewUsernameDomain(logger log.Logger, repo AccountRepo) (do *UsernameDomain)
 		log:  log.NewHelper(log.With(logger, "module", "account/http/domain/username")),
 		repo: repo,
 	}
+
 	return do
 }
 

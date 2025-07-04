@@ -2,11 +2,13 @@ package data
 
 import (
 	"context"
+	"database/sql"
+	"fmt"
 
 	"github.com/go-pantheon/fabrica-kit/xerrors"
+	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
 	"github.com/pkg/errors"
-	"gorm.io/gorm"
 )
 
 func (d *accountData) GetByUsername(ctx context.Context, name string) (*domain.Account, error) {
@@ -15,26 +17,56 @@ func (d *accountData) GetByUsername(ctx context.Context, name string) (*domain.A
 	}
 
 	po := Account{}
-	result := d.data.Mdb.Debug().WithContext(ctx).Where("`username`=?", name).First(&po)
-	if result.Error != nil {
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+
+	fb := upg.NewSelectSQLFieldBuilder()
+	fb.Append("username", &po.Username)
+	fb.Append("password", &po.PasswordHash)
+	fb.Append("register_ip", &po.RegisterIp)
+	fb.Append("last_login_ip", &po.LastLoginIp)
+	fb.Append("default_color", &po.DefaultColor)
+	fb.Append("channel", &po.Channel)
+	fb.Append("state", &po.State)
+	fb.Append("created_at", &po.CreatedAt)
+	fb.Append("updated_at", &po.UpdatedAt)
+
+	fieldSql, values := fb.Build()
+
+	sqlStr := fmt.Sprintf("SELECT %s FROM accounts WHERE username = $1", fieldSql)
+
+	row := d.data.Pdb.QueryRowContext(ctx, sqlStr, name)
+	if err := row.Scan(values...); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
 			return nil, xerrors.APINotFound("name:%s", name)
 		}
-		return nil, xerrors.APIDBFailed("name:%s", name).WithCause(result.Error)
+
+		return nil, xerrors.APIDBFailed("name:%s", name).WithCause(err)
 	}
+
 	return po2bo(&po), nil
 }
 
 func (d *accountData) UpdatePasswordHash(ctx context.Context, id int64, passwordHash string) (bool, error) {
-	po := Account{}
-	result := d.data.Mdb.Debug().WithContext(ctx).Where("`id`=?", id).First(&po)
-	if result.Error != nil {
-		return false, xerrors.APIDBFailed("id:%d", id).WithCause(result.Error)
+	fb := upg.NewUpdateSQLFieldBuilder(2)
+
+	fb.Append("password", passwordHash)
+
+	fieldSql, values := fb.Build()
+	values = upg.AppendValueFirst(values, id)
+	sqlStr := fmt.Sprintf("UPDATE accounts SET %s WHERE account_id = $1", fieldSql)
+
+	result, err := d.data.Pdb.ExecContext(ctx, sqlStr, values...)
+	if err != nil {
+		return false, xerrors.APIDBFailed("id:%d", id).WithCause(err)
 	}
-	po.PasswordHash = passwordHash
-	result = d.data.Mdb.Debug().WithContext(ctx).Where("`id`=?", id).Updates(&po)
-	if result.Error != nil {
-		return false, xerrors.APIDBFailed("id:%d", id).WithCause(result.Error)
+
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return false, xerrors.APIDBFailed("id:%d", id).WithCause(err)
 	}
+
+	if rows == 0 {
+		return false, xerrors.APIDBFailed("id:%d", id)
+	}
+
 	return true, nil
 }

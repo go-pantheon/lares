@@ -1,73 +1,70 @@
 package data
 
 import (
-	"github.com/go-pantheon/fabrica-kit/profile"
-	"github.com/go-pantheon/fabrica-util/data/cache"
+	"context"
+
+	tpg "github.com/go-pantheon/fabrica-kit/trace/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/redis"
 	"github.com/go-pantheon/lares/app/account/internal/conf"
-	"github.com/pkg/errors"
-	"github.com/redis/go-redis/v9"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	goredis "github.com/redis/go-redis/v9"
 )
 
 type Data struct {
-	Mdb *gorm.DB
-	Rdb cache.Cacheable
+	Pdb *postgresql.DB
+	Rdb goredis.UniversalClient
 }
 
 func NewData(c *conf.Data) (d *Data, cleanup func(), err error) {
 	var (
-		pdb *gorm.DB
-		rdb cache.Cacheable
+		pdb *postgresql.DB
+		rdb goredis.UniversalClient
 	)
 
 	if c.Redis.Cluster {
-		rdb, cleanup, err = cache.NewRedisCluster(&redis.ClusterOptions{
+		rdb, cleanup, err = redis.NewCluster(&goredis.ClusterOptions{
 			Addrs:        []string{c.Redis.Addr},
 			Password:     c.Redis.Password,
 			DialTimeout:  c.Redis.DialTimeout.AsDuration(),
 			WriteTimeout: c.Redis.WriteTimeout.AsDuration(),
 			ReadTimeout:  c.Redis.ReadTimeout.AsDuration(),
 		})
-		if err != nil {
-			return
-		}
 	} else {
-		rdb, cleanup, err = cache.NewRedis(&redis.Options{
+		rdb, cleanup, err = redis.NewStandalone(&goredis.Options{
 			Addr:         c.Redis.Addr,
 			Password:     c.Redis.Password,
 			DialTimeout:  c.Redis.DialTimeout.AsDuration(),
 			WriteTimeout: c.Redis.WriteTimeout.AsDuration(),
 			ReadTimeout:  c.Redis.ReadTimeout.AsDuration(),
 		})
-		if err != nil {
-			return
+	}
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	pdb, cleanupPg, err := tpg.NewTracingDB(context.Background(), tpg.DefaultPostgreSQLConfig(postgresql.Config{
+		DSN:    c.Postgresql.Source,
+		DBName: c.Postgresql.Database,
+	}))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	d = &Data{
+		Pdb: pdb,
+		Rdb: rdb,
+	}
+
+	combinedCleanup := func() {
+		if cleanup != nil {
+			cleanup()
+		}
+
+		if cleanupPg != nil {
+			cleanupPg()
 		}
 	}
 
-	pdb, err = gorm.Open(postgres.New(postgres.Config{
-		DSN: c.Postgres.Source,
-	}), &gorm.Config{})
-	if err != nil {
-		err = errors.Wrapf(err, "new postgres db failed")
-		return
-	}
-	if profile.IsDev() {
-		pdb = pdb.Debug()
-	}
-
-	sdb, err := pdb.DB()
-	if err != nil {
-		err = errors.Wrapf(err, "get raw db failed")
-		return
-	}
-
-	sdb.SetMaxIdleConns(int(c.Postgres.MaxIdleConns))
-	sdb.SetMaxOpenConns(int(c.Postgres.MaxOpenConns))
-
-	d = &Data{
-		Mdb: pdb,
-		Rdb: rdb,
-	}
-	return
+	return d, combinedCleanup, nil
 }

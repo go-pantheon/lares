@@ -31,6 +31,7 @@ func (s *AccountInterface) FacebookLogin(ctx context.Context, req *v1.FacebookLo
 	if err != nil {
 		return nil, err
 	}
+
 	return &v1.FacebookLoginResponse{
 		Info: info,
 	}, nil
