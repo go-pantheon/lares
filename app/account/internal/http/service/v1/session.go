@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/go-pantheon/fabrica-kit/profile"
 	"github.com/go-pantheon/fabrica-util/xid"
 	"github.com/go-pantheon/fabrica-util/xrand"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
@@ -48,7 +49,10 @@ func genToken(account *domain.Account, color string) (token string, expiredTime 
 		AccountId: account.Id,
 		Timeout:   expiredTime,
 		Rand:      rand,
+		ServerId:  0,
+		Location:  int32(profile.Zone()),
 		Color:     getAccountColor(account, color),
+		Status:    gatev1.OnlineStatus_ONLINE_STATUS_GATE,
 	}
 
 	bytes, err := proto.Marshal(auth)
