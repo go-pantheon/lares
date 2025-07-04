@@ -69,36 +69,42 @@ func TestVerifyPassword(t *testing.T) {
 		name       string
 		password   string
 		storedHash string
+		verified   bool
 		wantErr    bool
 	}{
 		{
 			name:       "correct password",
 			password:   password,
 			storedHash: hash,
+			verified:   true,
 			wantErr:    false,
 		},
 		{
 			name:       "wrong password",
 			password:   "wrong_password",
 			storedHash: hash,
+			verified:   false,
 			wantErr:    false,
 		},
 		{
 			name:       "empty password",
 			password:   "",
 			storedHash: hash,
+			verified:   false,
 			wantErr:    false,
 		},
 		{
 			name:       "invalid hash format",
 			password:   password,
 			storedHash: "invalid_hash",
+			verified:   false,
 			wantErr:    true,
 		},
 		{
 			name:       "non-Argon2id hash",
 			password:   password,
 			storedHash: "$bcrypt$notvalid",
+			verified:   false,
 			wantErr:    true,
 		},
 	}
@@ -114,7 +120,7 @@ func TestVerifyPassword(t *testing.T) {
 			}
 
 			assert.NoError(t, err)
-			assert.True(t, verifed)
+			assert.Equal(t, tt.verified, verifed)
 		})
 	}
 }
@@ -190,10 +196,10 @@ func TestDecodeArgon2idHash(t *testing.T) {
 				return
 			}
 
-			assert.Equal(t, 64*1024, params.Memory)
-			assert.Equal(t, 3, params.Time)
-			assert.Equal(t, 4, params.Threads)
-			assert.Equal(t, 32, params.KeyLength)
+			assert.Equal(t, uint32(64*1024), params.Memory)
+			assert.Equal(t, uint32(3), params.Time)
+			assert.Equal(t, uint8(4), params.Threads)
+			assert.Equal(t, uint32(32), params.KeyLength)
 			assert.Equal(t, 16, params.SaltLength)
 			assert.NotEmpty(t, salt)
 			assert.NotEmpty(t, hash)
@@ -321,10 +327,10 @@ func TestDefaultArgon2Params(t *testing.T) {
 	require.NotNil(t, params)
 
 	// Verify if the parameter values are as expected
-	assert.Equal(t, 64*1024, params.Memory)
-	assert.Equal(t, 3, params.Time)
-	assert.Equal(t, 4, params.Threads)
-	assert.Equal(t, 32, params.KeyLength)
+	assert.Equal(t, uint32(64*1024), params.Memory)
+	assert.Equal(t, uint32(3), params.Time)
+	assert.Equal(t, uint8(4), params.Threads)
+	assert.Equal(t, uint32(32), params.KeyLength)
 	assert.Equal(t, 16, params.SaltLength)
 }
 
