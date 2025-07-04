@@ -1,3 +1,6 @@
+[submodule "deps/fabrica-net"]
+	path = deps/fabrica-net
+	url = https://github.com/go-pantheon/fabrica-net
 [submodule "deps/fabrica-util"]
 	path = deps/fabrica-util
 	url = https://github.com/go-pantheon/fabrica-util
@@ -7,6 +10,3 @@
 [submodule "api/server"]
 	path = api/server
 	url = https://github.com/go-pantheon/api-server
-[submodule "deps/fabrica-net"]
-	path = deps/fabrica-net
-	url = https://github.com/go-pantheon/fabrica-net
