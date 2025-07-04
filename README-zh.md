@@ -4,10 +4,9 @@
 </div>
 
 <p align="center">
-<a href="https://golang.org/"><img src="https://img.shields.io/badge/Go-1.24+-00ADD8?style=flat&logo=go" alt="Go"></a>
-<a href="https://github.com/go-kratos/kratos"><img src="https://img.shields.io/badge/Kratos-v2.8.4-blue" alt="Kratos"></a>
-<a href="https://github.com/go-pantheon/lares/actions/workflows/test.yml"><img src="https://github.com/go-pantheon/lares/workflows/Test/badge.svg" alt="测试状态"></a>
+<a href="https://github.com/go-pantheon/lares/actions"><img src="https://github.com/go-pantheon/lares/workflows/Go/badge.svg" alt="构建状态"></a>
 <a href="https://github.com/go-pantheon/lares/releases"><img src="https://img.shields.io/github/v/release/go-pantheon/lares" alt="最新版本"></a>
+<a href="https://github.com/go-kratos/kratos"><img src="https://img.shields.io/badge/Kratos-v2.8.4-blue" alt="Kratos"></a>
 <a href="https://pkg.go.dev/github.com/go-pantheon/lares"><img src="https://pkg.go.dev/badge/github.com/go-pantheon/lares" alt="GoDoc"></a>
 <a href="https://goreportcard.com/report/github.com/go-pantheon/lares"><img src="https://goreportcard.com/badge/github.com/go-pantheon/lares" alt="Go Report Card"></a>
 <a href="https://github.com/go-pantheon/lares/blob/main/LICENSE"><img src="https://img.shields.io/github/license/go-pantheon/lares" alt="许可证"></a>
