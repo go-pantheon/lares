@@ -11,7 +11,6 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/wire v0.6.0
 	github.com/huandu/facebook/v2 v2.9.1
-	github.com/jackc/pgx/v5 v5.7.5
 	github.com/json-iterator/go v1.1.12
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.11.0
@@ -19,11 +18,10 @@ require (
 	go.etcd.io/etcd/client/v3 v3.6.1
 	golang.org/x/crypto v0.39.0
 	golang.org/x/oauth2 v0.30.0
-	google.golang.org/api v0.239.0
+	google.golang.org/api v0.240.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6
-
 )
 
 require (
@@ -60,6 +58,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/pgx/v5 v5.7.5 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
