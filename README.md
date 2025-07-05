@@ -1,6 +1,6 @@
 <div align="center">
   <h1>🔐 Lares Game Account Authentication Service</h1>
-  <p><em>High-performance game core business service framework for the go-pantheon ecosystem</em></p>
+  <p><em>Specialized game account authentication service with dual-token architecture and multi-platform login support</em></p>
 </div>
 
 <p align="center">
@@ -19,9 +19,7 @@
 
 ## About Lares
 
-Lares is the account authentication center of the go-pantheon game server ecosystem, focusing on providing secure and reliable identity verification solutions for game applications. Lares supports native account systems and multiple third-party platform account registration and login, connecting users, third-party platforms, and game services through enterprise-grade security solutions, providing users with Account Tokens for Janus gateway handshake connections to start gaming.
-
-For more information, please visit: [deepwiki/go-pantheon/lares](https://deepwiki.com/go-pantheon/lares)
+**Lares** is a specialized game account authentication service that provides secure, high-performance identity verification for modern gaming applications. Featuring a dual-token architecture (Session + AuthToken), native support for Apple/Google/Facebook login, and game-optimized features like color-based character selection and server routing, Lares transforms complex authentication challenges into simple solutions that game developers can implement quickly while maintaining enterprise-grade security and performance at scale.
 
 ## About the go-pantheon Ecosystem
 
