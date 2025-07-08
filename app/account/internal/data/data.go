@@ -3,21 +3,21 @@ package data
 import (
 	"context"
 
-	tpg "github.com/go-pantheon/fabrica-kit/trace/postgresql"
-	"github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-kit/trace/tracepg"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/fabrica-util/data/redis"
 	"github.com/go-pantheon/lares/app/account/internal/conf"
 	goredis "github.com/redis/go-redis/v9"
 )
 
 type Data struct {
-	Pdb *postgresql.DB
+	Pdb *pg.DB
 	Rdb goredis.UniversalClient
 }
 
 func NewData(c *conf.Data) (d *Data, cleanup func(), err error) {
 	var (
-		pdb *postgresql.DB
+		pdb *pg.DB
 		rdb goredis.UniversalClient
 	)
 
@@ -43,7 +43,7 @@ func NewData(c *conf.Data) (d *Data, cleanup func(), err error) {
 		return nil, nil, err
 	}
 
-	pdb, cleanupPg, err := tpg.NewTracingDB(context.Background(), tpg.DefaultPostgreSQLConfig(postgresql.Config{
+	pdb, cleanupPg, err := tracepg.NewDB(context.Background(), tracepg.DefaultPostgreSQLConfig(pg.Config{
 		DSN:    c.Postgresql.Source,
 		DBName: c.Postgresql.Database,
 	}))

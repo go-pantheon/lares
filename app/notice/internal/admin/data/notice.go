@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/lares/app/notice/internal/admin/biz"
 	"github.com/go-pantheon/lares/app/notice/internal/data"
 )
@@ -41,7 +41,7 @@ func NewNoticeData(data *data.Data, logger log.Logger) (biz.NoticeRepo, error) {
 }
 
 func (d *noticeData) GetList(ctx context.Context, index, size int64) ([]*biz.Notice, error) {
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("title", nil)
 	fb.Append("content", nil)
 	fb.Append("start_time", nil)
@@ -80,7 +80,7 @@ func (d *noticeData) GetList(ctx context.Context, index, size int64) ([]*biz.Not
 func (d *noticeData) GetById(ctx context.Context, id int64) (*biz.Notice, error) {
 	po := &Notice{}
 
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("id", &po.Id)
 	fb.Append("title", &po.Title)
 	fb.Append("content", &po.Content)
@@ -102,14 +102,14 @@ func (d *noticeData) GetById(ctx context.Context, id int64) (*biz.Notice, error)
 func (d *noticeData) UpdateById(ctx context.Context, bo *biz.Notice) error {
 	po := noticeBo2Po(bo)
 
-	fb := upg.NewUpdateSQLFieldBuilder(2)
+	fb := pg.NewUpdateSQLFieldBuilder(2)
 	fb.Append("title", &po.Title)
 	fb.Append("content", &po.Content)
 	fb.Append("start_time", &po.StartTime)
 	fb.Append("end_time", &po.EndTime)
 
 	fieldSql, values := fb.Build()
-	values = upg.AppendValueFirst(values, &po.Id)
+	values = pg.AppendValueFirst(values, &po.Id)
 
 	sqlStr := fmt.Sprintf("UPDATE notices SET %s WHERE id=$1", fieldSql)
 
@@ -133,7 +133,7 @@ func (d *noticeData) UpdateById(ctx context.Context, bo *biz.Notice) error {
 func (d *noticeData) Insert(ctx context.Context, bo *biz.Notice) error {
 	po := noticeBo2Po(bo)
 
-	fb := upg.NewInsertSQLFieldBuilder()
+	fb := pg.NewInsertSQLFieldBuilder()
 	fb.Append("title", &po.Title)
 	fb.Append("content", &po.Content)
 	fb.Append("start_time", &po.StartTime)

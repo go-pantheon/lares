@@ -11,8 +11,8 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-pantheon/fabrica-kit/profile"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
-	"github.com/go-pantheon/fabrica-util/data/db/postgresql/migrate"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
+	"github.com/go-pantheon/fabrica-util/data/db/pg/migrate"
 	"github.com/go-pantheon/fabrica-util/xid"
 	"github.com/go-pantheon/lares/app/account/internal/data"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
@@ -88,7 +88,7 @@ func NewAccountData(data *data.Data, logger log.Logger) (domain.AccountRepo, err
 		log:  log.NewHelper(log.With(logger, "module", "account/http/data/account")),
 	}
 
-	if err := migrate.Migrate(context.Background(), data.Pdb.GetPool(), "accounts", &Account{}, nil); err != nil {
+	if err := migrate.Migrate(context.Background(), data.Pdb, "accounts", &Account{}, nil); err != nil {
 		return nil, err
 	}
 
@@ -139,7 +139,7 @@ func (d *accountData) createQaAccounts(ctx context.Context, num int) error {
 func (d *accountData) Create(ctx context.Context, acc *domain.Account) (*domain.Account, error) {
 	po := d.buildCreatePo(acc)
 
-	fb := upg.NewInsertSQLFieldBuilder()
+	fb := pg.NewInsertSQLFieldBuilder()
 
 	fb.Append("zone", po.Zone)
 	fb.Append("device", po.Device)
@@ -178,7 +178,7 @@ func (d *accountData) GetById(ctx context.Context, id int64) (*domain.Account, e
 	gameID, zone := xid.SplitUID(id)
 	po := Account{AccountId: gameID, Zone: zone}
 
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("account_id", &po.AccountId)
 	fb.Append("zone", &po.Zone)
 	fb.Append("device", &po.Device)

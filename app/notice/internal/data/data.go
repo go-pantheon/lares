@@ -3,8 +3,8 @@ package data
 import (
 	"context"
 
-	kdb "github.com/go-pantheon/fabrica-kit/trace/postgresql"
-	udb "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-kit/trace/tracepg"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/fabrica-util/data/redis"
 	"github.com/go-pantheon/lares/app/notice/internal/conf"
 	"github.com/pkg/errors"
@@ -12,13 +12,13 @@ import (
 )
 
 type Data struct {
-	Pdb *udb.DB
+	Pdb *pg.DB
 	Rdb goredis.UniversalClient
 }
 
 func NewData(c *conf.Data) (d *Data, cleanup func(), err error) {
 	var (
-		pdb *udb.DB
+		pdb *pg.DB
 		rdb goredis.UniversalClient
 	)
 
@@ -44,7 +44,7 @@ func NewData(c *conf.Data) (d *Data, cleanup func(), err error) {
 		return nil, nil, err
 	}
 
-	pdb, cleanupPg, err := kdb.NewTracingDB(context.Background(), kdb.DefaultPostgreSQLConfig(udb.Config{
+	pdb, cleanupPg, err := tracepg.NewDB(context.Background(), tracepg.DefaultPostgreSQLConfig(pg.Config{
 		DSN:      c.Postgresql.Source,
 		DBName:   c.Postgresql.Database,
 		MinConns: 10,

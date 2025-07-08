@@ -36,10 +36,6 @@ Thumbs.db
 # private config
 app/*/configs
 
-# Note: submodules should not be ignored
-# /api/
-# /deps/
-
 # go work
 go.work
 go.work.sum

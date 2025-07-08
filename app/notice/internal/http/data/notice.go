@@ -7,8 +7,8 @@ import (
 
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
-	"github.com/go-pantheon/fabrica-util/data/db/postgresql/migrate"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
+	"github.com/go-pantheon/fabrica-util/data/db/pg/migrate"
 	"github.com/go-pantheon/lares/app/notice/internal/data"
 	"github.com/go-pantheon/lares/app/notice/internal/http/biz"
 )
@@ -44,7 +44,7 @@ func NewNoticeData(data *data.Data, logger log.Logger) (biz.NoticeRepo, error) {
 		log:  log.NewHelper(log.With(logger, "module", "account/interface/data/notice")),
 	}
 
-	if err := migrate.Migrate(context.Background(), data.Pdb.GetPool(), "notices", &Notice{}, map[string]string{}); err != nil {
+	if err := migrate.Migrate(context.Background(), data.Pdb, "notices", &Notice{}, map[string]string{}); err != nil {
 		return nil, errors.InternalServer("notice.NewNoticeData", "db mirgrate failed. table=notices").WithCause(err)
 	}
 
@@ -52,7 +52,7 @@ func NewNoticeData(data *data.Data, logger log.Logger) (biz.NoticeRepo, error) {
 }
 
 func (d *noticeData) NoticeList(ctx context.Context, now time.Time) ([]*biz.Notice, error) {
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("title", nil)
 	fb.Append("content", nil)
 	fb.Append("start_time", nil)

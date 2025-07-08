@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
 	"github.com/pkg/errors"
 )
@@ -18,7 +18,7 @@ func (d *accountData) GetByUsername(ctx context.Context, name string) (*domain.A
 
 	po := Account{}
 
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("username", &po.Username)
 	fb.Append("password", &po.PasswordHash)
 	fb.Append("register_ip", &po.RegisterIp)
@@ -46,12 +46,12 @@ func (d *accountData) GetByUsername(ctx context.Context, name string) (*domain.A
 }
 
 func (d *accountData) UpdatePasswordHash(ctx context.Context, id int64, passwordHash string) (bool, error) {
-	fb := upg.NewUpdateSQLFieldBuilder(2)
+	fb := pg.NewUpdateSQLFieldBuilder(2)
 
 	fb.Append("password", passwordHash)
 
 	fieldSql, values := fb.Build()
-	values = upg.AppendValueFirst(values, id)
+	values = pg.AppendValueFirst(values, id)
 	sqlStr := fmt.Sprintf("UPDATE accounts SET %s WHERE account_id = $1", fieldSql)
 
 	result, err := d.data.Pdb.ExecContext(ctx, sqlStr, values...)

@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/lares/app/account/internal/http/domain"
 	"github.com/pkg/errors"
 )
@@ -18,7 +18,7 @@ func (d *accountData) GetByApple(ctx context.Context, apple string) (*domain.Acc
 
 	po := Account{}
 
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("apple", &po.Apple)
 	fb.Append("google", &po.Google)
 	fb.Append("facebook", &po.Facebook)

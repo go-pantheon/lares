@@ -10,7 +10,7 @@ import (
 	"github.com/go-kratos/kratos/v2/errors"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-pantheon/fabrica-kit/xerrors"
-	upg "github.com/go-pantheon/fabrica-util/data/db/postgresql"
+	"github.com/go-pantheon/fabrica-util/data/db/pg"
 	"github.com/go-pantheon/fabrica-util/xid"
 	"github.com/go-pantheon/lares/app/account/internal/admin/biz"
 	"github.com/go-pantheon/lares/app/account/internal/data"
@@ -71,7 +71,7 @@ func NewAccountData(data *data.Data, logger log.Logger) biz.AccountRepo {
 func (d *accountData) GetById(ctx context.Context, id int64) (*biz.Account, error) {
 	po := Account{Id: id}
 
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("id", &po.Id)
 	fb.Append("name", &po.Name)
 	fb.Append("apple", &po.Apple)
@@ -100,7 +100,7 @@ func (d *accountData) GetById(ctx context.Context, id int64) (*biz.Account, erro
 }
 
 func (d *accountData) GetList(ctx context.Context, index, size int64, cond *biz.Account) ([]*biz.Account, error) {
-	fb := upg.NewSelectSQLFieldBuilder()
+	fb := pg.NewSelectSQLFieldBuilder()
 	fb.Append("id", nil)
 	fb.Append("name", nil)
 	fb.Append("apple", nil)
