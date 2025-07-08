@@ -36,9 +36,9 @@ Thumbs.db
 # private config
 app/*/configs
 
-# submodules
-/api/
-/deps/
+# Note: submodules should not be ignored
+# /api/
+# /deps/
 
 # go work
 go.work
