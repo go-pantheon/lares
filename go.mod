@@ -5,9 +5,9 @@ go 1.24.4
 require (
 	github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20250527152916-d6f5f00cf562
 	github.com/go-kratos/kratos/v2 v2.8.4
-	github.com/go-pantheon/fabrica-kit v0.0.22
-	github.com/go-pantheon/fabrica-net v0.0.22
-	github.com/go-pantheon/fabrica-util v0.0.31
+	github.com/go-pantheon/fabrica-kit v0.0.24
+	github.com/go-pantheon/fabrica-net v0.0.24
+	github.com/go-pantheon/fabrica-util v0.0.34
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/google/wire v0.6.0
 	github.com/huandu/facebook/v2 v2.9.1
@@ -19,7 +19,7 @@ require (
 	golang.org/x/crypto v0.39.0
 	golang.org/x/oauth2 v0.30.0
 	google.golang.org/api v0.240.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20250603155806-513f23925822
+	google.golang.org/genproto/googleapis/api v0.0.0-20250707201910-8d1bb00bc6a7
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6
 )
@@ -67,7 +67,7 @@ require (
 	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.65.0 // indirect
-	github.com/prometheus/procfs v0.16.1 // indirect
+	github.com/prometheus/procfs v0.17.0 // indirect
 	github.com/rakyll/statik v0.1.7 // indirect
 	github.com/speps/go-hashids/v2 v2.0.1 // indirect
 	go.etcd.io/etcd/api/v3 v3.6.1 // indirect
@@ -88,7 +88,7 @@ require (
 	golang.org/x/sync v0.15.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250603155806-513f23925822 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250707201910-8d1bb00bc6a7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
